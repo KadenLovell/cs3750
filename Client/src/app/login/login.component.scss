@@ -1,0 +1,19 @@
+mat-card {
+    max-width: 400px;
+    margin: 2em auto;
+    text-align: center;
+  }
+
+  .form-container {
+    display: grid;
+    grid-row-gap: 10px;
+}
+
+  .button-container {
+      display: grid;
+      grid-row-gap: 5px;
+  }
+
+  mat-form-field {
+    display: block;
+  }
