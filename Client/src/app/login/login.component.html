@@ -1,3 +1,5 @@
+<div id="particles-js"></div>
+
 <ng-container [ngSwitch]="view">
     <!-- view 1|login -->
     <ng-container *ngSwitchCase="1">
@@ -17,124 +19,128 @@
 
 <!-- login -->
 <ng-template #view1>
-    <mat-card>
-        <mat-card-content>
-            <form #form="ngForm" class="form-container" (ngSubmit)="login()">
-                <h2>Login</h2>
+    <div class="login-div">
+        <mat-card>
+            <mat-card-content>
+                <form #form="ngForm" class="form-container" (ngSubmit)="login()">
+                    <h2>Login</h2>
 
-                <!-- Form Errors -->
-                <mat-error *ngIf="errors && errors.userNotFound">
-                    Email, or password was invalid.
-                </mat-error>
-
-                <!-- Form Fields -->
-                <mat-form-field class="full-width-input">
-                    <input #email="ngModel" matInput placeholder="Email" name="email" type="email" [(ngModel)]="model.email" required>
-                    <mat-error>
-                        Email is required.
+                    <!-- Form Errors -->
+                    <mat-error *ngIf="errors && errors.userNotFound">
+                        Email, or password was invalid.
                     </mat-error>
-                </mat-form-field>
 
-                <mat-form-field class="full-width-input">
-                    <input #password="ngModel" matInput placeholder="Password" name="password" type="password" [(ngModel)]="model.password" required>
-                    <mat-error>
-                        Password is required.
-                    </mat-error>
-                </mat-form-field>
+                    <!-- Form Fields -->
+                    <mat-form-field class="full-width-input">
+                        <input #email="ngModel" matInput placeholder="Email" name="email" type="email" [(ngModel)]="model.email" required>
+                        <mat-error>
+                            Email is required.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-divider [inset]="true"></mat-divider>
+                    <mat-form-field class="full-width-input">
+                        <input #password="ngModel" matInput placeholder="Password" name="password" type="password" [(ngModel)]="model.password" required>
+                        <mat-error>
+                            Password is required.
+                        </mat-error>
+                    </mat-form-field>
 
-                <div class="button-container">
-                    <button mat-stroked-button type="button" (click)="view = 2; resetViewstate()">Create user</button>
-                    <button mat-stroked-button type="button" [disabled]="!model.username" (click)="view=3; resetViewstate()">Forgot Password</button>
-                    <button mat-raised-button color="primary" type="submit">Login</button>
-                </div>
-            </form>
-        </mat-card-content>
-    </mat-card>
+                    <mat-divider [inset]="true"></mat-divider>
+
+                    <div class="button-container">
+                        <button mat-stroked-button type="button" (click)="view = 2; resetViewstate()">Create user</button>
+                        <button mat-stroked-button type="button" [disabled]="!model.username" (click)="view=3; resetViewstate()">Forgot Password</button>
+                        <button mat-raised-button color="primary" type="submit">Login</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </ng-template>
 
 <!-- create user -->
 <ng-template #view2>
-    <mat-card>
-        <mat-card-content>
-            <form #form="ngForm" class="form-container" (ngSubmit)="createUser()">
-                <h2>Create User</h2>
-                <!-- Form Errors -->
-                <mat-error *ngIf="errors && errors.usernameExists">
-                    Username is already registered.
-                </mat-error>
-
-                <mat-error *ngIf="errors && errors.emailExists">
-                    Email address is already registered.
-                </mat-error>
-
-                <!-- Form Fields -->
-                <mat-form-field class="full-width-input">
-                    <input #username="ngModel" matInput placeholder="Username" name="username" type="text" [(ngModel)]="model.username" required>
-                    <mat-error>
-                        Username is required.
+    <div class="create-div">
+        <mat-card>
+            <mat-card-content>
+                <form #form="ngForm" class="form-container" (ngSubmit)="createUser()">
+                    <h2>Create User</h2>
+                    <!-- Form Errors -->
+                    <mat-error *ngIf="errors && errors.usernameExists">
+                        Username is already registered.
                     </mat-error>
-                </mat-form-field>
 
-                <mat-form-field class="full-width-input">
-                    <input #firstname="ngModel" matInput placeholder="First Name" name="firstname" type="text" [(ngModel)]="model.firstname" required>
-                    <mat-error>
-                        First name is required.
+                    <mat-error *ngIf="errors && errors.emailExists">
+                        Email address is already registered.
                     </mat-error>
-                </mat-form-field>
 
-                <mat-form-field class="full-width-input">
-                    <input #lastname="ngModel" matInput placeholder="Last Name" name="lastname" type="text" [(ngModel)]="model.lastname" required>
-                    <mat-error>
-                        Last name is required.
-                    </mat-error>
-                </mat-form-field>
+                    <!-- Form Fields -->
+                    <mat-form-field class="full-width-input">
+                        <input #username="ngModel" matInput placeholder="Username" name="username" type="text" [(ngModel)]="model.username" required>
+                        <mat-error>
+                            Username is required.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="full-width-input">
-                    <input #dateOfBirth="ngModel" matInput placeholder="Date Of Birth" name="dateOfBirth" type="date" [(ngModel)]="model.dateOfBirth" required>
-                    <mat-error>
-                        Date of birth is required.
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <input #firstname="ngModel" matInput placeholder="First Name" name="firstname" type="text" [(ngModel)]="model.firstname" required>
+                        <mat-error>
+                            First name is required.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="full-width-input">
-                    <input #email="ngModel" matInput placeholder="Email" name="email" type="email" [(ngModel)]="model.email" required>
-                    <mat-error>
-                        Email address is required.
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <input #lastname="ngModel" matInput placeholder="Last Name" name="lastname" type="text" [(ngModel)]="model.lastname" required>
+                        <mat-error>
+                            Last name is required.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="full-width-input">
-                    <input #confirmEmail="ngModel" matInput placeholder="Confirm Email" name="confirmEmail" type="email" [(ngModel)]="model.confirmEmail" required>
-                    <mat-error>
-                        Email address confirmation is required.
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <input #dateOfBirth="ngModel" matInput placeholder="Date Of Birth" name="dateOfBirth" type="date" [(ngModel)]="model.dateOfBirth" required>
+                        <mat-error>
+                            Date of birth is required.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="full-width-input">
-                    <input #password="ngModel" matInput placeholder="Password" name="password" type="password" [(ngModel)]="model.password" required>
-                    <mat-error>
-                        Password is required.
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <input #email="ngModel" matInput placeholder="Email" name="email" type="email" [(ngModel)]="model.email" required>
+                        <mat-error>
+                            Email address is required.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-form-field class="full-width-input">
-                    <input #confirmPassword="ngModel" matInput placeholder="Confirm Password" name="confirmPassword" type="password" [(ngModel)]="model.confirmPassword" required>
-                    <mat-error>
-                        Password confirmation is required.
-                    </mat-error>
-                </mat-form-field>
+                    <mat-form-field class="full-width-input">
+                        <input #confirmEmail="ngModel" matInput placeholder="Confirm Email" name="confirmEmail" type="email" [(ngModel)]="model.confirmEmail" required>
+                        <mat-error>
+                            Email address confirmation is required.
+                        </mat-error>
+                    </mat-form-field>
 
-                <mat-divider [inset]="true"></mat-divider>
+                    <mat-form-field class="full-width-input">
+                        <input #password="ngModel" matInput placeholder="Password" name="password" type="password" [(ngModel)]="model.password" required>
+                        <mat-error>
+                            Password is required.
+                        </mat-error>
+                    </mat-form-field>
 
-                <div class="button-container">
-                    <button mat-stroked-button type="button" (click)="view = 1; resetViewstate()">Cancel</button>
-                    <button mat-raised-button color="primary" type="submit">Create</button>
-                </div>
-            </form>
-        </mat-card-content>
-    </mat-card>
+                    <mat-form-field class="full-width-input">
+                        <input #confirmPassword="ngModel" matInput placeholder="Confirm Password" name="confirmPassword" type="password" [(ngModel)]="model.confirmPassword" required>
+                        <mat-error>
+                            Password confirmation is required.
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-divider [inset]="true"></mat-divider>
+
+                    <div class="button-container">
+                        <button mat-stroked-button type="button" (click)="view = 1; resetViewstate()">Cancel</button>
+                        <button mat-raised-button color="primary" type="submit">Create</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </ng-template>
 
 <!-- forgot password -->
