@@ -1,3 +1,4 @@
+// DO NOT EDIT, this handles our http communication
 import { Injectable } from "@angular/core";
 import { HttpEventType, HttpClient, HttpErrorResponse, HttpRequest, HttpResponse } from "@angular/common/http";
 import { Router } from "@angular/router";

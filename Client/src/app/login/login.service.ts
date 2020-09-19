@@ -6,7 +6,7 @@ import { HttpService } from "../http.service";
 export class LoginService {
     constructor(private readonly _httpService: HttpService) { }
     async login(model: any): Promise<any> {
-        const url = `/api/login`;
+        const url = `/api/login/login`;
 
         return await this._httpService.post(url, model);
     }

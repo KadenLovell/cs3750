@@ -1,27 +1,38 @@
+// modules (keep alpahabetical)
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
-import { HttpService } from './http.service';
 import { MaterialModule } from './material.module';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+// components (keep alphabetical)
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+// shared components (keep alphabetical)
+import { HttpService } from './http.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule,
+    RouterModule.forRoot([
+      { path: "", redirectTo: "login", pathMatch: "full" },
+      { path: "**", redirectTo: "login" },
+      { path: 'login', component: LoginComponent },
+      { path: 'home', component: HomeComponent }
+    ]),
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
