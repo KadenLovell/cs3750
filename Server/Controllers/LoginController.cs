@@ -14,7 +14,7 @@ namespace Server.Controllers {
             _loginService = loginService;
         }
 
-        [HttpPost("add")]
+        [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] dynamic model) {
             var result = await _loginService.LoginAsync(model);
             return Json(result);

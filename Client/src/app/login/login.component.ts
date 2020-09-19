@@ -28,14 +28,6 @@ export class LoginComponent implements OnInit {
     this.model.dateOfBirth = [];
   }
 
-  resetPassword() {
-    // TODO: 
-    // send questions + new password to server,
-    // validate the questions on the server for security,
-    // if no match, show error message, else update password
-    return;
-  }
-
   login() {
     // if there are loading animations, handle the state here: IE: this.loading = true;
     this._loginService.login(this.model).then(response => {
@@ -45,9 +37,6 @@ export class LoginComponent implements OnInit {
 
       // if result was successful: set shared user, then route to home component
       if (this.response && this.response.success) {
-
-
-
         this.router.navigate(['../home'], { relativeTo: this.route });
       }
     });
@@ -69,14 +58,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['../home'], { relativeTo: this.route });
       }
     });
-  }
-
-  loadQuestions() {
-    // TODO:
-    // pass username to server
-    // if server returns status 200, set questions in the model
-    // if server returns error, "username doesn't exist"
-    return;
   }
 
   resetViewstate() {
