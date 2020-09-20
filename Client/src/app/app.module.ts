@@ -28,10 +28,10 @@ import { HttpService } from './http.service';
     HttpClientModule,
     MaterialModule,
     RouterModule.forRoot([
-      { path: "", redirectTo: "login", pathMatch: "full" },
-      { path: "**", redirectTo: "login" },
       { path: 'login', component: LoginComponent },
-      { path: 'home', component: HomeComponent }
+      { path: 'home', component: HomeComponent },
+      { path: "", redirectTo: "login", pathMatch: "full" },
+      { path: "**", redirectTo: "login" }
     ]),
   ],
   providers: [HttpService],
