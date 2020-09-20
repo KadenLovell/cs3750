@@ -9,8 +9,10 @@ import { RouterModule } from '@angular/router';
 
 // components (keep alphabetical)
 import { AppComponent } from './app.component';
+import { DustinComponent } from './dustin/dustin.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { RyanComponent } from './ryan/ryan.component';
 
 // shared components (keep alphabetical)
 import { HttpService } from './http.service';
@@ -19,7 +21,9 @@ import { HttpService } from './http.service';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    RyanComponent,
+    DustinComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +34,8 @@ import { HttpService } from './http.service';
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'home', component: HomeComponent },
+      { path: 'ryan', component: RyanComponent },
+      { path: 'dustin', component: DustinComponent },
       { path: "", redirectTo: "login", pathMatch: "full" },
       { path: "**", redirectTo: "login" }
     ]),

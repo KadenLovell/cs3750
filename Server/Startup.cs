@@ -37,7 +37,9 @@ namespace Server {
             // Example:
             // Services (keep alphabetized, disregarding "Service" suffix)
             services
+             .AddScoped<DustinService>()
              .AddScoped<LoginService>()
+             .AddScoped<RyanService>()
              .AddScoped<UserService>();
         }
 
