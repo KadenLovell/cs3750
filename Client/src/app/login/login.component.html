@@ -66,12 +66,8 @@
                 <form #form="ngForm" class="form-container" (ngSubmit)="createUser()">
                     <h2>Create User</h2>
                     <!-- Form Errors -->
-                    <mat-error *ngIf="errors && errors.usernameExists">
-                        Username is already registered.
-                    </mat-error>
-
-                    <mat-error *ngIf="errors && errors.emailExists">
-                        Email address is already registered.
+                    <mat-error *ngIf="errors && errors.userExists">
+                        A user with the same username, or email, already exists.
                     </mat-error>
 
                     <!-- Form Fields -->

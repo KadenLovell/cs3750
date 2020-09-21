@@ -1,38 +1,24 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Server.Models;
 using Server.Persistence;
 
 namespace Server.Services {
     public class UserService {
-        private readonly DataContext _context;
-        public UserService(DataContext context) {
-            _context = context;
+        private readonly IRepository<User> _repository;
+        public UserService(IRepository<User> repository) {
+            _repository = repository;
         }
         public async Task<dynamic> AddUserAsync(dynamic model) {
-            var username = (string)model.username;
-            var email = (string)model.email;
+            var exists = await _repository.UserExistsByUsernameOrEmail((string)model.username, (string)model.email);
 
-            var usernameExists = await _context.User.AnyAsync(x => x.Username == username);
-            var emailExists = await _context.User.AnyAsync(x => x.Email == email);
-
-            if (usernameExists) {
+            if (exists) {
                 var error = new {
                     errors = new {
-                        usernameExists = true
+                        userExists = true
                     }
                 };
-                return error;
-            }
 
-            if (emailExists) {
-                var error = new {
-                    errors = new {
-                        emailExists = true
-                    }
-                };
                 return error;
             }
 
@@ -47,8 +33,7 @@ namespace Server.Services {
                 ModifiedDate = null
             };
 
-            _context.Entry(user).State = EntityState.Added;
-            await _context.SaveChangesAsync();
+            await _repository.AddAsync(user);
 
             var result = new {
                 success = true,

@@ -25,6 +25,8 @@ namespace Server {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddScoped<IPersistenceContext, DataContext>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddControllers();
 
             // Added Newtonsoft JSON parser for controllers to be able to parse JSON objects [FromBody] to dynamic objects.

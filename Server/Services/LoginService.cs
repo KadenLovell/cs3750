@@ -1,19 +1,15 @@
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using Server.Models;
 using Server.Persistence;
 
 namespace Server.Services {
     public class LoginService {
-        private readonly DataContext _context;
-        public LoginService(DataContext context) {
-            _context = context;
+        private readonly IRepository<User> _repository;
+        public LoginService(IRepository<User> repository) {
+            _repository = repository;
         }
         public async Task<dynamic> LoginAsync(dynamic model) {
-            var email = (string)model.email;
-            var password = (string)model.password;
-
-            var user = await _context.User.Where(x => x.Email.ToLower() == email.ToLower() && x.Password == password).SingleOrDefaultAsync();
+            var user = await _repository.GetUserByEmailAsync((string)model.email);
 
             if (user == null) {
                 var error = new {
@@ -21,6 +17,7 @@ namespace Server.Services {
                         userNotFound = true
                     }
                 };
+
                 return error;
             }
 
