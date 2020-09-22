@@ -1,12 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +21,7 @@ namespace Server {
             services.AddScoped<IPersistenceContext, DataContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddControllers();
+            services.AddCors();
 
             // Added Newtonsoft JSON parser for controllers to be able to parse JSON objects [FromBody] to dynamic objects.
             services.AddControllersWithViews()
@@ -51,7 +45,7 @@ namespace Server {
                 app.UseDeveloperExceptionPage();
             }
             app.UseAuthorization();
-            app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
+            app.UseCors(options => options.WithOrigins("http://localhost:4200", "https://localhost:4200", "localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseEndpoints(endpoints => {
