@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Server.Persistence;
 using Server.Services;
@@ -52,7 +51,7 @@ namespace Server {
                 app.UseDeveloperExceptionPage();
             }
             app.UseAuthorization();
-            app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(options => options.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseEndpoints(endpoints => {
