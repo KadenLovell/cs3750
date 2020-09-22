@@ -44,10 +44,10 @@ namespace Server {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseAuthorization();
             app.UseCors(options => options.WithOrigins("http://localhost:4200", "https://localhost:4200", "localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
