@@ -16,6 +16,12 @@ import { RyanComponent } from './ryan/ryan.component';
 
 // shared components (keep alphabetical)
 import { HttpService } from './http.service';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,7 @@ import { HttpService } from './http.service';
     LoginComponent,
     HomeComponent,
     RyanComponent,
-    DustinComponent
+    DustinComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +45,12 @@ import { HttpService } from './http.service';
       { path: "", redirectTo: "login", pathMatch: "full" },
       { path: "**", redirectTo: "login" }
     ]),
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]

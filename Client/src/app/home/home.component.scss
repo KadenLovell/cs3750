@@ -1,0 +1,45 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+mat-card {
+  width: 400px;
+  margin: auto;
+  text-align: center;
+  background-color: #515151;
+}
+
+.form-container {
+  display: grid;
+  grid-row-gap: 10px;
+}
+
+.button-container {
+    display: grid;
+    grid-row-gap: 5px;
+}
+
+.icon-container {
+  display: grid;
+  grid-row-gap: 30px;
+  padding-left: 80px;
+  transform: scale(1.2);}
+
+mat-form-field {
+  display: block;
+}
+
