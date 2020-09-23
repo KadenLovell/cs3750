@@ -1,14 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
     <mat-nav-list class="icon-container">
-      <mat-icon >account_circle</mat-icon>
-      <mat-icon >inbox</mat-icon>
-      <mat-icon >star</mat-icon>
-      <mat-icon >send</mat-icon>
+      <mat-icon routerLink="/calendar">account_circle</mat-icon>
+      <mat-icon routerLink="/classlist">inbox</mat-icon>
+      <mat-icon routerLink="/sidebar">star</mat-icon>
       <a mat-item-list href="./login">Logout</a>
     </mat-nav-list>
   </mat-sidenav>

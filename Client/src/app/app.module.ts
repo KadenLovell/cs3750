@@ -22,6 +22,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ClasslistComponent } from './classlist/classlist.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { MatListModule } from '@angular/material/list';
     HomeComponent,
     RyanComponent,
     DustinComponent,
+    SidebarComponent,
+    ClasslistComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +44,10 @@ import { MatListModule } from '@angular/material/list';
     HttpClientModule,
     MaterialModule,
     RouterModule.forRoot([
+      { path: 'calendar', component: CalendarComponent },
+      { path: 'sidebar', component: SidebarComponent },
+      { path: 'classlist', component: ClasslistComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'login', component: LoginComponent },
       { path: 'home', component: HomeComponent },
       { path: 'ryan', component: RyanComponent },
