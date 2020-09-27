@@ -1,9 +1,13 @@
 .sidenav-container {
   height: 100%;
 }
-
 .sidenav {
   width: 200px;
+}
+
+.sidenavRight{
+  width: 200px;
+  right: 0%;
 }
 
 .sidenav .mat-toolbar {
@@ -37,7 +41,15 @@ mat-card {
   display: grid;
   grid-row-gap: 30px;
   padding-left: 80px;
-  transform: scale(1.2);}
+  transform: scale(1.2);
+}
+.icon-containerRight {
+  display: grid;
+  grid-row-gap: 30px;
+  padding-left: 30px;
+  transform: scale(1.2);
+}
+
 
 mat-form-field {
   display: block;

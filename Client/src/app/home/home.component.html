@@ -11,6 +11,23 @@
       <a mat-item-list routerLink="/sidebar">Logout</a>
     </mat-nav-list>
   </mat-sidenav>
+
+  <!-- right side nav coopied from left nav-->
+  <mat-sidenav #drawer class="sidenavRight" fixedInViewport
+  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  [mode]="(isHandset$ | async) ? 'over' : 'side'"
+  [opened]="(isHandset$ | async) === false">
+  <mat-toolbar></mat-toolbar>
+  <mat-nav-list class="icon-containerRight">
+    <!--empty spacer line-->
+    <a mat-item-list routerLink="/sidebar"></a>
+    <mat-icon routerLink="/sidebar">assignment</mat-icon>
+    <a mat-item-list routerLink="/sidebar">TO DO</a>
+    <a mat-item-list routerLink="/sidebar">CLASS A ASSIGNMENT 1</a>
+    <a mat-item-list routerLink="/sidebar">CLASS B                ASSIGNMENT 1</a>
+  </mat-nav-list>
+</mat-sidenav>
+
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <button
