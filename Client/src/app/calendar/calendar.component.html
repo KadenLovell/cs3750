@@ -1,1 +1,172 @@
-<p>calendar works!</p>
+<div class="content">
+    <div class="buttons">
+        <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile style="float: left;" [colspan]="4">
+                <div class="buttons-left">
+                    <button
+                        mat-raised-button
+                        mwlCalendarPreviousView
+                        color="primary"
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="closeOpenMonthViewDay()"
+                        type="button">
+                        Previous
+                    </button>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        mwlCalendarToday
+                        [(viewDate)]="viewDate">
+                        Today
+                    </button>
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        mwlCalendarNextView
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="closeOpenMonthViewDay()">
+                        Next
+                    </button>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4">
+                <h2 class="selection-title">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h2>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="4">
+                <div class="buttons-right">
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (eventClicked)="handleEvent('Clicked', $event.event)"
+                        [class.active]="view === CalendarView.Month">
+                        Month
+                    </button>
+
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+    <div [ngSwitch]="view">
+        <mwl-calendar-month-view
+            *ngSwitchCase="CalendarView.Month"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-month-view>
+        <mwl-calendar-week-view
+            *ngSwitchCase="CalendarView.Week"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-week-view>
+        <mwl-calendar-day-view
+            *ngSwitchCase="CalendarView.Day"
+            [viewDate]="viewDate"
+            [events]="events"
+            [refresh]="refresh"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)">
+        </mwl-calendar-day-view>
+    </div>
+</div>
+<!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+
+<!-- 
+<h3>
+    Edit events
+    <button class="btn btn-primary float-right" (click)="addEvent()">
+        Add new
+    </button>
+    <div class="clearfix"></div>
+</h3>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Primary color</th>
+                <th>Secondary color</th>
+                <th>Starts at</th>
+                <th>Ends at</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let event of events">
+                <td>
+                    <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="event.title"
+                        (keyup)="refresh.next()" />
+                </td>
+                <td>
+                    <input
+                        type="color"
+                        [(ngModel)]="event.color.primary"
+                        (change)="refresh.next()" />
+                </td>
+                <td>
+                    <input
+                        type="color"
+                        [(ngModel)]="event.color.secondary"
+                        (change)="refresh.next()" />
+                </td>
+                <td>
+                    <input
+                        class="form-control"
+                        type="text"
+                        mwlFlatpickr
+                        [(ngModel)]="event.start"
+                        (ngModelChange)="refresh.next()"
+                        [altInput]="true"
+                        [convertModelValue]="true"
+                        [enableTime]="true"
+                        dateFormat="Y-m-dTH:i"
+                        altFormat="F j, Y H:i"
+                        placeholder="Not set" />
+                </td>
+                <td>
+                    <input
+                        class="form-control"
+                        type="text"
+                        mwlFlatpickr
+                        [(ngModel)]="event.end"
+                        (ngModelChange)="refresh.next()"
+                        [altInput]="true"
+                        [convertModelValue]="true"
+                        [enableTime]="true"
+                        dateFormat="Y-m-dTH:i"
+                        altFormat="F j, Y H:i"
+                        placeholder="Not set" />
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="deleteEvent(event)">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<ng-template #modalContent>
+    <h5 mat-dialog-title>RIP</h5>
+    <div mat-dialog-content>
+        Dialog Checkpoint, need to add new component to handle bodies for angular material apparently...
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button [mat-dialog-close] cdkFocusInitial>Ok</button>
+    </div>
+</ng-template>

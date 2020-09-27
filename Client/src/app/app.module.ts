@@ -1,6 +1,7 @@
 // modules (keep alpahabetical)
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlatpickrModule } from 'angularx-flatpickr';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { MaterialModule } from './material.module';
@@ -25,6 +26,8 @@ import { MatListModule } from '@angular/material/list';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ClasslistComponent } from './classlist/classlist.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import { CalendarComponent } from './calendar/calendar.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule, FlatpickrModule.forRoot(),
     FormsModule,
     HttpClientModule,
     MaterialModule,
@@ -61,6 +65,7 @@ import { CalendarComponent } from './calendar/calendar.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [HttpService],
   bootstrap: [AppComponent]
