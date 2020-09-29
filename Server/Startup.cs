@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,23 @@ namespace Server {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services
+              .AddAuthentication("Cookies")
+              .AddCookie(x => {
+                  x.Cookie.Domain = $".localhost:4200";
+                  x.Cookie.Name = "3750auth_ticketDev_";
+                  x.Events.OnRedirectToLogin += context => {
+                      context.Response.Redirect($"https://localhost:4200/login");
+
+                      return Task.CompletedTask;
+                  };
+                  x.Events.OnRedirectToLogout += context => {
+                      context.Response.Redirect($"https://localhost:4200/login");
+
+                      return Task.CompletedTask;
+                  };
+              });
+
             services.AddScoped<IPersistenceContext, DataContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddControllers();
@@ -27,6 +46,9 @@ namespace Server {
             services.AddControllersWithViews()
             .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
+            // Add HTTP Context to keep track of login status on the client.
+            services.AddHttpContextAccessor();
+
             // If this were to ever be a production envrionment, we would want to configure this based on the build environment.
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevelopSqlServer")));
 
@@ -34,6 +56,7 @@ namespace Server {
             // Services (keep alphabetized, disregarding "Service" suffix)
             services
              .AddScoped<DustinService>()
+             .AddScoped<CredentialsService>()
              .AddScoped<LoginService>()
              .AddScoped<RyanService>()
              .AddScoped<UserService>();

@@ -6,7 +6,7 @@
     <mat-toolbar></mat-toolbar>
     <mat-nav-list class="icon-container">
       <mat-icon routerLink="/calendar">account_circle</mat-icon>
-      <mat-icon routerLink="/classlist">inbox</mat-icon>
+      <mat-icon (click)="openModal()">inbox</mat-icon>
       <mat-icon routerLink="/sidebar">star</mat-icon>
       <a mat-item-list routerLink="/sidebar">Logout</a>
     </mat-nav-list>
@@ -25,3 +25,16 @@
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<!-- Notifications below -->
+<ng-template #modalContent>
+  <!-- editable -->
+  <h5 mat-dialog-title>RIP</h5>
+  <div mat-dialog-content>
+    Dialog Checkpoint, need to add new component to handle bodies for angular material apparently...
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close] cdkFocusInitial>Ok</button>
+  </div>
+  <!-- editable -->
+</ng-template>
