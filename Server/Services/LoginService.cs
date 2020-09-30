@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-using System.Security.Claims;
+// using System.Collections.Generic;
+// using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+// using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Server.Models;
 using Server.Persistence;
@@ -29,12 +29,12 @@ namespace Server.Services {
                 return error;
             }
 
-            var credentials = (Credentials)await _credentialsService.GetCredentialsAsync(model);
-            ClaimsIdentity identity;
-            identity = CreateIdentity(credentials);
-            await _httpContextAccessor.HttpContext.SignInAsync(new ClaimsPrincipal(identity));
+            // var credentials = (Credentials)await _credentialsService.GetCredentialsAsync(model);
+            // ClaimsIdentity identity;
+            // identity = CreateIdentity(credentials);
+            // await _httpContextAccessor.HttpContext.SignInAsync(new ClaimsPrincipal(identity));
 
-            var test = _httpContextAccessor.HttpContext.User.Identity;
+            // var test = _httpContextAccessor.HttpContext.User.Identity;
 
             var result = new {
                 success = true,
@@ -45,31 +45,31 @@ namespace Server.Services {
                     firstname = user.FirstName,
                     lastname = user.LastName,
                     dateOfBirth = user.DateOfBirth,
-                    test
+                    // test
                 }
             };
 
             return result;
         }
 
-        public async Task SignOutAsync() {
-            var identity = (ClaimsIdentity)_httpContextAccessor.HttpContext.User.Identity;
-            await _httpContextAccessor.HttpContext.SignOutAsync();
-        }
+        // public async Task SignOutAsync() {
+        //     var identity = (ClaimsIdentity)_httpContextAccessor.HttpContext.User.Identity;
+        //     await _httpContextAccessor.HttpContext.SignOutAsync();
+        // }
 
-        private static ClaimsIdentity CreateIdentity(Credentials credentials) {
-            // adds common claims
-            var claims = new List<Claim> {
-                new Claim("https://localhost:4200/claims/id", credentials.User.Id.ToString()),
-                new Claim("https://localhost:4200/claims/firstname", credentials.User.FirstName),
-                new Claim("https://localhost:4200/claims/lastname", credentials.User.LastName),
-                new Claim("https://localhost:4200/claims/username", credentials.User.Username),
-                new Claim("https://localhost:4200/claims/email", credentials.User.Email)
-            };
+        // private static ClaimsIdentity CreateIdentity(Credentials credentials) {
+        //     // adds common claims
+        //     var claims = new List<Claim> {
+        //         new Claim("https://localhost:4200/claims/id", credentials.User.Id.ToString()),
+        //         new Claim("https://localhost:4200/claims/firstname", credentials.User.FirstName),
+        //         new Claim("https://localhost:4200/claims/lastname", credentials.User.LastName),
+        //         new Claim("https://localhost:4200/claims/username", credentials.User.Username),
+        //         new Claim("https://localhost:4200/claims/email", credentials.User.Email)
+        //     };
 
-            var identity = new ClaimsIdentity(claims, "Cookies");
+        //     var identity = new ClaimsIdentity(claims, "Cookies");
 
-            return identity;
-        }
+        //     return identity;
+        // }
     }
 }
