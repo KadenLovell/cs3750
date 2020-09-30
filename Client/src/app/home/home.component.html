@@ -46,9 +46,12 @@
 <!-- Notifications below -->
 <ng-template #modalContent>
   <!-- editable -->
-  <h5 mat-dialog-title>Upcoming Due Dates</h5>
+  <h3 mat-dialog-title>Upcoming This Week</h3>
   <div mat-dialog-content>
-    Upcoming assignment due this week for CS 3750: <a mat-item-list class="notification-link" [mat-dialog-close] routerLink="/sidebar">Assignment 1</a>
+    CS 3750 assignment due: <a mat-item-list class="notification-link" [mat-dialog-close] routerLink="/sidebar">Assignment 1</a>
+  </div>
+  <div mat-dialog-content>
+    CS 3750 calendar event: <a mat-item-list class="notification-link" [mat-dialog-close] routerLink="/calendar">Group Meeting</a>
   </div>
   <div mat-dialog-actions>
     <button mat-button [mat-dialog-close] cdkFocusInitial>Ok</button>
