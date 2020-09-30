@@ -55,3 +55,11 @@ mat-form-field {
   display: block;
 }
 
+.notification-link {
+  color: #25c4c4;
+  text-decoration: none;
+}
+
+.notification-link:hover, .notification-link:active {
+  text-decoration: underline;
+}
