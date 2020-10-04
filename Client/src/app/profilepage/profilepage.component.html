@@ -4,28 +4,6 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
-    <mat-nav-list class="icon-container">
-      <mat-icon routerLink="/profilepage">account_circle</mat-icon> <!--routerLink="/profilepage" fails ? -->
-      <mat-icon (click)="openModal()">inbox</mat-icon>
-      <mat-icon routerLink="/sidebar">star</mat-icon>
-      <a mat-item-list routerLink="/sidebar">Logout</a>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <!-- right side nav coopied from left nav-->
-  <mat-sidenav #drawer class="sidenavRight" fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false">
-    <mat-toolbar></mat-toolbar>
-    <mat-nav-list class="icon-containerRight">
-      <!--empty spacer line-->
-      <a mat-item-list routerLink="/sidebar"></a>
-      <mat-icon routerLink="/sidebar">a &nbsp; &nbsp; &nbsp; &nbsp;assignment</mat-icon>
-      <a mat-item-list routerLink="/sidebar"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TO DO</a>
-      <a mat-item-list routerLink="/sidebar">CLASS A ASSIGNMENT 1</a>
-      <a mat-item-list routerLink="/sidebar">CLASS B ASSIGNMENT 1</a>
-    </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -43,18 +21,3 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<!-- Notifications below -->
-<ng-template #modalContent>
-  <!-- editable -->
-  <h3 mat-dialog-title>Upcoming This Week</h3>
-  <div mat-dialog-content>
-    CS 3750 assignment due: <a mat-item-list class="notification-link" [mat-dialog-close] routerLink="/sidebar">Assignment 1</a>
-  </div>
-  <div mat-dialog-content>
-    CS 3750 calendar event: <a mat-item-list class="notification-link" [mat-dialog-close] routerLink="/calendar">Group Meeting</a>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button [mat-dialog-close] cdkFocusInitial>Ok</button>
-  </div>
-  <!-- editable -->
-</ng-template>
