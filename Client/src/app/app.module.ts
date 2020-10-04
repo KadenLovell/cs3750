@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { DustinComponent } from './dustin/dustin.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ProfilePageComponent } from './profilepage/profilepage.component';
 import { RyanComponent } from './ryan/ryan.component';
 
 // shared components (keep alphabetical)
@@ -39,6 +40,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     SidebarComponent,
     ClasslistComponent,
     CalendarComponent,
+    ProfilePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     MaterialModule,
     RouterModule.forRoot([
       { path: 'calendar', component: CalendarComponent },
+      { path: 'profilepage', component: ProfilePageComponent },
       { path: 'sidebar', component: SidebarComponent },
       { path: 'classlist', component: ClasslistComponent },
       { path: 'login', component: LoginComponent },

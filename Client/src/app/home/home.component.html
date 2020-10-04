@@ -5,7 +5,7 @@
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
     <mat-nav-list class="icon-container">
-      <mat-icon routerLink="/calendar">account_circle</mat-icon>
+      <mat-icon routerLink="/profilepage">account_circle</mat-icon> <!--routerLink="/profilepage" fails ? -->
       <mat-icon (click)="openModal()">inbox</mat-icon>
       <mat-icon routerLink="/sidebar">star</mat-icon>
       <a mat-item-list routerLink="/sidebar">Logout</a>
