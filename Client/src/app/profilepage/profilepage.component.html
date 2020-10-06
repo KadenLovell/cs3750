@@ -85,21 +85,61 @@
     <p> &nbsp; </p>
       <p class="profile">Student Info:</p>
       <p> &nbsp; </p>
-      <p class="profile">First Name:</p>
-      <p class="profile">Last Name:</p>
-      <p class="profile">Date of Birth:</p>
-      <p>&nbsp;</p>
-      <p class="profile">Address:</p>
-      <p class="profile">City:</p>
-      <p class="profile">State:</p>
-      <p class="profile">Zip:</p>
-      <p>&nbsp;</p>
-      <p class="profile">Email:</p>
-      <p class="profile">Phone:</p>
-      <p>&nbsp;</p>
-      <p class="profile">Bio:</p>
-      <textarea disabled class="profile" name="bio" rows="10" cols="30"></textarea>
-      <p>&nbsp;</p>
+      
+      <p><mat-form-field class="profile">
+        <input #firstName="ngModel" matInput placeholder="First Name" name="firstName" type="name" [(ngModel)]="model.firstName" required>
+        <mat-error>
+          Required field.
+        </mat-error>
+      </mat-form-field></p>
+      
+      <p><mat-form-field class="profile">
+        <input #lastName="ngModel" matInput placeholder="Last Name" name="lastName" type="name" [(ngModel)]="model.lastName" required>
+        <mat-error>
+          Required field.
+        </mat-error>
+      </mat-form-field></p>
+      
+      <p><mat-form-field class="profile">
+        <input #birthDate="ngModel" matInput placeholder="Birth Date" name="birthDate" type="date" [(ngModel)]="model.birthDate" required>
+        <mat-error>
+          Required field.
+        </mat-error>
+      </mat-form-field></p>
+
+      <hr class="profile">
+      
+      <p><mat-form-field class="profile">
+        <input #address="ngModel" matInput placeholder="Street Address" name="address" type="address" [(ngModel)]="model.address">
+      </mat-form-field></p>
+      
+      <p><mat-form-field class="profile">
+        <input #city="ngModel" matInput placeholder="City" name="city" type="city" [(ngModel)]="model.city">
+      </mat-form-field></p>
+      
+      <p><mat-form-field class="profile">
+        <input #state="ngModel" matInput placeholder="State" name="state" type="state" [(ngModel)]="model.state">
+      </mat-form-field></p>
+      
+      <p><mat-form-field class="profile">
+        <input #zip="ngModel" matInput placeholder="Zip" name="zip" type="zip" [(ngModel)]="model.zip">
+      </mat-form-field></p>
+      
+      <hr class="profile">
+      
+      <p><mat-form-field class="profile">
+        <input #email="ngModel" matInput placeholder="Email" name="email" type="email" [(ngModel)]="model.email">
+      </mat-form-field></p>
+      
+      <p><mat-form-field class="profile">
+        <input #phone="ngModel" matInput placeholder="Phone" name="phone" type="phone" [(ngModel)]="model.phone">
+      </mat-form-field></p>
+
+      <p><mat-form-field class="profile" appearance="fill">
+        <mat-label>Bio</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field></p>
+
       <div style="margin-left:50px">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <i class="fa fa-linkedin-square" style="font-size:36px"></i>
