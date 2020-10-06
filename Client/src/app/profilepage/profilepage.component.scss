@@ -36,5 +36,12 @@ hr.profile {
 }
 
 
+.home {
+  color: white;
+  text-decoration: none;
+}
 
+.home:hover, .home:active {
+  text-decoration: underline;
+}
 
