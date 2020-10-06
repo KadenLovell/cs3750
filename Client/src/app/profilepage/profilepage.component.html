@@ -1,3 +1,15 @@
+<ng-container [ngSwitch]="view">
+  <!-- view 1|readonly -->
+  <ng-container *ngSwitchCase="1">
+      <ng-container *ngTemplateOutlet="view1"></ng-container>
+  </ng-container>
+  <!-- view 2|edit profile -->
+  <ng-container *ngSwitchCase="2">
+      <ng-container *ngTemplateOutlet="view2"></ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #view1>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav-content>
     <mat-toolbar color="primary">
@@ -10,15 +22,14 @@
         <a mat-item-list routerLink="/sidebar">Home</a>
       <span style="width: 100%;text-align: center">KARD Learning</span>
     </mat-toolbar>
+    <button mat-stroked-button type="button" style="margin-left:50px;margin-top:50px" (click)="view = 2;">Edit Profile</button>
+
   <!-- Profile pic would go here-->
     <div class="center">
       <img src="http://i38.photobucket.com/albums/e149/eloginko/hello_zpsc60ffbf3.gif" />
-  </div>
-
+    </div>
   <!-- Profile elements-->
- <!-- I hate this but i coulndt figure out how else to space these just a little to the left.-->
-
-<div class="left">
+<div>
   <p> &nbsp; </p>
     <p class="profile">Student Info:</p>
     <p> &nbsp; </p>
@@ -39,7 +50,6 @@
     <p>&nbsp;</p>
     <div style="margin-left:50px">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <p>Links:</p>
     <i class="fa fa-linkedin-square" style="font-size:36px"></i>
     <a class="external-links" target="_blank" href="https://www.linkedin.com/home">LinkedIn</a>
     <i class="fa fa-github" style="font-size:36px"></i>
@@ -47,8 +57,66 @@
     <i class="fa fa-facebook" style="font-size:36px"></i>
     <a class="external-links" target="_blank" href="https://www.facebook.com/">Facebook</a>
   </div>
-
 </div>
-  </mat-sidenav-content> 
+</mat-sidenav-content> 
 </mat-sidenav-container>
+</ng-template>
+
+<ng-template #view2>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav-content>
+      <form #form="ngForm" class="form-container" (ngSubmit)="saveProfile()">
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          ></button>
+          <!-- need this to take us back to home-->
+          <a mat-item-list routerLink="/sidebar">Home</a>
+        <span style="width: 100%;text-align: center">KARD Learning</span>
+      </mat-toolbar>
+    <!-- Profile pic would go here-->
+      <div class="center">
+        <img src="http://i38.photobucket.com/albums/e149/eloginko/hello_zpsc60ffbf3.gif" />
+    </div>
+    <!-- Profile elements-->
+  <div>
+    <p> &nbsp; </p>
+      <p class="profile">Student Info:</p>
+      <p> &nbsp; </p>
+      <p class="profile">First Name:</p>
+      <p class="profile">Last Name:</p>
+      <p class="profile">Date of Birth:</p>
+      <p>&nbsp;</p>
+      <p class="profile">Address:</p>
+      <p class="profile">City:</p>
+      <p class="profile">State:</p>
+      <p class="profile">Zip:</p>
+      <p>&nbsp;</p>
+      <p class="profile">Email:</p>
+      <p class="profile">Phone:</p>
+      <p>&nbsp;</p>
+      <p class="profile">Bio:</p>
+      <textarea disabled class="profile" name="bio" rows="10" cols="30"></textarea>
+      <p>&nbsp;</p>
+      <div style="margin-left:50px">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <i class="fa fa-linkedin-square" style="font-size:36px"></i>
+      <a style="pointer-events: none; display: inline-block;"disabled class="external-links" target="_blank" href="https://www.linkedin.com/home">LinkedIn</a>
+      <i class="fa fa-github" style="font-size:36px"></i>
+      <a style="pointer-events: none; display: inline-block;"class="external-links" target="_blank" href="https://github.com/">GitHub</a>
+      <i class="fa fa-facebook" style="font-size:36px"></i>
+      <a style="pointer-events: none; display: inline-block;"class="external-links" target="_blank" href="https://www.facebook.com/">Facebook</a>
+      <div class="button-container">
+        <button mat-stroked-button style="margin-top:30px;margin-right:30px;" type="button" (click)="view = 1; resetViewstate()">Cancel</button>
+        <button mat-raised-button style="margin-top:30px" color="primary" type="submit">Save</button>
+    </div>
+    </div>
+  </div>
+</form>
+</mat-sidenav-content> 
+</mat-sidenav-container>
+</ng-template>
+
 
