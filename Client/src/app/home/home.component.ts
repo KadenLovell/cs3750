@@ -63,8 +63,4 @@ export class HomeComponent implements OnInit {
   resetViewstate() {
     this.errors = {};
   }
-
-
-
-
 }

@@ -14,9 +14,21 @@ namespace Server.Controllers {
             _userService = userService;
         }
 
+        [HttpGet("{userId:long}")]
+        public async Task<IActionResult> GetUserAsync(long userId) {
+            var result = await _userService.GetUserAsync(userId);
+            return Json(result);
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> AddUserAsync([FromBody] dynamic model) {
             var result = await _userService.AddUserAsync(model);
+            return Json(result);
+        }
+
+        [HttpPost("update")]
+        public async Task<IActionResult> UpdateUserAsync([FromBody] dynamic model) {
+            var result = await _userService.UpdateUserAsync(model);
             return Json(result);
         }
     }
