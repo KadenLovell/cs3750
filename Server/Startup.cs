@@ -26,9 +26,10 @@ namespace Server {
                 options.DefaultScheme = "Cookies";
             })
             .AddCookie(options => {
-                options.Cookie.HttpOnly = true;
+                options.Cookie.HttpOnly = false;
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.Name = "auth_cookie";
+                options.ExpireTimeSpan = TimeSpan.FromHours(8);
                 options.Events = new CookieAuthenticationEvents {
                     OnRedirectToLogin = redirectContext => {
                         redirectContext.HttpContext.Response.StatusCode = 401;

@@ -6,6 +6,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HomeService } from './home.service';
 import { MatDialog } from '@angular/material/dialog';
 
+// shared
+import { User } from "../../shared/user/user";
+import { UserService } from "../../shared/user/user.service";
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,19 +30,27 @@ export class HomeComponent implements OnInit {
       shareReplay()
     );
 
-  constructor(private route: ActivatedRoute, private readonly router: Router, private readonly _homeService: HomeService, private breakpointObserver: BreakpointObserver, private modal: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly _homeService: HomeService,
+    private breakpointObserver: BreakpointObserver,
+    private readonly _userService: UserService,
+    private modal: MatDialog) { }
+
+  get user(): User {
+    return this._userService.user;
+  }
 
   ngOnInit(): void {
+    this._userService.loadUser();
     this.view = 1;
     this.model = {};
   }
 
   openModal(): void {
     // Notifications
-    const modal = this.modal.open(this.modalContent, { width: '750px', data: {} });
-    modal.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    this.modal.open(this.modalContent, { width: '750px', data: {} });
   }
 
   resetViewstate() {
