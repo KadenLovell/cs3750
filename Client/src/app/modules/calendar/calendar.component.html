@@ -34,18 +34,6 @@
             <mat-grid-tile [colspan]="4">
                 <h2 class="selection-title">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h2>
             </mat-grid-tile>
-            <mat-grid-tile [colspan]="4">
-                <div class="buttons-right">
-                    <button
-                        mat-raised-button
-                        color="primary"
-                        (eventClicked)="handleEvent('Clicked', $event.event)"
-                        [class.active]="view === CalendarView.Month">
-                        Month
-                    </button>
-
-                </div>
-            </mat-grid-tile>
         </mat-grid-list>
     </div>
 

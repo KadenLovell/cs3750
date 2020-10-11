@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { LoginService } from './login.service';
 declare var particlesJS: any;
-// shared
 
 @Component({
   selector: 'app-login',
@@ -17,11 +16,16 @@ export class LoginComponent implements OnInit {
   errors: any;
   view: any;
 
-  constructor(private route: ActivatedRoute, private readonly router: Router, private readonly _loginService: LoginService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly _loginService: LoginService) { }
+
   ngOnInit(): void {
     particlesJS.load('particles-js', 'assets/particles.json', function () {
       console.log('callback - particles.js config loaded');
     });
+    this._loginService.logout();
 
     this.view = 1;
     this.model = {};

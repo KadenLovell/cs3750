@@ -28,6 +28,7 @@ namespace Server.Persistence {
 
         public async Task UpdateAsync(TModel model) {
             if (model == null) throw new ArgumentNullException("entity");
+            entities.Update(model);
             await _dataContext.SaveChangesAsync();
         }
 

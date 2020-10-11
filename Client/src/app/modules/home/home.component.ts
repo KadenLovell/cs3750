@@ -6,6 +6,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HomeService } from './home.service';
 import { MatDialog } from '@angular/material/dialog';
 
+// shared
+import { User } from "../../shared/user/user";
+import { UserService } from "../../shared/user/user.service";
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,45 +30,30 @@ export class HomeComponent implements OnInit {
       shareReplay()
     );
 
-  constructor(private route: ActivatedRoute, private readonly router: Router, private readonly _homeService: HomeService, private breakpointObserver: BreakpointObserver, private modal: MatDialog) { }
+  constructor(
+    private route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly _homeService: HomeService,
+    private breakpointObserver: BreakpointObserver,
+    private readonly _userService: UserService,
+    private modal: MatDialog) { }
+
+  get user(): User {
+    return this._userService.user;
+  }
 
   ngOnInit(): void {
+    this._userService.loadUser();
     this.view = 1;
     this.model = {};
   }
 
   openModal(): void {
     // Notifications
-    const modal = this.modal.open(this.modalContent, { width: '750px', data: {} });
-    modal.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  //TODO THIS WILL BE CHANGED TO WHATEVER SERVICE(S) WE NEED
-  createUser() {
-    // if there are loading animations, handle the state here: IE: this.loading = true;
-    this._homeService.addUser(this.model).then(response => {
-      // if there are loading animations, handle the state here: IE: this.loading = false;
-      this.response = response;
-      this.errors = response.errors;
-
-      if (this.errors) {
-        return;
-      }
-
-      // if result was successful: set shared user, then route to home component
-      if (this.response && this.response.success) {
-        this.router.navigate(['../home'], { relativeTo: this.route });
-      }
-    });
+    this.modal.open(this.modalContent, { width: '750px', data: {} });
   }
 
   resetViewstate() {
     this.errors = {};
   }
-
-
-
-
 }

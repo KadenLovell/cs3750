@@ -10,23 +10,21 @@ import { RouterModule } from '@angular/router';
 
 // components (keep alphabetical)
 import { AppComponent } from './app.component';
-import { DustinComponent } from './dustin/dustin.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { ProfilePageComponent } from './profilepage/profilepage.component';
-import { RyanComponent } from './ryan/ryan.component';
+import { HomeComponent } from './modules/home/home.component';
+import { LoginComponent } from './modules/login/login.component';
+import { ProfilePageComponent } from './modules/profilepage/profilepage.component';
 
 // shared components (keep alphabetical)
-import { HttpService } from './http.service';
+import { HttpService } from './shared/http/http.service';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { ClasslistComponent } from './classlist/classlist.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { SidebarComponent } from './modules/sidebar/sidebar.component';
+import { ClasslistComponent } from './modules/classlist/classlist.component';
+import { CalendarComponent } from './modules/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
@@ -35,8 +33,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RyanComponent,
-    DustinComponent,
     SidebarComponent,
     ClasslistComponent,
     CalendarComponent,
@@ -57,8 +53,6 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
       { path: 'login', component: LoginComponent },
       { path: 'login', component: LoginComponent },
       { path: 'home', component: HomeComponent },
-      { path: 'ryan', component: RyanComponent },
-      { path: 'dustin', component: DustinComponent },
       { path: "", redirectTo: "login", pathMatch: "full" },
       { path: "**", redirectTo: "login" }
     ]),

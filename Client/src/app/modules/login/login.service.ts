@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { HttpService } from "../http.service";
+import { HttpService } from "../../shared/http/http.service";
 
 @Injectable()
 export class LoginService {
@@ -9,6 +9,12 @@ export class LoginService {
         const url = `/api/login/login`;
 
         return await this._httpService.post(url, model);
+    }
+
+    async logout(): Promise<any> {
+        const url = `/api/login/logout`;
+
+        return await this._httpService.post(url);
     }
 
     async addUser(model: any): Promise<any> {

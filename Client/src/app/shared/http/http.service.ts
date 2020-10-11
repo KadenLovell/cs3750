@@ -13,7 +13,7 @@ export class HttpService {
     get(url: string): Promise<any> {
         const result =
             this._httpClient
-                .get(this.base + url)
+                .get(this.base + url, { withCredentials: true })
                 .pipe(retry(3))
                 .toPromise()
                 .then(response => {
@@ -48,7 +48,7 @@ export class HttpService {
         const result =
             this
                 ._httpClient
-                .post(this.base + url, model)
+                .post(this.base + url, model, { withCredentials: true })
                 .toPromise()
                 .then(response => {
                     return Promise.resolve(response);
@@ -71,6 +71,7 @@ export class HttpService {
     upload(url: string, formData: FormData, uploading: (percentage: number) => void, uploaded: (response) => void, error: (reason: string) => void, completed: () => void) {
         const req = new HttpRequest("POST", this.base + url, formData, {
             reportProgress: true,
+            withCredentials: true
         });
 
         this
