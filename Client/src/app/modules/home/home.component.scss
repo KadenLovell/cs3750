@@ -10,14 +10,14 @@ mat-sidenav {
 }
 
 .right-content {
-  height: 100vh;
+  height: 95vh;
   float: right;
   width: 15vw;
   background: #424242;
 }
 
 .left-content {
-  height: 100vh;
+  height: 95vh;
   float: left;
   width: 8vw;
   background: #424242;
@@ -38,4 +38,11 @@ mat-sidenav {
   margin-top: 1vw;
   margin-right: auto;
   width: 30vw;
+}
+
+.calendar {
+  position: absolute;
+  bottom: 5vh;
+  width: 75vw;
+  margin-left: 1vw;
 }
