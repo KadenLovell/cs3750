@@ -6,5 +6,7 @@ namespace Server.Persistence {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         // Example:
         public DbSet<User> User { get; set; }
+
+        public DbSet<Class> Class { get; set; }
     }
 }
