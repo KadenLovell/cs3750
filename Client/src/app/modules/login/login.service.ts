@@ -11,6 +11,12 @@ export class LoginService {
         return await this._httpService.post(url, model);
     }
 
+    async logout(): Promise<any> {
+        const url = `/api/login/logout`;
+
+        return await this._httpService.post(url);
+    }
+
     async addUser(model: any): Promise<any> {
         const url = `/api/user/add`;
 

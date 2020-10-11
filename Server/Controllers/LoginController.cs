@@ -19,5 +19,11 @@ namespace Server.Controllers {
             var result = await _loginService.LoginAsync(model);
             return Json(result);
         }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> LogoutAsync() {
+            await _loginService.LogoutAsync();
+            return NoContent();
+        }
     }
 }
