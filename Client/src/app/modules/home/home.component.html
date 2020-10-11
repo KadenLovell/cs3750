@@ -1,25 +1,86 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container fullscreen>
+  <mat-sidenav-content>
+    <mat-toolbar class="toolbar-spacer" color="primary">
+      <span style="margin:auto">KARD</span>
+    </mat-toolbar>
+
+    <div class="right-content">
+      <mat-grid-list cols="1" rowHeight="50px">
+        <mat-nav-list class="icon-container">
+          <mat-grid-tile cols="1" rows="3">
+            <h1 mat-item-list>TODO:</h1>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <a mat-item-list class="notification-link" routerLink="/sidebar">CLASS A ASSIGNMENT 1</a>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <a mat-item-list class="notification-link" routerLink="/sidebar">CLASS B ASSIGNMENT 1</a>
+          </mat-grid-tile>
+        </mat-nav-list>
+      </mat-grid-list>
+    </div>
+
+    <div class="left-content">
+      <mat-grid-list cols="1" rowHeight="100px">
+        <mat-grid-tile>
+          <button mat-fab color="accent" routerLink="/profilepage">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <button mat-fab color="accent" (click)="openModal()">
+            <mat-icon>inbox</mat-icon>
+          </button>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <button mat-fab color="accent" routerLink="/calendar">
+            <mat-icon>today</mat-icon>
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+
+    <div class="center-content">
+      <mat-grid-list cols="4" rowHeight="125px">
+        <mat-grid-tile *ngFor="let number of [0,1,2,3,4]">
+          <mat-card>
+            <mat-card-title>Class Card</mat-card-title>
+            <mat-card-subtitle>3750</mat-card-subtitle>
+            <mat-card-content>
+              Class description would go here.
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- INITIAL CODE START -->
+
+<!-- <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
     <mat-nav-list class="icon-container">
-      <mat-icon routerLink="/profilepage">account_circle</mat-icon> <!--routerLink="/profilepage" fails ? -->
+      <mat-icon routerLink="/profilepage">account_circle</mat-icon>
       <mat-icon (click)="openModal()">inbox</mat-icon>
       <mat-icon routerLink="/sidebar">star</mat-icon>
       <a mat-item-list routerLink="/sidebar">Logout</a>
     </mat-nav-list>
-  </mat-sidenav>
-
-  <!-- right side nav coopied from left nav-->
+  </mat-sidenav> -->
+<!--
   <mat-sidenav #drawer class="sidenavRight" fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false">
     <mat-toolbar></mat-toolbar>
     <mat-nav-list class="icon-containerRight">
-      <!--empty spacer line-->
       <a mat-item-list routerLink="/sidebar"></a>
       <mat-icon routerLink="/sidebar">a &nbsp; &nbsp; &nbsp; &nbsp;assignment</mat-icon>
       <a mat-item-list routerLink="/sidebar"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;TO DO</a>
@@ -41,7 +102,9 @@
       <span style="width: 100%;text-align: center">KARD Learning</span>
     </mat-toolbar>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
+
+<!-- INITIAL CODE END -->
 
 <!-- Notifications below -->
 <ng-template #modalContent>
