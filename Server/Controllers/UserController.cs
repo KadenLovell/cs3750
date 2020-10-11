@@ -13,6 +13,11 @@ namespace Server.Controllers {
             _context = context;
             _userService = userService;
         }
+        [HttpGet("activeuser")]
+        public async Task<IActionResult> GetActiveUserAsync() {
+            var result = await _userService.GetActiveUserAsync();
+            return Json(result);
+        }
 
         [HttpGet("{userId:long}")]
         public async Task<IActionResult> GetUserAsync(long userId) {

@@ -1,13 +1,35 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Server.Models;
 using Server.Persistence;
 
 namespace Server.Services {
     public class UserService {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IRepository<User> _repository;
-        public UserService(IRepository<User> repository) {
+        public UserService(IHttpContextAccessor httpContextAccessor, IRepository<User> repository) {
             _repository = repository;
+            _httpContextAccessor = httpContextAccessor;
+        }
+        public async Task<dynamic> GetActiveUserAsync() {
+            var id = _httpContextAccessor.HttpContext.User.Identity.Id();
+            var user = await _repository.GetUserById(id);
+
+            if (user == null) {
+                return null;
+            }
+
+            var result = new {
+                id = _httpContextAccessor.HttpContext.User.Identity.Id(),
+                username = user.Username,
+                firstname = user.FirstName,
+                lastname = user.LastName,
+                email = user.Email
+                // TODO: add user role here once it exists
+            };
+
+            return result;
         }
 
         public async Task<dynamic> GetUserAsync(long id) {

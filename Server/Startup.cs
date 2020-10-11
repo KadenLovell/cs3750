@@ -1,7 +1,9 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,22 +22,20 @@ namespace Server {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            services
-              .AddAuthentication("Cookies")
-              .AddCookie(x => {
-                  x.Cookie.Domain = $".localhost:4200";
-                  x.Cookie.Name = "3750auth_ticketDev_";
-                  x.Events.OnRedirectToLogin += context => {
-                      context.Response.Redirect($"https://localhost:4200/login");
-
-                      return Task.CompletedTask;
-                  };
-                  x.Events.OnRedirectToLogout += context => {
-                      context.Response.Redirect($"https://localhost:4200/login");
-
-                      return Task.CompletedTask;
-                  };
-              });
+            services.AddAuthentication(options => {
+                options.DefaultScheme = "Cookies";
+            })
+            .AddCookie(options => {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.SameSite = SameSiteMode.None;
+                options.Cookie.Name = "auth_cookie";
+                options.Events = new CookieAuthenticationEvents {
+                    OnRedirectToLogin = redirectContext => {
+                        redirectContext.HttpContext.Response.StatusCode = 401;
+                        return Task.CompletedTask;
+                    }
+                };
+            });
 
             services.AddScoped<IPersistenceContext, DataContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -55,10 +55,7 @@ namespace Server {
             // Example:
             // Services (keep alphabetized, disregarding "Service" suffix)
             services
-             .AddScoped<DustinService>()
-             .AddScoped<CredentialsService>()
              .AddScoped<LoginService>()
-             .AddScoped<RyanService>()
              .AddScoped<UserService>();
         }
 
@@ -67,8 +64,14 @@ namespace Server {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(options => options.WithOrigins("http://localhost:4200", "https://localhost:4200", "localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
+
+            var cookiePolicyOptions = new CookiePolicyOptions {
+                MinimumSameSitePolicy = SameSiteMode.None,
+            };
+            app.UseCookiePolicy(cookiePolicyOptions);
+            app.UseCors(options => options.WithOrigins("http://localhost:4200", "https://localhost:4200", "localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints => {

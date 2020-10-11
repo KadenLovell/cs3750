@@ -41,25 +41,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  //TODO THIS WILL BE CHANGED TO WHATEVER SERVICE(S) WE NEED
-  createUser() {
-    // if there are loading animations, handle the state here: IE: this.loading = true;
-    this._homeService.addUser(this.model).then(response => {
-      // if there are loading animations, handle the state here: IE: this.loading = false;
-      this.response = response;
-      this.errors = response.errors;
-
-      if (this.errors) {
-        return;
-      }
-
-      // if result was successful: set shared user, then route to home component
-      if (this.response && this.response.success) {
-        this.router.navigate(['../home'], { relativeTo: this.route });
-      }
-    });
-  }
-
   resetViewstate() {
     this.errors = {};
   }
