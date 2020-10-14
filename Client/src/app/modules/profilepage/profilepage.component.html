@@ -9,6 +9,7 @@
   </ng-container>
 </ng-container>
 
+<!-- view 1|readonly -->
 <ng-template #view1>
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav-content>
@@ -57,6 +58,7 @@
   </mat-sidenav-container>
 </ng-template>
 
+<!-- view 2|edit profile -->
 <ng-template #view2>
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav-content>
@@ -171,7 +173,7 @@
 
           <div class="button-container">
             <button mat-stroked-button style="margin-top:30px;margin-right:30px;" type="button" (click)="view = 1; resetViewstate()">Cancel</button>
-            <button mat-raised-button style="margin-top:30px" color="primary" type="submit">Save</button>
+            <button mat-raised-button style="margin-top:30px" color="primary" type="submit" (click)="view = 1; resetViewstate()">Save</button>
           </div>
         </div>
       </form>
