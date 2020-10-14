@@ -14,6 +14,12 @@ namespace Server.Controllers {
             _classService = classService;
         }
 
+        [HttpGet("list")]
+        public async Task<IActionResult> GetClassesAsync() {
+            var result = await _classService.GetClassesAsync();
+            return Json(result);
+        }
+
         [HttpGet("{classId:long}")]
         public async Task<IActionResult> GetClassAsync(long classId) {
             var result = await _classService.GetClassAsync(classId);

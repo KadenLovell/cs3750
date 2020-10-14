@@ -56,8 +56,15 @@
             </mat-grid-tile>
         </mat-grid-list>
 
-        <button mat-stroked-button type="button" (click)="view = 2;">Edit</button>
+        <!-- example for table  https://material.angular.io/components/table/overview  -->
+        <!-- <div *ngFor="let x of rows">
+            {{x.id}}
+            {{x.code}}
+            {{x.description}}
+        </div> -->
+        <!-- end of example for table -->
 
+        <button mat-stroked-button type="button" (click)="view = 2;">Edit</button>
     </mat-sidenav-container>
 </ng-template>
 
@@ -110,7 +117,7 @@
             </mat-grid-list>
 
             <button mat-stroked-button type="button" (click)="view = 1;">Cancel</button>
-            <button mat-stroked-button type="submit" (click)="view = 1;">Save</button>
+            <button mat-stroked-button type="submit" (click)="view = 1; save()">Save</button>
         </form>
     </mat-sidenav-container>
 </ng-template>

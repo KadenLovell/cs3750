@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ProfilePageService } from './profilepage.service';
+
 @Component({
   selector: 'app-profilepage',
   templateUrl: './profilepage.component.html',
@@ -30,7 +31,6 @@ export class ProfilePageComponent implements OnInit {
     this._profilePageService.updateUser(this.model).then(response => {
       // if there are loading animations, handle the state here: IE: this.loading = false;
       this.response = response;
-      console.log(this.response);
       this.errors = response.errors;
 
       // if result was successful: set shared user, then route to home component
