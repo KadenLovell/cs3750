@@ -13,6 +13,6 @@ namespace Server.Models {
         public string Location { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
-        public string MaxCapacity { get; set; }
-        }
+        public string Capacity { get; set; }
+    }
 }

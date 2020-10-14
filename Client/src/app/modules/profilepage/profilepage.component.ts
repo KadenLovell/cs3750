@@ -25,7 +25,7 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  updateUser() {
+  save() {
     // if there are loading animations, handle the state here: IE: this.loading = true;
     this._profilePageService.updateUser(this.model).then(response => {
       // if there are loading animations, handle the state here: IE: this.loading = false;

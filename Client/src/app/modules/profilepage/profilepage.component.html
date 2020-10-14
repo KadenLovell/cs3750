@@ -62,20 +62,21 @@
 <ng-template #view2>
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav-content>
-      <form #form="ngForm" class="form-container" (ngSubmit)="updateUser()">
-        <mat-toolbar color="primary">
-          <button
-            type="button"
-            aria-label="Toggle sidenav"
-            mat-icon-button></button>
-          <!-- need this to take us back to home-->
-          <a mat-item-list routerLink="/sidebar">Home</a>
-          <span style="width: 100%;text-align: center">KARD Learning</span>
-        </mat-toolbar>
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button></button>
+        <a mat-item-list routerLink="/home">Home</a>
+        <span style="width: 100%;text-align: center">KARD Learning</span>
+      </mat-toolbar>
+
+      <form #form="ngForm" class="form-container" (ngSubmit)="save()">
         <!-- Profile pic would go here-->
         <div class="center">
           <img src="http://i38.photobucket.com/albums/e149/eloginko/hello_zpsc60ffbf3.gif" />
         </div>
+
         <!-- Profile elements-->
         <div>
           <p> &nbsp; </p>

@@ -12,7 +12,7 @@ namespace Server.Services {
             _repository = repository;
             _httpContextAccessor = httpContextAccessor;
         }
-    
+
         public async Task<dynamic> GetClassAsync(long id) {
             var classes = await _repository.GetClassById(id);
 
@@ -26,7 +26,7 @@ namespace Server.Services {
                 location = classes.Location,
                 startTime = classes.StartTime?.ToString("d"),
                 endTime = classes.EndTime?.ToString("d"),
-                maxCapacity = classes.MaxCapacity
+                capacity = classes.Capacity
             };
 
             return result;
@@ -54,7 +54,7 @@ namespace Server.Services {
                 Location = model.location,
                 StartTime = DateTime.Parse((string)model.startTime),
                 EndTime = DateTime.Parse((string)model.endTime),
-                MaxCapacity = model.maxCapacity,
+                Capacity = model.capacity,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = null
             };
@@ -73,7 +73,7 @@ namespace Server.Services {
                     location = classes.Location,
                     startTime = classes.StartTime,
                     endTime = classes.EndTime,
-                    maxCapacity = classes.MaxCapacity
+                    capacity = classes.Capacity
                 }
             };
 
@@ -95,7 +95,7 @@ namespace Server.Services {
             classes.Location = model.location;
             classes.StartTime = DateTime.Parse((string)model.startTime);
             classes.EndTime = DateTime.Parse((string)model.endTime);
-            classes.MaxCapacity = model.maxCapacity;
+            classes.Capacity = model.capacity;
 
             await _repository.UpdateAsync(classes);
 
@@ -110,7 +110,7 @@ namespace Server.Services {
                 location = classes.Location,
                 startTime = classes.StartTime?.ToString("d"),
                 endTime = classes.EndTime?.ToString("d"),
-                maxCapacity = classes.MaxCapacity,
+                capacity = classes.Capacity,
             };
 
             return result;

@@ -1,1 +1,116 @@
-<p>classlist works!</p>
+<ng-container [ngSwitch]="view">
+    <!-- view 1|readonly -->
+    <ng-container *ngSwitchCase="1">
+        <ng-container *ngTemplateOutlet="view1"></ng-container>
+    </ng-container>
+    <!-- view 2|edit -->
+    <ng-container *ngSwitchCase="2">
+        <ng-container *ngTemplateOutlet="view2"></ng-container>
+    </ng-container>
+</ng-container>
+
+<!-- view 1|readonly -->
+<ng-template #view1>
+    <mat-sidenav-container fullscreen>
+        <mat-grid-list cols="4" rowHeight="50px">
+            <mat-grid-tile cols="1">
+                <mat-form-field>
+                    <input #code="ngModel" matInput placeholder="Code" name="code" type="text" [(ngModel)]="model.code" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile cols="1">
+                <mat-form-field>
+                    <input #name="ngModel" matInput placeholder="Name" name="name" type="text" [(ngModel)]="model.name" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile cols="1">
+                <mat-form-field>
+                    <input #description="ngModel" matInput placeholder="Description" name="description" type="text" [(ngModel)]="model.description" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile cols="1">
+                <mat-form-field>
+                    <input #department="ngModel" matInput placeholder="Department" name="department" type="text" [(ngModel)]="model.department" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile cols="1">
+                <mat-form-field>
+                    <input #creditHours="ngModel" matInput placeholder="Credit Hours" name="creditHours" type="text" [(ngModel)]="model.creditHours" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile cols="1">
+                <mat-form-field>
+                    <input #location="ngModel" matInput placeholder="Location" name="location" type="text" [(ngModel)]="model.location" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile cols="1">
+                <mat-form-field>
+                    <input #capacity="ngModel" matInput placeholder="Capacity" name="capacity" type="text" [(ngModel)]="model.capacity" readonly>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+
+        <button mat-stroked-button type="button" (click)="view = 2;">Edit</button>
+
+    </mat-sidenav-container>
+</ng-template>
+
+<!-- view 2|edit -->
+<ng-template #view2>
+    <mat-sidenav-container fullscreen>
+        <form #form="ngForm" class="form-container" (ngSubmit)="save()">
+            <mat-grid-list cols="4" rowHeight="50px">
+                <mat-grid-tile cols="1">
+                    <mat-form-field>
+                        <input #code="ngModel" matInput placeholder="Code" name="code" type="text" [(ngModel)]="model.code">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile cols="1">
+                    <mat-form-field>
+                        <input #name="ngModel" matInput placeholder="Name" name="name" type="text" [(ngModel)]="model.name">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile cols="1">
+                    <mat-form-field>
+                        <input #description="ngModel" matInput placeholder="Description" name="description" type="text" [(ngModel)]="model.description">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile cols="1">
+                    <mat-form-field>
+                        <input #department="ngModel" matInput placeholder="Department" name="department" type="text" [(ngModel)]="model.department">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile cols="1">
+                    <mat-form-field>
+                        <input #creditHours="ngModel" matInput placeholder="Credit Hours" name="creditHours" type="text" [(ngModel)]="model.creditHours">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile cols="1">
+                    <mat-form-field>
+                        <input #location="ngModel" matInput placeholder="Location" name="location" type="text" [(ngModel)]="model.location">
+                    </mat-form-field>
+                </mat-grid-tile>
+
+                <mat-grid-tile cols="1">
+                    <mat-form-field>
+                        <input #capacity="ngModel" matInput placeholder="Capacity" name="capacity" type="text" [(ngModel)]="model.capacity">
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <button mat-stroked-button type="button" (click)="view = 1;">Cancel</button>
+            <button mat-stroked-button type="submit" (click)="view = 1;">Save</button>
+        </form>
+    </mat-sidenav-container>
+</ng-template>
