@@ -20,12 +20,13 @@ namespace Server.Models {
         public string GithubUrl { get; set; }
         public string FacebookUrl { get; set; }
         public string Password { get; set; }
-        public UserRole Role { get; set; }
+        public bool Role { get; set; }
     }
-
+    /* commented out while simple role of type String is implemented
     public enum UserRole : byte {
         Teacher = 0,
         Student = 1,
         Administrator = 2
     }
+    */
 }

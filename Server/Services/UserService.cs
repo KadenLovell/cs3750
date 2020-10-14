@@ -25,8 +25,10 @@ namespace Server.Services {
                 username = user.Username,
                 firstname = user.FirstName,
                 lastname = user.LastName,
-                email = user.Email
+                email = user.Email,
+                role = user.Role
                 // TODO: add user role here once it exists
+                // TODO: the only spot here that needs role added?
             };
 
             return result;
@@ -39,6 +41,7 @@ namespace Server.Services {
                 id = user.Id,
                 username = user.Username,
                 email = user.Email,
+                role = user.Role,
                 firstName = user.FirstName,
                 lastName = user.LastName,
                 dateOfBirth = user.DateOfBirth?.ToString("d"),
@@ -75,6 +78,7 @@ namespace Server.Services {
                 LastName = model.lastname,
                 DateOfBirth = DateTime.Parse((string)model.dateOfBirth),
                 Email = model.email,
+                Role = model.role,
                 Password = model.password,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = null
@@ -88,6 +92,7 @@ namespace Server.Services {
                     id = user.Id,
                     username = user.Username,
                     email = user.Email,
+                    role = user.Role,
                     firstname = user.FirstName,
                     lastname = user.LastName,
                     dateOfBirth = user.DateOfBirth
@@ -106,6 +111,7 @@ namespace Server.Services {
 
             user.Username = model.username;
             user.Email = model.email;
+            user.Role = model.role;
             user.FirstName = model.firstName;
             user.LastName = model.lastName;
             user.DateOfBirth = DateTime.Parse((string)model.dateOfBirth);
@@ -126,6 +132,7 @@ namespace Server.Services {
                 id = user.Id,
                 username = user.Username,
                 email = user.Email,
+                role = user.Role,
                 firstName = user.FirstName,
                 lastName = user.LastName,
                 dateOfBirth = user.DateOfBirth?.ToString("d"),
