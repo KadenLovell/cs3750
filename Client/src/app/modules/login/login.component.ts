@@ -22,14 +22,11 @@ export class LoginComponent implements OnInit {
     private readonly _loginService: LoginService) { }
 
   ngOnInit(): void {
-    particlesJS.load('particles-js', 'assets/particles.json', function () {
-      console.log('callback - particles.js config loaded');
-    });
-    this._loginService.logout();
-
+    particlesJS.load('particles-js', 'assets/particles.json');
     this.view = 1;
     this.model = {};
     this.model.dateOfBirth = [];
+    this.model.role = false;
   }
 
   login() {

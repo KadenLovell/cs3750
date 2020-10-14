@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
   openModal(): void {
     // Notifications
     this.modal.open(this.modalContent, { width: '750px', data: {} });
+    console.log(this.user);
   }
 
   resetViewstate() {

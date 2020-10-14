@@ -22,7 +22,7 @@ export class UserService {
                 firstname: activeUser.firstname,
                 lastname: activeUser.lastname,
                 email: activeUser.email,
-                role: activeUser.role // dch
+                role: activeUser.role
             }
             this.user = user;
         }

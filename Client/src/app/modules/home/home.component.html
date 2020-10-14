@@ -40,7 +40,7 @@
           </button>
         </mat-grid-tile>
 
-        <mat-grid-tile>
+        <mat-grid-tile *ngIf="user && user.role">
           <button mat-fab color="accent" routerLink="/classlist">
             <mat-icon>menu_book</mat-icon>
           </button>

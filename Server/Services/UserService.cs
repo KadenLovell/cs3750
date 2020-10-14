@@ -27,8 +27,6 @@ namespace Server.Services {
                 lastname = user.LastName,
                 email = user.Email,
                 role = user.Role
-                // TODO: add user role here once it exists
-                // TODO: the only spot here that needs role added?
             };
 
             return result;

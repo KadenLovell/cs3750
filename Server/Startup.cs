@@ -29,7 +29,7 @@ namespace Server {
                 options.Cookie.HttpOnly = false;
                 options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.Name = "auth_cookie";
-                options.ExpireTimeSpan = TimeSpan.FromHours(8);
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(1);
                 options.Events = new CookieAuthenticationEvents {
                     OnRedirectToLogin = redirectContext => {
                         redirectContext.HttpContext.Response.StatusCode = 401;

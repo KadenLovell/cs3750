@@ -45,7 +45,7 @@ namespace Server.Services {
                 //AllowRefresh = <bool>,
                 // Refreshing the authentication session should be allowed.
 
-                ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8),
+                // ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8),
                 // The time at which the authentication ticket expires. A 
                 // value set here overrides the ExpireTimeSpan option of 
                 // CookieAuthenticationOptions set with AddCookie.

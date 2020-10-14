@@ -25,7 +25,6 @@ export class ClasslistComponent implements OnInit {
   }
 
   save() {
-    console.log("FIRED");
     this._classListService.addClass(this.model);
   }
 }
