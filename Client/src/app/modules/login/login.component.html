@@ -5,7 +5,7 @@
     <ng-container *ngSwitchCase="1">
         <ng-container *ngTemplateOutlet="view1"></ng-container>
     </ng-container>
-    
+
 
     <!-- view 2|create user -->
     <ng-container *ngSwitchCase="2">
@@ -21,148 +21,84 @@
 <!-- login -->
 <ng-template #view1>
     <div class="login-div">
-        <mat-card>
-            <mat-card-content>
-                <form #form="ngForm" class="form-container" (ngSubmit)="login()">
-                    <h2>Login</h2>
-
-                    <!-- Form Errors -->
-                    <mat-error *ngIf="errors && errors.userNotFound">
-                        Email, or password was invalid.
-                    </mat-error>
-
-                    <!-- Form Fields -->
-                    <mat-form-field class="full-width-input">
-                        <input #email="ngModel" matInput placeholder="Email" name="email" type="email" [(ngModel)]="model.email" required>
-                        <mat-error>
-                            Email is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width-input">
-                        <input #password="ngModel" matInput placeholder="Password" name="password" type="password" [(ngModel)]="model.password" required>
-                        <mat-error>
-                            Password is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-divider [inset]="true"></mat-divider>
-
-                    <div class="button-container">
-                        <button mat-stroked-button type="button" (click)="view = 2; resetViewstate()">Create user</button>
-                        <button mat-stroked-button type="button" [disabled]="!model.username" (click)="view=3; resetViewstate()">Forgot Password</button>
-                        <button mat-raised-button color="primary" type="submit">Login</button>
+        <div class="card" style="width: 24rem;">
+            <h5 class="card-header">Login</h5>
+            <div class="card-body">
+                <form #form="ngForm" (ngSubmit)="login()">
+                    <div class="form-group">
+                        <label for="email">Email address: </label>
+                        <input #email="ngModel" class="form-control" id="email" name="email" type="email" [(ngModel)]="model.email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password: </label>
+                        <input #password="ngModel" class="form-control" id="password" name="password" type="password" [(ngModel)]="model.password" required>
+                        <small class="text-danger" *ngIf="errors && errors.userNotFound">
+                            Email, or password was invalid.
+                        </small>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-secondary mr-2" (click)="view = 2; resetViewstate()">Create user</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </form>
-            </mat-card-content>
-        </mat-card>
+            </div>
+        </div>
     </div>
 </ng-template>
 
 <!-- create user -->
 <ng-template #view2>
     <div class="create-div">
-        <mat-card>
-            <mat-card-content>
-                <form #form="ngForm" class="form-container" (ngSubmit)="createUser()">
-                    <h2>Create User</h2>
-                    <!-- Form Errors -->
-                    <mat-error *ngIf="errors && errors.userExists">
-                        A user with the same username, or email, already exists.
-                    </mat-error>
+        <div class="card" style="width: 24rem;">
+            <h5 class="card-header">Create User</h5>
+            <div class="card-body">
+                <form #form="ngForm" (ngSubmit)="createUser()">
+                    <div class="form-group">
+                        <label for="username">Username: </label>
+                        <input #username="ngModel" class="form-control" id="username" name="username" type="text" [(ngModel)]="model.username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">First name: </label>
+                        <input #firstname="ngModel" class="form-control" id="firstname" name="firstname" type="text" [(ngModel)]="model.firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last name: </label>
+                        <input #lastname="ngModel" class="form-control" id="lastname" name="lastname" type="text" [(ngModel)]="model.lastname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of birth: </label>
+                        <input #dateOfBirth="ngModel" class="form-control" id="dateOfBirth" name="dateOfBirth" type="date" [(ngModel)]="model.dateOfBirth" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address: </label>
+                        <input #email="ngModel" class="form-control" id="email" name="email" type="email" [(ngModel)]="model.email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmEmail">Confirm email address: </label>
+                        <input #confirmEmail="ngModel" class="form-control" id="confirmEmail" name="confirmEmail" type="confirmEmail" [(ngModel)]="model.confirmEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password: </label>
+                        <input #password="ngModel" class="form-control" id="password" name="password" type="password" [(ngModel)]="model.password" required>
+                        <small class="text-danger" *ngIf="errors && errors.userExists">
+                            A user with the same username, or email, already exists.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm password: </label>
+                        <input #confirmPassword="ngModel" class="form-control" id="confirmPassword" name="confirmPassword" type="password" [(ngModel)]="model.confirmPassword" required>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" #role="ngModel" id="role" name="role" type="checkbox" [(ngModel)]="model.role" required>
+                        <label class="form-check-label" for="role">Is teacher: </label>
+                    </div>
 
-                    <!-- Form Fields -->
-                    <mat-form-field class="full-width-input">
-                        <input #username="ngModel" matInput placeholder="Username" name="username" type="text" [(ngModel)]="model.username" required>
-                        <mat-error>
-                            Username is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width-input">
-                        <input #firstname="ngModel" matInput placeholder="First Name" name="firstname" type="text" [(ngModel)]="model.firstname" required>
-                        <mat-error>
-                            First name is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width-input">
-                        <input #lastname="ngModel" matInput placeholder="Last Name" name="lastname" type="text" [(ngModel)]="model.lastname" required>
-                        <mat-error>
-                            Last name is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width-input">
-                        <input #dateOfBirth="ngModel" matInput placeholder="Date Of Birth" name="dateOfBirth" type="date" [(ngModel)]="model.dateOfBirth" required>
-                        <mat-error>
-                            Date of birth is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width-input">
-                        <input #email="ngModel" matInput placeholder="Email" name="email" type="email" [(ngModel)]="model.email" required>
-                        <mat-error>
-                            Email address is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width-input">
-                        <input #confirmEmail="ngModel" matInput placeholder="Confirm Email" name="confirmEmail" type="email" [(ngModel)]="model.confirmEmail" required>
-                        <mat-error>
-                            Email address confirmation is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width-input">
-                        <input #password="ngModel" matInput placeholder="Password" name="password" type="password" [(ngModel)]="model.password" required>
-                        <mat-error>
-                            Password is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width-input">
-                        <input #confirmPassword="ngModel" matInput placeholder="Confirm Password" name="confirmPassword" type="password" [(ngModel)]="model.confirmPassword" required>
-                        <mat-error>
-                            Password confirmation is required.
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-checkbox #role="ngModel" name="role" [(ngModel)]="model.role">Is Teacher</mat-checkbox>
-                    
-                    <mat-divider [inset]="true"></mat-divider>
-
-                    <div class="button-container">
-                        <button mat-stroked-button type="button" (click)="view = 1; resetViewstate()">Cancel</button>
-                        <button mat-raised-button color="primary" type="submit">Create</button>
+                    <div class="btn-group mt-3" role="group">
+                        <button class="btn btn-secondary mr-2" (click)="view = 1; resetViewstate()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
                     </div>
                 </form>
-            </mat-card-content>
-        </mat-card>
+            </div>
+        </div>
     </div>
-</ng-template>
-
-<!-- forgot password -->
-<ng-template #view3>
-    <mat-card>
-        <mat-card-content>
-            <form #form="ngForm" class="form-container" (ngSubmit)="resetPassword()">
-                <h2>Reset Password</h2>
-
-                <mat-form-field class="full-width-input">
-                    <input #username="ngModel" matInput placeholder="Username" name="username" type="text" [(ngModel)]="model.username" required>
-                    <mat-error>
-                        Username is required.
-                    </mat-error>
-                </mat-form-field>
-
-                <mat-divider [inset]="true"></mat-divider>
-
-                <div class="button-container">
-                    <button mat-stroked-button type="button" (click)="view = 1; resetViewstate()">Cancel</button>
-                    <button mat-raised-button color="primary" type="submit">Reset</button>
-                </div>
-            </form>
-        </mat-card-content>
-    </mat-card>
 </ng-template>
