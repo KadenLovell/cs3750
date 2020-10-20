@@ -20,6 +20,12 @@ namespace Server.Controllers {
             return Json(result);
         }
 
+        [HttpGet("searchlist")]
+        public async Task<IActionResult> GetClassSearchAsync(string name, string department, string instructor) {
+            var result = await _classService.GetClassSearchAsync(name, department, instructor);
+            return Json(result);
+        }
+
         [HttpGet("{classId:long}")]
         public async Task<IActionResult> GetClassAsync(long classId) {
             var result = await _classService.GetClassAsync(classId);

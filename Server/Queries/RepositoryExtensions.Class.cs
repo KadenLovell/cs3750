@@ -36,5 +36,24 @@ namespace Server.Persistence {
 
             return result;
         }
+
+        
+          public static async Task<List<Class>> SearchClasses(this IRepository<Class> repository, string name, string department, string instructor) {
+            var query =
+                    repository
+                    .AsQueryable()
+                    .OfType<Class>();
+                    if(name != null) {
+                        query.Where(x => x.Name.Contains(name));
+                      } 
+                    if(department != null) {
+                        query.Where(x => x.Department.Contains(department));
+                      } 
+                    if(department != null) {
+                        query.Where(x => x.Instructor.Contains(instructor));
+                      } 
+                var result = await query.ToListAsync();
+            return result;
+          }
     }
 }

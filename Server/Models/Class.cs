@@ -7,6 +7,7 @@ namespace Server.Models {
         public DateTime? ModifiedDate { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public string Instructor { get; set; }
         public string Description { get; set; }
         public string Department { get; set; }
         public string CreditHours { get; set; }
