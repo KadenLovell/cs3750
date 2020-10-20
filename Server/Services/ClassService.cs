@@ -23,13 +23,17 @@ namespace Server.Services {
 
             var result = new List<dynamic>();
 
-            foreach (var obj in classes) {
+            foreach (var obj in classes) { // list here what you want to use on the front end
                 result.Add(new {
                     obj.Id,
                     obj.Code,
-                    obj.Description
+                    obj.Description,
+                    obj.Name,
+                    obj.Capacity,
+                    obj.CreditHours,
+                    obj.Department
                 });
-            }
+            } // Id, Name, Credit Hours, Department, Capacity, Instructor, Start Time, End Time, Register Button
 
             return result;
         }
@@ -131,6 +135,30 @@ namespace Server.Services {
                 endTime = obj.EndTime?.ToString("d"),
                 capacity = obj.Capacity,
             };
+
+            return result;
+        }
+
+         public async Task<dynamic> GetClassSearchAsync(string name, string department, string instructor) {
+            var classes = await _repository.SearchClasses(name, department, instructor);
+            if (classes == null || classes.Count == 0) {
+                return null;
+            }
+
+            var result = new List<dynamic>();
+
+            foreach (var obj in classes) {
+                result.Add(new {
+                    obj.Id,
+                    obj.Name,
+                    obj.CreditHours,
+                    obj.Department,
+                    obj.Capacity,
+                    obj.Instructor,
+                    obj.StartTime,
+                    obj.EndTime
+                });
+            }
 
             return result;
         }
