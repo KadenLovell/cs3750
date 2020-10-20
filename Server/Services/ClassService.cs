@@ -134,5 +134,29 @@ namespace Server.Services {
 
             return result;
         }
+
+         public async Task<dynamic> GetClassSearchAsync(string name, string department, string instructor) {
+            var classes = await _repository.SearchClasses(name, department, instructor);
+            if (classes == null || classes.Count == 0) {
+                return null;
+            }
+
+            var result = new List<dynamic>();
+
+            foreach (var obj in classes) {
+                result.Add(new {
+                    obj.Id,
+                    obj.Name,
+                    obj.CreditHours,
+                    obj.Department,
+                    obj.Capacity,
+                    obj.Instructor,
+                    obj.StartTime,
+                    obj.EndTime
+                });
+            }
+
+            return result;
+        }
     }
 }
