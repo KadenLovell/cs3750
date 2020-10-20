@@ -23,13 +23,17 @@ namespace Server.Services {
 
             var result = new List<dynamic>();
 
-            foreach (var obj in classes) {
+            foreach (var obj in classes) { // list here what you want to use on the front end
                 result.Add(new {
                     obj.Id,
                     obj.Code,
-                    obj.Description
+                    obj.Description,
+                    obj.Name,
+                    obj.Capacity,
+                    obj.CreditHours,
+                    obj.Department
                 });
-            }
+            } // Id, Name, Credit Hours, Department, Capacity, Instructor, Start Time, End Time, Register Button
 
             return result;
         }
