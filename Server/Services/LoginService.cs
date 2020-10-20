@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -29,39 +28,20 @@ namespace Server.Services {
             }
 
             var claims = new List<Claim> {
+                new Claim(ClaimTypes.Name, user.Username),
                 new Claim("https://localhost:4200/claims/firstname", user.FirstName),
                 new Claim("https://localhost:4200/claims/lastname", user.LastName),
                 new Claim("https://localhost:4200/claims/email", user.Email),
                 new Claim("https://localhost:4200/claims/username", user.Username),
                 new Claim("https://localhost:4200/claims/id", user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username),
-                // TOOD: after student/teacher role is added, update value
-                new Claim("https://localhost:4200/claims/role", "Administrator"),
+                new Claim("https://localhost:4200/claims/role", user.Role.ToString()),
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
 
             var authProperties = new AuthenticationProperties {
-                //AllowRefresh = <bool>,
-                // Refreshing the authentication session should be allowed.
-
-                // ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8),
-                // The time at which the authentication ticket expires. A 
-                // value set here overrides the ExpireTimeSpan option of 
-                // CookieAuthenticationOptions set with AddCookie.
-
                 IsPersistent = false,
-                // Whether the authentication session is persisted across 
-                // multiple requests. When used with cookies, controls
-                // whether the cookie's lifetime is absolute (matching the
-                // lifetime of the authentication ticket) or session-based.
-
-                //IssuedUtc = <DateTimeOffset>,
-                // The time at which the authentication ticket was issued.
-
                 RedirectUri = "https://localhost:4200/login"
-                // The full path or absolute URI to be used as an http 
-                // redirect response value.
             };
 
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);

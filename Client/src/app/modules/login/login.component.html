@@ -6,15 +6,9 @@
         <ng-container *ngTemplateOutlet="view1"></ng-container>
     </ng-container>
 
-
     <!-- view 2|create user -->
     <ng-container *ngSwitchCase="2">
         <ng-container *ngTemplateOutlet="view2"></ng-container>
-    </ng-container>
-
-    <!-- view 3|forgot password -->
-    <ng-container *ngSwitchCase="3">
-        <ng-container *ngTemplateOutlet="view3"></ng-container>
     </ng-container>
 </ng-container>
 
@@ -24,18 +18,26 @@
         <div class="card" style="width: 24rem;">
             <h5 class="card-header">Login</h5>
             <div class="card-body">
-                <form #form="ngForm" (ngSubmit)="login()">
+                <form #form="ngForm" novalidate (ngSubmit)="login()">
                     <div class="form-group">
                         <label for="email">Email address: </label>
-                        <input #email="ngModel" class="form-control" id="email" name="email" type="email" [(ngModel)]="model.email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password: </label>
-                        <input #password="ngModel" class="form-control" id="password" name="password" type="password" [(ngModel)]="model.password" required>
-                        <small class="text-danger" *ngIf="errors && errors.userNotFound">
-                            Email, or password was invalid.
+                        <input #email="ngModel" class="form-control" id="email" name="email" type="email" required [(ngModel)]="model.email">
+                        <small class="text-danger form-text" *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.required">
+                            Email address is required.
                         </small>
                     </div>
+
+                    <div class="form-group">
+                        <label for="password">Password: </label>
+                        <input #password="ngModel" class="form-control" id="password" name="password" type="password" required [(ngModel)]="model.password">
+                        <small class="text-danger form-text" *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
+                            Password is required.
+                        </small>
+                        <small class="text-danger form-text" *ngIf="errors && errors.userNotFound">
+                            Email address, or password was invalid.
+                        </small>
+                    </div>
+
                     <div class="btn-group" role="group">
                         <button class="btn btn-secondary mr-2" (click)="view = 2; resetViewstate()">Create user</button>
                         <button type="submit" class="btn btn-primary">Login</button>
@@ -56,41 +58,74 @@
                     <div class="form-group">
                         <label for="username">Username: </label>
                         <input #username="ngModel" class="form-control" id="username" name="username" type="text" [(ngModel)]="model.username" required>
+                        <small class="text-danger form-text" *ngIf="username.invalid && (username.dirty || username.touched) && username.errors.required">
+                            Username is required.
+                        </small>
+                        <small class="text-danger form-text" *ngIf="errors && errors.userExists">
+                            A user with the same username, or email, already exists.
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="firstname">First name: </label>
                         <input #firstname="ngModel" class="form-control" id="firstname" name="firstname" type="text" [(ngModel)]="model.firstname" required>
+                        <small class="text-danger form-text" *ngIf="firstname.invalid && (firstname.dirty || firstname.touched) && firstname.errors.required">
+                            First name is required.
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="lastname">Last name: </label>
                         <input #lastname="ngModel" class="form-control" id="lastname" name="lastname" type="text" [(ngModel)]="model.lastname" required>
+                        <small class="text-danger form-text" *ngIf="lastname.invalid && (lastname.dirty || lastname.touched) && lastname.errors.required">
+                            Last name is required.
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="dateOfBirth">Date of birth: </label>
                         <input #dateOfBirth="ngModel" class="form-control" id="dateOfBirth" name="dateOfBirth" type="date" [(ngModel)]="model.dateOfBirth" required>
+                        <small class="text-danger form-text" *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched) && dateOfBirth.errors.required">
+                            Date of birth is required.
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="email">Email address: </label>
                         <input #email="ngModel" class="form-control" id="email" name="email" type="email" [(ngModel)]="model.email" required>
+                        <small class="text-danger form-text" *ngIf="email.invalid && (email.dirty || email.touched) && email.errors.required">
+                            Email address is required.
+                        </small>
+                        <small class="text-danger form-text" *ngIf="errors && errors.userExists">
+                            A user with the same username, or email, already exists.
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="confirmEmail">Confirm email address: </label>
                         <input #confirmEmail="ngModel" class="form-control" id="confirmEmail" name="confirmEmail" type="confirmEmail" [(ngModel)]="model.confirmEmail" required>
+                        <small class="text-danger form-text" *ngIf="confirmEmail.invalid && (confirmEmail.dirty || confirmEmail.touched) && confirmEmail.errors.required">
+                            Email address confirmation is required.
+                        </small>
+                        <small class="text-danger form-text" *ngIf="errors && errors.userExists">
+                            A user with the same username, or email, already exists.
+                        </small>
                     </div>
                     <div class="form-group">
                         <label for="password">Password: </label>
                         <input #password="ngModel" class="form-control" id="password" name="password" type="password" [(ngModel)]="model.password" required>
-                        <small class="text-danger" *ngIf="errors && errors.userExists">
-                            A user with the same username, or email, already exists.
+                        <small class="text-danger form-text" *ngIf="password.invalid && (password.dirty || password.touched) && password.errors.required">
+                            Password is required.
                         </small>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword">Confirm password: </label>
                         <input #confirmPassword="ngModel" class="form-control" id="confirmPassword" name="confirmPassword" type="password" [(ngModel)]="model.confirmPassword" required>
+                        <small class="text-danger form-text" *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched) && confirmPassword.errors.required">
+                            Password confirmation is required.
+                        </small>
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" #role="ngModel" id="role" name="role" type="checkbox" [(ngModel)]="model.role" required>
                         <label class="form-check-label" for="role">Is teacher: </label>
+                        <small class="text-danger form-text" *ngIf="role.invalid && (role.dirty || role.touched) && role.errors.required">
+                            Role is required.
+                        </small>
                     </div>
 
                     <div class="btn-group mt-3" role="group">

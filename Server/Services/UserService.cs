@@ -58,6 +58,10 @@ namespace Server.Services {
         }
 
         public async Task<dynamic> AddUserAsync(dynamic model) {
+            if (model.username == null || model.email == null) {
+                return null;
+            }
+
             var exists = await _repository.UserExistsByUsernameOrEmail((string)model.username, (string)model.email);
 
             if (exists) {

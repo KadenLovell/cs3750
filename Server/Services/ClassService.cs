@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json.Linq;
 using Server.Models;
 using Server.Persistence;
 
@@ -23,7 +22,7 @@ namespace Server.Services {
 
             var result = new List<dynamic>();
 
-            foreach (var obj in classes) { // list here what you want to use on the front end
+            foreach (var obj in classes) {
                 result.Add(new {
                     obj.Id,
                     obj.Code,
@@ -33,7 +32,7 @@ namespace Server.Services {
                     obj.CreditHours,
                     obj.Department
                 });
-            } // Id, Name, Credit Hours, Department, Capacity, Instructor, Start Time, End Time, Register Button
+            }
 
             return result;
         }
@@ -58,18 +57,6 @@ namespace Server.Services {
         }
 
         public async Task<dynamic> AddClassAsync(dynamic model) {
-            // var exists = await _repository.ClassExistsByNameOrCodeAsync((string)model.name, (string)model.code);
-
-            // if (exists) {
-            //     var error = new {
-            //         errors = new {
-            //             classExists = true
-            //         }
-            //     };
-
-            //     return error;
-            // }
-
             var obj = new Class {
                 Code = model.code,
                 Name = model.name,
@@ -139,7 +126,7 @@ namespace Server.Services {
             return result;
         }
 
-         public async Task<dynamic> GetClassSearchAsync(string name, string department, string instructor) {
+        public async Task<dynamic> GetClassSearchAsync(string name, string department, string instructor) {
             var classes = await _repository.SearchClasses(name, department, instructor);
             if (classes == null || classes.Count == 0) {
                 return null;
