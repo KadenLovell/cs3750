@@ -123,9 +123,6 @@
                     <div class="form-check">
                         <input class="form-check-input" #role="ngModel" id="role" name="role" type="checkbox" [(ngModel)]="model.role" required>
                         <label class="form-check-label" for="role">Is teacher: </label>
-                        <small class="text-danger form-text" *ngIf="role.invalid && (role.dirty || role.touched) && role.errors.required">
-                            Role is required.
-                        </small>
                     </div>
 
                     <div class="btn-group mt-3" role="group">
