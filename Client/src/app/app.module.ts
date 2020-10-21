@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 
 // components (keep alphabetical)
 import { AppComponent } from './app.component';
+import { CourseSearchComponent } from './modules/coursesearch/coursesearch.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ProfilePageComponent } from './modules/profilepage/profilepage.component';
@@ -34,6 +35,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     LoginComponent,
     HomeComponent,
     SidebarComponent,
+    CourseSearchComponent,
     ClasslistComponent,
     CalendarComponent,
     ProfilePageComponent,
@@ -49,6 +51,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
       { path: 'calendar', component: CalendarComponent },
       { path: 'profilepage', component: ProfilePageComponent },
       { path: 'sidebar', component: SidebarComponent },
+      { path: 'coursesearch', component: CourseSearchComponent },
       { path: 'classlist', component: ClasslistComponent },
       { path: 'login', component: LoginComponent },
       { path: 'login', component: LoginComponent },

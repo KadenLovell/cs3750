@@ -20,9 +20,9 @@ namespace Server.Controllers {
             return Json(result);
         }
 
-        [HttpGet("searchlist")]
-        public async Task<IActionResult> GetClassSearchAsync(string name, string department, string instructor) {
-            var result = await _classService.GetClassSearchAsync(name, department, instructor);
+        [HttpPost("searchlist")]
+        public async Task<IActionResult> GetClassSearchAsync([FromBody] dynamic model) {
+            var result = await _classService.GetClassSearchAsync(model);
             return Json(result);
         }
 

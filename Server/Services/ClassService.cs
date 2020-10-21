@@ -25,12 +25,14 @@ namespace Server.Services {
             foreach (var obj in classes) {
                 result.Add(new {
                     obj.Id,
-                    obj.Code,
-                    obj.Description,
                     obj.Name,
-                    obj.Capacity,
                     obj.CreditHours,
-                    obj.Department
+                    obj.Department,
+                    obj.Capacity,
+                    obj.Instructor,
+                    obj.StartTime,
+                    obj.EndTime,
+                    obj.Code
                 });
             }
 
@@ -126,8 +128,8 @@ namespace Server.Services {
             return result;
         }
 
-        public async Task<dynamic> GetClassSearchAsync(string name, string department, string instructor) {
-            var classes = await _repository.SearchClasses(name, department, instructor);
+        public async Task<dynamic> GetClassSearchAsync(dynamic model) {
+            var classes = await _repository.SearchClasses((string)model.name, (string)model.department, (string)model.instructor);
             if (classes == null || classes.Count == 0) {
                 return null;
             }
@@ -143,7 +145,8 @@ namespace Server.Services {
                     obj.Capacity,
                     obj.Instructor,
                     obj.StartTime,
-                    obj.EndTime
+                    obj.EndTime,
+                    obj.Code
                 });
             }
 

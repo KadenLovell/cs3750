@@ -15,7 +15,6 @@ export class ClasslistComponent implements OnInit {
   rows: any;
   
   displayedColumns: string[] = ['id', 'name', 'department', 'instructor', 'code'];
- 
 
   constructor(private readonly _classListService: ClassListService) { }
 
