@@ -13,7 +13,7 @@ export class CourseSearchComponent implements OnInit {
   errors: any;
   view: any;
   rows: any;
-  
+
   displayedColumns: string[] = ['id', 'name', 'department', 'instructor', 'code'];
 
   constructor(private readonly _courseSearchService: CourseSearchService) { }
@@ -22,16 +22,13 @@ export class CourseSearchComponent implements OnInit {
     this.view = 1;
     this.model = {};
     this._courseSearchService.getClasses().then(response => {
-      this.rows = response; // this.rows is an array of json objects for the classes
-      console.log(this.rows);
+      this.rows = response;
     });
   }
 
   search() {
     this._courseSearchService.searchClasses(this.model).then(response => {
-      this.rows = response; // this.rows is an array of json objects for the classes
-      console.log(this.rows);
+      this.rows = response;
     });
   }
-
 }

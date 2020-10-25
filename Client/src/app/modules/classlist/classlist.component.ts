@@ -13,7 +13,7 @@ export class ClasslistComponent implements OnInit {
   errors: any;
   view: any;
   rows: any;
-  
+
   displayedColumns: string[] = ['id', 'name', 'department', 'instructor', 'code'];
 
   constructor(private readonly _classListService: ClassListService) { }
@@ -21,13 +21,10 @@ export class ClasslistComponent implements OnInit {
   ngOnInit(): void {
     this.view = 1;
     this.model = {};
-    this._classListService.getClasses().then(response => {
-      this.rows = response; // this.rows is an array of json objects for the classes
-      console.log(this.rows);
-    });
   }
 
   save() {
     this._classListService.addClass(this.model);
+    this.model = {};
   }
 }

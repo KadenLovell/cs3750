@@ -1,63 +1,45 @@
-<mat-sidenav-container fullscreen>
-  <mat-sidenav-content>
-     <form #form="ngForm" class="form-container" (ngSubmit)="search()">
-        <mat-grid-list cols="4" rowHeight="50px">
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #name="ngModel" matInput placeholder="Name" name="name" type="text" [(ngModel)]="model.name">
-                    </mat-form-field>
-                </mat-grid-tile>
-                
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #department="ngModel" matInput placeholder="Department" name="department" type="text" [(ngModel)]="model.department">
-                    </mat-form-field>
-                </mat-grid-tile>
-                
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #instructor="ngModel" matInput placeholder="Instructor" name="instructor" type="text" [(ngModel)]="model.instructor">
-                    </mat-form-field>
-                </mat-grid-tile>
+<div class="card m-2">
+  <h5 class="card-header">Search Classes</h5>
+  <div class="card-body">
+    <form #form="ngForm" novalidate (ngSubmit)="search()">
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label for="name">Name: </label>
+          <input #name="ngModel" class="form-control" id="name" name="name" type="text" required [(ngModel)]="model.name">
+        </div>
 
-        </mat-grid-list>
-          <!--Id, Name, Credit Hours, Department, Capacity, Instructor, Start Time, End Time, Register Button-->
-        <button mat-stroked-button type="submit">Search</button>
-      </form>
-  <table mat-table [dataSource]="rows" class="mat-elevation-z8" *ngIf="rows" >
+        <div class="form-group col-md-4">
+          <label for="department">Department: </label>
+          <input #department="ngModel" class="form-control" id="department" name="department" type="text" required [(ngModel)]="model.department">
+        </div>
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+        <div class="form-group col-md-4">
+          <label for="instructor">Instructor: </label>
+          <input #instructor="ngModel" class="form-control" id="instructor" name="instructor" type="text" required [(ngModel)]="model.instructor">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="float:right;">Search</button>
+    </form>
+  </div>
+</div>
 
-
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let class"> {{class.id}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let class"> {{class.name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="code">
-      <th mat-header-cell *matHeaderCellDef> Code </th>
-      <td mat-cell *matCellDef="let class"> {{class.code}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="department">
-      <th mat-header-cell *matHeaderCellDef> Department </th>
-      <td mat-cell *matCellDef="let class"> {{class.department}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="instructor">
-      <th mat-header-cell *matHeaderCellDef> Instructor </th>
-      <td mat-cell *matCellDef="let class"> {{class.instructor}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-    </mat-sidenav-content>
-<mat-sidenav-container fullscreen>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Department</th>
+      <th>Instructor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let x of rows">
+      <td>{{x.id}}</td>
+      <td>{{x.name}}</td>
+      <td>{{x.code}}</td>
+      <td>{{x.departmnet}}</td>
+      <td>{{x.instructor}}</td>
+    </tr>
+  </tbody>
+</table>

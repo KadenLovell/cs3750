@@ -1,4 +1,4 @@
-// DO NOT EDIT, this handles our styles.
+// DO NOT EDIT, this handles our styles. (still in use by inbox, after refactoring inbox, it can be safely removed)
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 

@@ -1,10 +1,9 @@
-import { Component, ViewChild, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HomeService } from './home.service';
-import { MatDialog } from '@angular/material/dialog';
 
 // shared
 import { User } from "../../shared/user/user";
@@ -22,8 +21,6 @@ export class HomeComponent implements OnInit {
   errors: any;
   view: any;
 
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -35,23 +32,15 @@ export class HomeComponent implements OnInit {
     private readonly router: Router,
     private readonly _homeService: HomeService,
     private breakpointObserver: BreakpointObserver,
-    private readonly _userService: UserService,
-    private modal: MatDialog) { }
+    private readonly _userService: UserService) { }
 
   get user(): User {
     return this._userService.user;
   }
 
   ngOnInit(): void {
-    this._userService.loadUser();
     this.view = 1;
     this.model = {};
-  }
-
-  openModal(): void {
-    // Notifications
-    this.modal.open(this.modalContent, { width: '750px', data: {} });
-    console.log(this.user);
   }
 
   resetViewstate() {

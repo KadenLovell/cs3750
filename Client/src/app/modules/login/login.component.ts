@@ -69,6 +69,8 @@ export class LoginComponent implements OnInit {
     this.errors = {};
   }
 
+
+  // improve this function by removing all logic outside of making control marked as touched
   isValid(container: NgForm | NgModelGroup): boolean {
     const form = container as NgForm;
     const group = container as NgModelGroup;

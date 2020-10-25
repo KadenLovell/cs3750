@@ -11,173 +11,147 @@
 
 <!-- view 1|readonly -->
 <ng-template #view1>
-  <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-        <!-- need this to take us back to home-->
-        <a mat-item-list routerLink="/home" class="home">Home</a>
-        <span style="width: 100%;text-align: center">KARD Learning</span>
-      </mat-toolbar>
-      <button mat-stroked-button type="button" style="margin-left:50px;margin-top:50px" (click)="view = 2;">Edit Profile</button>
-
-      <!-- Profile pic would go here-->
-      <div class="center">
+  <div class="card m-2">
+    <h5 class="card-header">User Info</h5>
+    <div class="card-body">
+      <div class=col-md-3>
         <img src="http://i38.photobucket.com/albums/e149/eloginko/hello_zpsc60ffbf3.gif" />
       </div>
-      <!-- Profile elements-->
-      <div>
-        <p> &nbsp; </p>
-        <p class="profile">Student Info:</p>
-        <p> &nbsp; </p>
-        <p class="profile">First Name: {{model.firstName}}</p>
-        <p class="profile">Last Name: {{model.lastName}}</p>
-        <p class="profile">Date of Birth: {{model.dateOfBirth}}</p>
-        <p>&nbsp;</p>
-        <p class="profile">Address: {{model.streetAddress}}</p>
-        <p class="profile">City: {{model.city}}</p>
-        <p class="profile">State: {{model.state}}</p>
-        <p class="profile">Zip: {{model.zip}}</p>
-        <p>&nbsp;</p>
-        <p class="profile">Email: {{model.email}}</p>
-        <p class="profile">Phone: {{model.phone}}</p>
-        <p>&nbsp;</p>
-        <p class="profile">Bio:</p>
-        <textarea disabled class="profile" name="bio" rows="10" cols="30">{{model.bio}}</textarea>
-        <p>&nbsp;</p>
-        <div style="margin-left:50px">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-          <i class="fa fa-linkedin-square" style="font-size:36px"></i>
-          <a class="external-links" target="_blank" href="https://www.linkedin.com/home">LinkedIn</a>
-          <i class="fa fa-github" style="font-size:36px"></i>
-          <a class="external-links" target="_blank" href="https://github.com/">GitHub</a>
-          <i class="fa fa-facebook" style="font-size:36px"></i>
-          <a class="external-links" target="_blank" href="https://www.facebook.com/">Facebook</a>
+      <div class="row">
+        <div class="col-md-3">
+          <p class="profile">First Name: {{model.firstName}}</p>
         </div>
+
+        <div class="col-md-3">
+          <p class="profile">Last Name: {{model.lastName}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <p class="profile">Date of Birth: {{model.dateOfBirth}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <p class="profile">Address: {{model.streetAddress}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <p class="profile">City: {{model.city}}</p>
+        </div>
+        <div class="col-md-3">
+          <p class="profile">State: {{model.state}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <p class="profile">Zip: {{model.zip}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <p class="profile">Email: {{model.email}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <p class="profile">Phone: {{model.phone}}</p>
+        </div>
+
+        <div class="col-md-3">
+          <p class="profile">Bio: {{model.bio}}</p>
+        </div>
+
+        <!-- <div class="col-md-3">
+          <p target="_blank" href="https://www.linkedin.com/home">LinkedIn</p>
+        </div>
+
+        <div class="col-md-3">
+          <p target="_blank" href="https://github.com/">GitHub</p>
+        </div>
+
+        <div class="col-md-3">
+          <p target="_blank" href="https://www.facebook.com/">Facebook</p>
+        </div> -->
       </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+      <button class="btn btn-primary" type="button" (click)="view = 2;">Edit Profile</button>
+    </div>
+  </div>
 </ng-template>
 
 <!-- view 2|edit profile -->
 <ng-template #view2>
-  <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button></button>
-        <a mat-item-list routerLink="/home">Home</a>
-        <span style="width: 100%;text-align: center">KARD Learning</span>
-      </mat-toolbar>
+  <div class="card m-2">
+    <h5 class="card-header">Add Class</h5>
+    <div class="card-body">
+      <form #form="ngForm" novalidate (ngSubmit)="save()">
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="firstName">First Name: </label>
+            <input #firstName="ngModel" class="form-control" id="firstName" name="firstName" type="text" required [(ngModel)]="model.firstName">
+          </div>
 
-      <form #form="ngForm" class="form-container" (ngSubmit)="save()">
-        <!-- Profile pic would go here-->
-        <div class="center">
-          <img src="http://i38.photobucket.com/albums/e149/eloginko/hello_zpsc60ffbf3.gif" />
-        </div>
+          <div class="form-group col-md-3">
+            <label for="lastName">Last Name: </label>
+            <input #lastName="ngModel" class="form-control" id="lastName" name="lastName" type="text" required [(ngModel)]="model.lastName">
+          </div>
 
-        <!-- Profile elements-->
-        <div>
-          <p> &nbsp; </p>
-          <p class="profile">Student Info:</p>
-          <p> &nbsp; </p>
+          <div class="form-group col-md-3">
+            <label for="dateOfBirth">Date of Birth: </label>
+            <input #dateOfBirth="ngModel" class="form-control" id="dateOfBirth" name="dateOfBirth" type="date" required [(ngModel)]="model.dateOfBirth">
+          </div>
 
-          <p>
-            <mat-form-field class="profile">
-              <input #firstName="ngModel" matInput placeholder="First Name" name="firstName" type="name" [(ngModel)]="model.firstName" required>
-              <mat-error>
-                Required field.
-              </mat-error>
-            </mat-form-field>
-          </p>
+          <div class="form-group col-md-3">
+            <label for="streetAddress">Street Address: </label>
+            <input #streetAddress="ngModel" class="form-control" id="streetAddress" name="streetAddress" type="text" required [(ngModel)]="model.streetAddress">
+          </div>
 
-          <p>
-            <mat-form-field class="profile">
-              <input #lastName="ngModel" matInput placeholder="Last Name" name="lastName" type="name" [(ngModel)]="model.lastName" required>
-              <mat-error>
-                Required field.
-              </mat-error>
-            </mat-form-field>
-          </p>
+          <div class="form-group col-md-3">
+            <label for="city">City: </label>
+            <input #city="ngModel" class="form-control" id="city" name="city" type="text" required [(ngModel)]="model.city">
+          </div>
 
-          <p>
-            <mat-form-field class="profile">
-              <input #dateOfBirth="ngModel" matInput placeholder="Birth Date" name="birthDate" type="date" [(ngModel)]="model.dateOfBirth" required>
-              <mat-error>
-                Required field.
-              </mat-error>
-            </mat-form-field>
-          </p>
+          <div class="form-group col-md-3">
+            <label for="state">State: </label>
+            <input #state="ngModel" class="form-control" id="state" name="state" type="text" required [(ngModel)]="model.state">
+          </div>
 
-          <p>
-            <mat-form-field class="profile">
-              <input #streetAddress="ngModel" matInput placeholder="Street Address" name="streetAddress" type="address" [(ngModel)]="model.streetAddress">
-            </mat-form-field>
-          </p>
+          <div class="form-group col-md-3">
+            <label for="zip">Zip: </label>
+            <input #zip="ngModel" class="form-control" id="zip" name="zip" type="text" required [(ngModel)]="model.zip">
+          </div>
 
-          <p>
-            <mat-form-field class="profile">
-              <input #city="ngModel" matInput placeholder="City" name="city" type="city" [(ngModel)]="model.city">
-            </mat-form-field>
-          </p>
+          <div class="form-group col-md-3">
+            <label for="email">Email: </label>
+            <input #email="ngModel" class="form-control" id="email" name="email" type="text" required [(ngModel)]="model.email">
+          </div>
 
-          <p>
-            <mat-form-field class="profile">
-              <input #state="ngModel" matInput placeholder="State" name="state" type="state" [(ngModel)]="model.state">
-            </mat-form-field>
-          </p>
+          <div class="form-group col-md-3">
+            <label for="phone">Phone: </label>
+            <input #phone="ngModel" class="form-control" id="zip" name="phone" type="text" required [(ngModel)]="model.phone">
+          </div>
 
-          <p>
-            <mat-form-field class="profile">
-              <input #zip="ngModel" matInput placeholder="Zip" name="zip" type="zip" [(ngModel)]="model.zip">
-            </mat-form-field>
-          </p>
+          <div class="form-group col-md-3">
+            <label for="bio">Bio: </label>
+            <input #bio="ngModel" class="form-control" id="zip" name="bio" type="text" required [(ngModel)]="model.bio">
+          </div>
 
+          <div class="form-group col-md-3">
+            <label for="linkedInUrl">LinkedIn Url: </label>
+            <input #linkedInUrl="ngModel" class="form-control" id="linkedInUrl" name="linkedInUrl" type="text" required [(ngModel)]="model.linkedInUrl">
+          </div>
 
-          <p>
-            <mat-form-field class="profile">
-              <input #email="ngModel" matInput placeholder="Email" name="email" type="email" [(ngModel)]="model.email">
-            </mat-form-field>
-          </p>
+          <div class="form-group col-md-3">
+            <label for="githubUrl">Github Url: </label>
+            <input #githubUrl="ngModel" class="form-control" id="githubUrl" name="githubUrl" type="text" required [(ngModel)]="model.githubUrl">
+          </div>
 
-          <p>
-            <mat-form-field class="profile">
-              <input #phone="ngModel" matInput placeholder="Phone" name="phone" type="phone" [(ngModel)]="model.phone">
-            </mat-form-field>
-          </p>
-
-          <p>
-            <mat-form-field class="profile" appearance="fill">
-              <mat-label>Bio</mat-label>
-              <textarea #bio="ngModel" name="bio" matInput [(ngModel)]="model.bio"></textarea>
-            </mat-form-field>
-          </p>
-
-          <p>
-            <mat-form-field class="profile">
-              <input #linkedInUrl="ngModel" matInput placeholder="LinkedIn url" name="linkedInUrl" type="text" [(ngModel)]="model.linkedInUrl">
-            </mat-form-field>
-          </p>
-
-          <p>
-            <mat-form-field class="profile">
-              <input #githubUrl="ngModel" matInput placeholder="Github url" name="githubUrl" type="text" [(ngModel)]="model.githubUrl">
-            </mat-form-field>
-          </p>
-
-          <p>
-            <mat-form-field class="profile">
-              <input #facebookUrl="ngModel" matInput placeholder="Facebook url" name="facebookUrl" type="text" [(ngModel)]="model.facebookUrl">
-            </mat-form-field>
-          </p>
-
-          <div class="button-container">
-            <button mat-stroked-button style="margin-top:30px;margin-right:30px;" type="button" (click)="view = 1; resetViewstate()">Cancel</button>
-            <button mat-raised-button style="margin-top:30px" color="primary" type="submit" (click)="view = 1; resetViewstate()">Save</button>
+          <div class="form-group col-md-3">
+            <label for="facebookUrl">Facebook Url: </label>
+            <input #facebookUrl="ngModel" class="form-control" id="facebookUrl" name="facebookUrl" type="text" required [(ngModel)]="model.facebookUrl">
           </div>
         </div>
+
+        <div class="btn-group" role="group">
+          <button class="btn btn-secondary mr-2" (click)="view = 1;">Cancel</button>
+          <button class="btn btn-primary" type="submit" (click)="view = 1;">Save</button>
+        </div>
       </form>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+    </div>
+  </div>
 </ng-template>

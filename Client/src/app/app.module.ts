@@ -10,10 +10,13 @@ import { RouterModule } from '@angular/router';
 
 // components (keep alphabetical)
 import { AppComponent } from './app.component';
+import { CalendarComponent } from './modules/calendar/calendar.component';
+import { ClasslistComponent } from './modules/classlist/classlist.component';
 import { CourseSearchComponent } from './modules/coursesearch/coursesearch.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ProfilePageComponent } from './modules/profilepage/profilepage.component';
+import { SidebarComponent } from './modules/sidebar/sidebar.component';
 
 // shared components (keep alphabetical)
 import { HttpService } from './shared/http/http.service';
@@ -23,9 +26,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { SidebarComponent } from './modules/sidebar/sidebar.component';
-import { ClasslistComponent } from './modules/classlist/classlist.component';
-import { CalendarComponent } from './modules/calendar/calendar.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 

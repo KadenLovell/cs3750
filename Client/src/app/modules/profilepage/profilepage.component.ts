@@ -15,7 +15,10 @@ export class ProfilePageComponent implements OnInit {
   errors: any;
   view: any;
 
-  constructor(private route: ActivatedRoute, private readonly router: Router, private readonly _profilePageService: ProfilePageService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly _profilePageService: ProfilePageService) { }
 
   ngOnInit(): void {
     this.view = 1;
@@ -27,13 +30,10 @@ export class ProfilePageComponent implements OnInit {
   }
 
   save() {
-    // if there are loading animations, handle the state here: IE: this.loading = true;
     this._profilePageService.updateUser(this.model).then(response => {
-      // if there are loading animations, handle the state here: IE: this.loading = false;
       this.response = response;
       this.errors = response.errors;
 
-      // if result was successful: set shared user, then route to home component
       if (this.response && this.response.success) {
         this.view = 2;
       }

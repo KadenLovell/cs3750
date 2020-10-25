@@ -1,167 +1,54 @@
 <ng-container [ngSwitch]="view">
-    <!-- view 1|readonly -->
+    <!-- view 1|add -->
     <ng-container *ngSwitchCase="1">
         <ng-container *ngTemplateOutlet="view1"></ng-container>
     </ng-container>
-    <!-- view 2|edit -->
-    <ng-container *ngSwitchCase="2">
-        <ng-container *ngTemplateOutlet="view2"></ng-container>
-    </ng-container>
-    <ng-container *ngSwitchCase="3">
-        <ng-container *ngTemplateOutlet=""></ng-container>
-    </ng-container>
 </ng-container>
 
-<!-- view 1|readonly -->
+<!-- view 1|add -->
 <ng-template #view1>
-    <mat-sidenav-container fullscreen>
-        <mat-grid-list cols="4" rowHeight="50px">
-            <mat-grid-tile cols="1">
-                <mat-form-field>
-                    <input #code="ngModel" matInput placeholder="Code" name="code" type="text" [(ngModel)]="model.code" readonly>
-                </mat-form-field>
-            </mat-grid-tile>
+    <div class="card m-2">
+        <h5 class="card-header">Add Class</h5>
+        <div class="card-body">
+            <form #form="ngForm" novalidate (ngSubmit)="save()">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label for="code">Code: </label>
+                        <input #code="ngModel" class="form-control" id="code" name="code" type="text" required [(ngModel)]="model.code">
+                    </div>
 
-            <mat-grid-tile cols="1">
-                <mat-form-field>
-                    <input #name="ngModel" matInput placeholder="Name" name="name" type="text" [(ngModel)]="model.name" readonly>
-                </mat-form-field>
-            </mat-grid-tile>
+                    <div class="form-group col-md-3">
+                        <label for="name">Name: </label>
+                        <input #name="ngModel" class="form-control" id="name" name="name" type="text" required [(ngModel)]="model.name">
+                    </div>
 
-            <mat-grid-tile cols="1">
-                <mat-form-field>
-                    <input #description="ngModel" matInput placeholder="Description" name="description" type="text" [(ngModel)]="model.description" readonly>
-                </mat-form-field>
-            </mat-grid-tile>
+                    <div class="form-group col-md-3">
+                        <label for="description">Description: </label>
+                        <input #description="ngModel" class="form-control" id="description" name="description" type="text" required [(ngModel)]="model.description">
+                    </div>
 
-            <mat-grid-tile cols="1">
-                <mat-form-field>
-                    <input #department="ngModel" matInput placeholder="Department" name="department" type="text" [(ngModel)]="model.department" readonly>
-                </mat-form-field>
-            </mat-grid-tile>
+                    <div class="form-group col-md-3">
+                        <label for="department">Department: </label>
+                        <input #department="ngModel" class="form-control" id="department" name="department" type="text" required [(ngModel)]="model.department">
+                    </div>
 
-            <mat-grid-tile cols="1">
-                <mat-form-field>
-                    <input #creditHours="ngModel" matInput placeholder="Credit Hours" name="creditHours" type="text" [(ngModel)]="model.creditHours" readonly>
-                </mat-form-field>
-            </mat-grid-tile>
+                    <div class="form-group col-md-3">
+                        <label for="creditHours">Credit Hours: </label>
+                        <input #creditHours="ngModel" class="form-control" id="creditHours" name="creditHours" type="text" required [(ngModel)]="model.creditHours">
+                    </div>
 
-            <mat-grid-tile cols="1">
-                <mat-form-field>
-                    <input #location="ngModel" matInput placeholder="Location" name="location" type="text" [(ngModel)]="model.location" readonly>
-                </mat-form-field>
-            </mat-grid-tile>
+                    <div class="form-group col-md-3">
+                        <label for="location">Location: </label>
+                        <input #location="ngModel" class="form-control" id="location" name="location" type="text" required [(ngModel)]="model.location">
+                    </div>
 
-            <mat-grid-tile cols="1">
-                <mat-form-field>
-                    <input #capacity="ngModel" matInput placeholder="Capacity" name="capacity" type="text" [(ngModel)]="model.capacity" readonly>
-                </mat-form-field>
-            </mat-grid-tile>
-        </mat-grid-list>
-
-        <!-- example for table  https://material.angular.io/components/table/overview  -->
-        <!-- <div *ngFor="let x of rows">
-            {{x.id}}
-            {{x.code}}
-            {{x.description}}
-        </div> -->
-        <!-- end of example for table -->
-
-        <button mat-stroked-button type="button" (click)="view = 2;">Edit</button>
-
-<table mat-table [dataSource]="rows" class="mat-elevation-z8" *ngIf="rows">
-
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let class"> {{class.id}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let class"> {{class.name}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="code">
-    <th mat-header-cell *matHeaderCellDef> Code </th>
-    <td mat-cell *matCellDef="let class"> {{class.code}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="department">
-    <th mat-header-cell *matHeaderCellDef> Department </th>
-    <td mat-cell *matCellDef="let class"> {{class.department}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="instructor">
-    <th mat-header-cell *matHeaderCellDef> Instructor </th>
-    <td mat-cell *matCellDef="let class"> {{class.instructor}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-    </mat-sidenav-container>
+                    <div class="form-group col-md-3">
+                        <label for="capacity">Capacity: </label>
+                        <input #capacity="ngModel" class="form-control" id="capacity" name="capacity" type="text" required [(ngModel)]="model.capacity">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="float:right;">Add</button>
+            </form>
+        </div>
+    </div>
 </ng-template>
-
-<!-- view 2|edit -->
-<ng-template #view2>
-    <mat-sidenav-container fullscreen>
-        <form #form="ngForm" class="form-container" (ngSubmit)="save()">
-            <mat-grid-list cols="4" rowHeight="50px">
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #code="ngModel" matInput placeholder="Code" name="code" type="text" [(ngModel)]="model.code">
-                    </mat-form-field>
-                </mat-grid-tile>
-
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #name="ngModel" matInput placeholder="Name" name="name" type="text" [(ngModel)]="model.name">
-                    </mat-form-field>
-                </mat-grid-tile>
-
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #description="ngModel" matInput placeholder="Description" name="description" type="text" [(ngModel)]="model.description">
-                    </mat-form-field>
-                </mat-grid-tile>
-
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #department="ngModel" matInput placeholder="Department" name="department" type="text" [(ngModel)]="model.department">
-                    </mat-form-field>
-                </mat-grid-tile>
-
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #creditHours="ngModel" matInput placeholder="Credit Hours" name="creditHours" type="text" [(ngModel)]="model.creditHours">
-                    </mat-form-field>
-                </mat-grid-tile>
-
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #location="ngModel" matInput placeholder="Location" name="location" type="text" [(ngModel)]="model.location">
-                    </mat-form-field>
-                </mat-grid-tile>
-
-                <mat-grid-tile cols="1">
-                    <mat-form-field>
-                        <input #capacity="ngModel" matInput placeholder="Capacity" name="capacity" type="text" [(ngModel)]="model.capacity">
-                    </mat-form-field>
-                </mat-grid-tile>
-            </mat-grid-list>
-
-            <button mat-stroked-button type="button" (click)="view = 1;">Cancel</button>
-            <button mat-stroked-button type="submit" (click)="view = 1; save()">Save</button>
-        </form>
-    </mat-sidenav-container>
-</ng-template>
-
-
-
-
-
