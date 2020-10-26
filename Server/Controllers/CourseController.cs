@@ -20,6 +20,13 @@ namespace Server.Controllers {
             return Json(result);
         }
 
+        [HttpGet("list/{instructorId:long}")]
+        public async Task<IActionResult> GetCoursesByInstructorIdAsync(long instructorId) {
+            var result = await _courseService.GetCoursesByInstructorIdAsync(instructorId);
+            return Json(result);
+        }
+
+
         [HttpPost("searchlist")]
         public async Task<IActionResult> GetCourseSearchAsync([FromBody] dynamic model) {
             var result = await _courseService.GetCourseSearchAsync(model);

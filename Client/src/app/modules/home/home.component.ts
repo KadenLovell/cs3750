@@ -17,6 +17,7 @@ import { UserService } from "../../shared/user/user.service";
 })
 export class HomeComponent implements OnInit {
   model: any;
+  rows: any;
   response: any;
   errors: any;
   view: any;
@@ -39,6 +40,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._userService.loadUser();
+    this._homeService.getCourses(this.user.id).then(response => {
+      this.rows = response;
+    });
     this.view = 1;
     this.model = {};
   }

@@ -17,6 +17,16 @@ namespace Server.Persistence {
             return result;
         }
 
+        public static async Task<List<Course>> GetCoursesByInstructorIdAsync(this IRepository<Course> repository, long instructorId) {
+            var result =
+                await repository
+                    .AsQueryable()
+                    .OfType<Course>()
+                    .Where(x => x.InstructorId == instructorId)
+                    .ToListAsync();
+
+            return result;
+        }
         public static async Task<Course> GetCourseByIdAsync(this IRepository<Course> repository, long id) {
             var result =
                 await repository

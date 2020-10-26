@@ -9,11 +9,12 @@
 </div>
 
 <div class="row">
-  <div class=col-md-6 *ngFor="let number of [0,1,2,3]">
+  <div class=col-md-6 *ngFor="let x of rows">
     <div class="card mt-2 mr-2">
-      <h5 class="card-header">class Name</h5>
+      <h5 class="card-header">Course: {{x.name}}, Code: {{x.code}}, Department: {{x.department}}</h5>
       <div class="card-body">
-        Class info would go here:
+        Instructor: {{x.instructor}} <br />
+        Credit hours: {{x.creditHours}}
       </div>
     </div>
   </div>

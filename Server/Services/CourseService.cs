@@ -42,6 +42,31 @@ namespace Server.Services {
             return result;
         }
 
+        public async Task<dynamic> GetCoursesByInstructorIdAsync(long instructorId) {
+            var courses = await _repository.GetCoursesByInstructorIdAsync(instructorId);
+            if (courses == null || courses.Count == 0) {
+                return null;
+            }
+
+            var result = new List<dynamic>();
+
+            foreach (var course in courses) {
+                result.Add(new {
+                    course.Id,
+                    course.Name,
+                    course.CreditHours,
+                    course.Department,
+                    course.Capacity,
+                    course.Instructor,
+                    course.StartTime,
+                    course.EndTime,
+                    course.Code
+                });
+            }
+
+            return result;
+        }
+
         public async Task<dynamic> GetCourseAsync(long id) {
             var courses = await _repository.GetCourseByIdAsync(id);
 
@@ -69,7 +94,7 @@ namespace Server.Services {
 
             if (user.Role) {
                 var course = new Course {
-                    CreatedById = user.Id,
+                    InstructorId = user.Id,
                     Instructor = $"{user.LastName}, {user.FirstName}",
                     Code = model.code,
                     Name = model.name,
@@ -119,7 +144,7 @@ namespace Server.Services {
                 return null;
             }
 
-            if (user.Role && user.Id == course.CreatedById) {
+            if (user.Role && user.Id == course.InstructorId) {
                 course.Code = model.code;
                 course.Name = model.Name;
                 course.Description = model.description;
