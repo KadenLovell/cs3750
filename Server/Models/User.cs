@@ -22,11 +22,4 @@ namespace Server.Models {
         public string Password { get; set; }
         public bool Role { get; set; }
     }
-    /* commented out while simple role of type String is implemented
-    public enum UserRole : byte {
-        Teacher = 0,
-        Student = 1,
-        Administrator = 2
-    }
-    */
 }

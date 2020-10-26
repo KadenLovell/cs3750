@@ -39,20 +39,15 @@ namespace Server.Persistence {
 
 
         public static async Task<List<Course>> SearchCourses(this IRepository<Course> repository, string name, string department, string instructor) {
-            var query =
-                    repository
+            var result =
+                await repository
                     .AsQueryable()
-                    .OfType<Course>();
-            if (name != null) {
-                query.Where(x => x.Name.Contains(name));
-            }
-            if (department != null) {
-                query.Where(x => x.Department.Contains(department));
-            }
-            if (department != null) {
-                query.Where(x => x.Instructor.Contains(instructor));
-            }
-            var result = await query.ToListAsync();
+                    .OfType<Course>()
+                    .Where(x => x.Name.Contains(name))
+                    .Where(x => x.Department.Contains(department))
+                    .Where(x => x.Instructor.Contains(instructor))
+                    .ToListAsync();
+
             return result;
         }
     }

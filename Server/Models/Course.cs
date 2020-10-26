@@ -3,6 +3,7 @@ using System;
 namespace Server.Models {
     public class Course : IModel {
         public long Id { get; set; }
+        public long CreatedById { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public string Code { get; set; }
