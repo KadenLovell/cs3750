@@ -22,6 +22,10 @@ export class HomeComponent implements OnInit {
   errors: any;
   view: any;
 
+  get user(): User {
+    return this._userService.user;
+  }
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -35,12 +39,7 @@ export class HomeComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private readonly _userService: UserService) { }
 
-  get user(): User {
-    return this._userService.user;
-  }
-
   ngOnInit(): void {
-    this._userService.loadUser();
     this._homeService.getCourses(this.user.id).then(response => {
       this.rows = response;
     });

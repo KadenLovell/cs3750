@@ -4,6 +4,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { LoginService } from './login.service';
 
+// shared
+import { User } from "../../shared/user/user";
+import { UserService } from "../../shared/user/user.service";
+import { ENGINE_METHOD_DIGESTS } from 'constants';
+
 declare var particlesJS: any;
 
 @Component({
@@ -23,13 +28,14 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private readonly router: Router,
-    private readonly _loginService: LoginService) { }
+    private readonly _loginService: LoginService,
+    private readonly _userService: UserService) { }
 
   ngOnInit(): void {
     particlesJS.load('particles-js', 'assets/particles.json');
     this.view = 1;
     this.model = {};
-
+    this._loginService.logout(this.model);
     // initialize model defaults:
     this.model.dateOfBirth = [];
     this.model.role = false;
@@ -41,6 +47,17 @@ export class LoginComponent implements OnInit {
         this.response = response;
         this.errors = response.errors;
 
+        const user: User = {
+          id: this.response.user.id,
+          username: this.response.user.username,
+          firstname: this.response.user.firstname,
+          lastname: this.response.user.lastname,
+          email: this.response.user.email,
+          role: this.response.user.role,
+          authorized: true
+        };
+
+        this._userService.setUser(user);
         if (this.response && this.response.success) {
           this.router.navigate(['../home'], { relativeTo: this.route });
         }

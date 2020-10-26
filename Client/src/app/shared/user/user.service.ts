@@ -13,7 +13,7 @@ export class UserService {
     user: User;
 
     constructor(private readonly _httpService: HttpService, private readonly _router: Router) { }
-    async loadUser() {
+    loadUser() {
         const url = `/api/user/activeuser`;
         this._httpService.get(url).then(activeUser => {
             try {
@@ -45,5 +45,9 @@ export class UserService {
                 this._router.navigateByUrl("https://localhost:4200/login");
             }
         });
+    }
+
+    setUser(user: User) {
+        this.user = user;
     }
 }

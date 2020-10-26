@@ -1,29 +1,31 @@
 <!-- <mat-sidenav-container> -->
-<div class="card mt-2 mr-3" style="width:18rem; height:80vh; float: right;">
-  <h5 class="card-header">TODO:</h5>
-  <div class="card-body">
-    <a class="notification-link" routerLink="/coursesearch">CLASS A ASSIGNMENT 1</a>
-    <br />
-    <a class="notification-link" routerLink="/coursesearch">CLASS B ASSIGNMENT 1</a>
+<ng-container>
+  <div class="card mt-2 mr-3" style="width:18rem; height:80vh; float: right;">
+    <h5 class="card-header">TODO:</h5>
+    <div class="card-body">
+      <a class="notification-link" routerLink="/coursesearch">CLASS A ASSIGNMENT 1</a>
+      <br />
+      <a class="notification-link" routerLink="/coursesearch">CLASS B ASSIGNMENT 1</a>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class=col-md-6 *ngFor="let x of rows">
-    <div class="card mt-2 mr-2">
-      <h5 class="card-header">Course: {{x.name}}, Code: {{x.code}}, Department: {{x.department}}</h5>
-      <div class="card-body">
-        Instructor: {{x.instructor}} <br />
-        Credit hours: {{x.creditHours}}
+  <div class="row">
+    <div class=col-md-6 *ngFor="let x of rows">
+      <div class="card mt-2 mr-2">
+        <h5 class="card-header">Course: {{x.name}}, Code: {{x.code}}, Department: {{x.department}}</h5>
+        <div class="card-body">
+          Instructor: {{x.instructor}} <br />
+          Credit hours: {{x.creditHours}}
+        </div>
+      </div>
+    </div>
+    <div class=col-md-12>
+      <div class="card mt-2 mr-2">
+        <h5 class="card-header">Calendar</h5>
+        <div class="card-body">
+          <calendar-component></calendar-component>
+        </div>
       </div>
     </div>
   </div>
-  <div class=col-md-12>
-    <div class="card mt-2 mr-2">
-      <h5 class="card-header">Calendar</h5>
-      <div class="card-body">
-        <calendar-component></calendar-component>
-      </div>
-    </div>
-  </div>
-</div>
+</ng-container>
