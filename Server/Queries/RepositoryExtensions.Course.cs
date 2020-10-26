@@ -43,9 +43,9 @@ namespace Server.Persistence {
                 await repository
                     .AsQueryable()
                     .OfType<Course>()
-                    .Where(x => x.Name.Contains(name))
-                    .Where(x => x.Department.Contains(department))
-                    .Where(x => x.Instructor.Contains(instructor))
+                    .Where(x => x.Name.Contains(name ?? ""))
+                    .Where(x => x.Department.Contains(department ?? ""))
+                    .Where(x => x.Instructor.Contains(instructor ?? ""))
                     .ToListAsync();
 
             return result;
