@@ -7,7 +7,6 @@ import { LoginService } from './login.service';
 // shared
 import { User } from "../../shared/user/user";
 import { UserService } from "../../shared/user/user.service";
-import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 declare var particlesJS: any;
 

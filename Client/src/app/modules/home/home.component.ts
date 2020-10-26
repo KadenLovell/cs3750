@@ -40,9 +40,11 @@ export class HomeComponent implements OnInit {
     private readonly _userService: UserService) { }
 
   ngOnInit(): void {
-    this._homeService.getCourses(this.user.id).then(response => {
-      this.rows = response;
-    });
+    if (this.user) {
+      this._homeService.getCourses(this.user.id).then(response => {
+        this.rows = response;
+      });
+    }
     this.view = 1;
     this.model = {};
   }
