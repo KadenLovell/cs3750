@@ -7,7 +7,7 @@ import { HttpService } from "../../shared/http/http.service";
 export class ClassListService {
     constructor(private readonly _httpService: HttpService) { }
     async addClass(model: any): Promise<any> {
-        const url = `/api/class/add`;
+        const url = `/api/course/add`;
 
         return await this._httpService.post(url, model);
     }
