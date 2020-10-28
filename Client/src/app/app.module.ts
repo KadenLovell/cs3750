@@ -16,6 +16,7 @@ import { CourseSearchComponent } from './modules/coursesearch/coursesearch.compo
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
 import { ProfilePageComponent } from './modules/profilepage/profilepage.component';
+import { TuitionAndFeesComponent } from './modules/tuitionandfees/tuitionandfees.component';
 
 // shared components (keep alphabetical)
 import { HttpService } from './shared/http/http.service';
@@ -37,6 +38,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     ClasslistComponent,
     CalendarComponent,
     ProfilePageComponent,
+    TuitionAndFeesComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
       { path: 'profilepage', component: ProfilePageComponent },
       { path: 'coursesearch', component: CourseSearchComponent },
       { path: 'classlist', component: ClasslistComponent },
+      { path: 'tuitionandfees', component: TuitionAndFeesComponent },
       { path: 'login', component: LoginComponent },
       { path: 'login', component: LoginComponent },
       { path: 'home', component: HomeComponent },
