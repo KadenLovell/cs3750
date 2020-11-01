@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseSearchService } from './coursesearch.service';
+import { BaseComponent } from '../../base/base.component';
 
 @Component({
   selector: 'app-coursesearch',
@@ -7,7 +8,7 @@ import { CourseSearchService } from './coursesearch.service';
   styleUrls: ['./coursesearch.component.scss'],
   providers: [CourseSearchService]
 })
-export class CourseSearchComponent implements OnInit {
+export class CourseSearchComponent extends BaseComponent implements OnInit {
   model: any;
   response: any;
   errors: any;
@@ -16,7 +17,9 @@ export class CourseSearchComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'name', 'department', 'instructor', 'code'];
 
-  constructor(private readonly _courseSearchService: CourseSearchService) { }
+  constructor(private readonly _courseSearchService: CourseSearchService) {
+    super();
+  }
 
   ngOnInit(): void {
     this.view = 1;

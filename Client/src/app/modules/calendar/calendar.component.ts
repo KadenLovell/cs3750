@@ -1,32 +1,10 @@
-import {
-  Inject,
-  ViewEncapsulation,
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  OnDestroy,
-  OnInit,
-  TemplateRef,
-} from '@angular/core';
+import { Inject, ViewEncapsulation, Component, ChangeDetectionStrategy, ViewChild, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from 'date-fns';
+import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Subject } from 'rxjs';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { MatDialog } from '@angular/material/dialog';
+import { BaseComponent } from '../../base/base.component';
 
 export interface DialogData {
   action: string;
@@ -54,7 +32,7 @@ const colors: any = {
   templateUrl: 'calendar.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class CalendarComponent implements OnInit, OnDestroy {
+export class CalendarComponent extends BaseComponent implements OnInit, OnDestroy {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   private readonly darkThemeClass = 'dark-theme';
   view: CalendarView = CalendarView.Month;
@@ -62,7 +40,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
-  constructor(@Inject(DOCUMENT) private document, private modal: MatDialog) { }
+  constructor(@Inject(DOCUMENT) private document, private modal: MatDialog) {
+    super();
+  }
 
   ngOnInit(): void {
     this.document.body.classList.add(this.darkThemeClass);

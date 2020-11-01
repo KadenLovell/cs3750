@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { FormControl, NgForm, NgModelGroup } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { LoginService } from './login.service';
@@ -7,6 +6,7 @@ import { LoginService } from './login.service';
 // shared
 import { User } from "../../shared/user/user";
 import { UserService } from "../../shared/user/user.service";
+import { BaseComponent } from '../../base/base.component';
 
 declare var particlesJS: any;
 
@@ -16,7 +16,7 @@ declare var particlesJS: any;
   styleUrls: ['./login.component.scss'],
   providers: [LoginService]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends BaseComponent implements OnInit {
   model: any;
   response: any;
   errors: any;
@@ -28,13 +28,16 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private readonly router: Router,
     private readonly _loginService: LoginService,
-    private readonly _userService: UserService) { }
+    private readonly _userService: UserService) {
+    super();
+  }
 
   ngOnInit(): void {
     particlesJS.load('particles-js', 'assets/particles.json');
     this.view = 1;
     this.model = {};
     this._loginService.logout(this.model);
+
     // initialize model defaults:
     this.model.dateOfBirth = [];
     this.model.role = false;
@@ -83,57 +86,5 @@ export class LoginComponent implements OnInit {
 
   resetViewstate() {
     this.errors = {};
-  }
-
-
-  // improve this function by removing all logic outside of making control marked as touched
-  isValid(container: NgForm | NgModelGroup): boolean {
-    const form = container as NgForm;
-    const group = container as NgModelGroup;
-
-    const formGroup =
-      form.form
-        ? form.form
-        : group.control;
-
-    let count = 0;
-
-    for (const k in formGroup.controls) {
-      if (!Object.prototype.hasOwnProperty.call(formGroup.controls, k)) {
-        continue;
-      }
-
-      const control = formGroup.get(k) as FormControl;
-
-      if (!control) {
-        continue;
-      }
-
-      control.markAsTouched();
-
-      count += this.countErrors(control.errors);
-    }
-
-    return count === 0;
-  }
-
-  private countErrors(errors: Record<string, any> | null): number {
-    if (!errors) {
-      return 0;
-    }
-
-    let count = 0;
-
-    for (const k in errors) {
-      if (!Object.prototype.hasOwnProperty.call(errors, k)) {
-        continue;
-      }
-
-      if (k !== "remote") {
-        count++;
-      }
-    }
-
-    return count;
   }
 }

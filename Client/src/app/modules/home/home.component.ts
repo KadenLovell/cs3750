@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HomeService } from './home.service';
+import { BaseComponent } from '../../base/base.component';
 
 // shared
 import { User } from "../../shared/user/user";
@@ -15,7 +16,7 @@ import { UserService } from "../../shared/user/user.service";
   styleUrls: ['./home.component.scss'],
   providers: [HomeService]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent extends BaseComponent implements OnInit {
   model: any;
   rows: any;
   response: any;
@@ -37,7 +38,9 @@ export class HomeComponent implements OnInit {
     private readonly router: Router,
     private readonly _homeService: HomeService,
     private breakpointObserver: BreakpointObserver,
-    private readonly _userService: UserService) { }
+    private readonly _userService: UserService) {
+    super();
+  }
 
   ngOnInit(): void {
     if (this.user) {

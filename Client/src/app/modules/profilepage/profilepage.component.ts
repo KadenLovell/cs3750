@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ProfilePageService } from './profilepage.service';
+import { BaseComponent } from '../../base/base.component';
 
 @Component({
   selector: 'app-profilepage',
@@ -9,7 +10,7 @@ import { ProfilePageService } from './profilepage.service';
   styleUrls: ['./profilepage.component.scss'],
   providers: [ProfilePageService]
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent extends BaseComponent implements OnInit {
   model: any;
   response: any;
   errors: any;
@@ -18,7 +19,9 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private readonly router: Router,
-    private readonly _profilePageService: ProfilePageService) { }
+    private readonly _profilePageService: ProfilePageService) {
+    super();
+  }
 
   ngOnInit(): void {
     this.view = 1;
