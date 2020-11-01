@@ -15,36 +15,54 @@
                     <div class="form-group col-md-3">
                         <label for="code">Code: </label>
                         <input #code="ngModel" class="form-control" id="code" name="code" type="text" required [(ngModel)]="model.code">
+                        <small class="text-danger form-text" *ngIf="code.invalid && (code.dirty || code.touched) && code.errors.required">
+                            Code is required.
+                        </small>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="name">Name: </label>
                         <input #name="ngModel" class="form-control" id="name" name="name" type="text" required [(ngModel)]="model.name">
+                        <small class="text-danger form-text" *ngIf="name.invalid && (name.dirty || name.touched) && name.errors.required">
+                            Name is required.
+                        </small>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="description">Description: </label>
-                        <input #description="ngModel" class="form-control" id="description" name="description" type="text" required [(ngModel)]="model.description">
+                        <input #description="ngModel" class="form-control" id="description" name="description" type="text" [(ngModel)]="model.description">
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="department">Department: </label>
                         <input #department="ngModel" class="form-control" id="department" name="department" type="text" required [(ngModel)]="model.department">
+                        <small class="text-danger form-text" *ngIf="department.invalid && (department.dirty || department.touched) && department.errors.required">
+                            Department is required.
+                        </small>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="creditHours">Credit Hours: </label>
-                        <input #creditHours="ngModel" class="form-control" id="creditHours" name="creditHours" type="text" required [(ngModel)]="model.creditHours">
+                        <input #creditHours="ngModel" type="number" class="form-control" id="creditHours" name="creditHours" type="text" required [(ngModel)]="model.creditHours">
+                        <small class="text-danger form-text" *ngIf="creditHours.invalid && (creditHours.dirty || creditHours.touched) && creditHours.errors.required">
+                            Credit hours are required.
+                        </small>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="location">Location: </label>
                         <input #location="ngModel" class="form-control" id="location" name="location" type="text" required [(ngModel)]="model.location">
+                        <small class="text-danger form-text" *ngIf="location.invalid && (location.dirty || location.touched) && location.errors.required">
+                            Location is required.
+                        </small>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="capacity">Capacity: </label>
-                        <input #capacity="ngModel" class="form-control" id="capacity" name="capacity" type="number" required [(ngModel)]="model.capacity">
+                        <input #capacity="ngModel" type="number" id="capacity" name="capacity" required [(ngModel)]="model.capacity">
+                        <small class="text-danger form-text" *ngIf="(capacity.dirty || capacity.touched) && capacity.errors && capacity.errors.required">
+                            Capactiy is required.
+                        </small>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary" style="float:right;">Add</button>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { ClassListService } from './classlist.service';
 import { BaseComponent } from '../../base/base.component';
 
@@ -9,6 +9,7 @@ import { BaseComponent } from '../../base/base.component';
   providers: [ClassListService]
 })
 export class ClasslistComponent extends BaseComponent implements OnInit {
+  @ViewChild("form") form: any;
   model: any;
   response: any;
   errors: any;
@@ -27,7 +28,9 @@ export class ClasslistComponent extends BaseComponent implements OnInit {
   }
 
   save() {
-    this._classListService.addClass(this.model);
-    this.model = {};
+    if (this.isValid(this.form)) {
+      this._classListService.addClass(this.model);
+      this.model = {};
+    }
   }
 }
