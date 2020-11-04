@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Server.Persistence;
 using Server.Services;
@@ -9,9 +10,11 @@ namespace Server.Controllers {
     public class UserController : Controller {
         private readonly DataContext _context;
         private readonly UserService _userService;
-        public UserController(DataContext context, UserService userService) {
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public UserController(DataContext context, UserService userService, IHttpContextAccessor httpContextAccessor) {
             _context = context;
             _userService = userService;
+            _httpContextAccessor = httpContextAccessor;
         }
         [HttpGet("activeuser")]
         public async Task<IActionResult> GetActiveUserAsync() {
@@ -19,9 +22,10 @@ namespace Server.Controllers {
             return Json(result);
         }
 
-        [HttpGet("{userId:long}")]
-        public async Task<IActionResult> GetUserAsync(long userId) {
-            var result = await _userService.GetUserAsync(userId);
+        [HttpGet("loaduser")]
+        public async Task<IActionResult> GetUserAsync() {
+            var id = _httpContextAccessor.HttpContext.User.Identity.Id();
+            var result = await _userService.GetUserAsync(id);
             return Json(result);
         }
 

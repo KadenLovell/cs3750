@@ -21,5 +21,6 @@ namespace Server.Models {
         public string FacebookUrl { get; set; }
         public string Password { get; set; }
         public bool Role { get; set; }
+        public byte[] Avatar { get; set; }
     }
 }

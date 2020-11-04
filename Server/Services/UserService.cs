@@ -37,6 +37,7 @@ namespace Server.Services {
 
             var result = new {
                 id = user.Id,
+                avatar = user.Avatar,
                 username = user.Username,
                 email = user.Email,
                 role = user.Role,
@@ -111,6 +112,7 @@ namespace Server.Services {
                 return null;
             }
 
+            user.Avatar = model.avatar;
             user.Username = model.username;
             user.Email = model.email;
             user.Role = model.role;
@@ -132,6 +134,7 @@ namespace Server.Services {
             var result = new {
                 success = true,
                 id = user.Id,
+                avatar = user.Avatar,
                 username = user.Username,
                 email = user.Email,
                 role = user.Role,

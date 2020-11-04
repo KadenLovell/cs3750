@@ -46,8 +46,7 @@ export class HttpService {
 
     post(url: string, model = null): Promise<any> {
         const result =
-            this
-                ._httpClient
+            this._httpClient
                 .post(this.base + url, model, { withCredentials: true })
                 .toPromise()
                 .then(response => {

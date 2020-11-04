@@ -6,8 +6,8 @@ import { HttpService } from "../../shared/http/http.service";
 @Injectable()
 export class ProfilePageService {
     constructor(private readonly _httpService: HttpService) { }
-    async loadUser(userId: any): Promise<any> {
-        const url = `/api/user/${userId}`;
+    async loadUser(): Promise<any> {
+        const url = `/api/user/loaduser`;
 
         return await this._httpService.get(url);
     }

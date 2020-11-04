@@ -15,7 +15,7 @@
     <h5 class="card-header">User Info</h5>
     <div class="card-body">
       <div class=col-md-3>
-        <img src="http://i38.photobucket.com/albums/e149/eloginko/hello_zpsc60ffbf3.gif" />
+        <img alt="http://i38.photobucket.com/albums/e149/eloginko/hello_zpsc60ffbf3.gif" src="data:image/png;base64,{{model.avatar}}" />
       </div>
       <div class="row">
         <div class="col-md-3">
@@ -81,6 +81,11 @@
     <div class="card-body">
       <form #form="ngForm" novalidate (ngSubmit)="save()">
         <div class="row">
+          <div class="form-group col-md-3">
+            <label for="profilePicture">Example file input</label>
+            <input #profilePicture="ngModel" type="file" name="profilePicture" (change)="handleUpload($event)" [(ngModel)]="model.profilePicture" class="form-control-file" id="profilePicture">
+          </div>
+
           <div class="form-group col-md-3">
             <label for="firstName">First Name: </label>
             <input #firstName="ngModel" class="form-control" id="firstName" name="firstName" type="text" required [(ngModel)]="model.firstName">
