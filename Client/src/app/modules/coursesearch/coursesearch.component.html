@@ -3,6 +3,7 @@
   <div class="card-body">
     <form #form="ngForm" novalidate (ngSubmit)="search()">
       <div class="row">
+
         <div class="form-group col-md-4">
           <label for="name">Name: </label>
           <input #name="ngModel" class="form-control" id="name" name="name" type="text" required [(ngModel)]="model.name">
@@ -17,6 +18,37 @@
           <label for="instructor">Instructor: </label>
           <input #instructor="ngModel" class="form-control" id="instructor" name="instructor" type="text" required [(ngModel)]="model.instructor">
         </div>
+
+        <div class="form-group col-sm-4">
+          <label for="ccyear">Department</label>
+            <select class="form-control" id="department" name="department" required [(ngModel)]="model.department">
+              <option>Business</option>
+              <option>Computer Science</option>
+              <option>Engineering</option>
+              <option>English</option>
+              <option>History</option>
+              <option>Mathematics</option>
+            </select>
+        </div>
+
+        <div class="form-group col-sm-4">
+          <label for="ccyear">Location</label>
+            <select class="form-control" id="location" name="location" required [(ngModel)]="model.location">
+              <option>Main Campus</option>
+              <option>Online</option>
+              <option>Secondary Campus 1</option>
+              <option>Secondary Campus 2</option>
+              <option>Secondary Campus 3</option>
+            </select>
+        </div>
+
+        <!--
+        <div class="form-group col-md-4">
+          <label for="meetingTimes">Meeting Times</label>
+          <input #meetingTimes="ngModel" class="form-control" id="meetingTimes" name="meetingTimes" [(ngModel)]="model.meetingTimes" type="text">
+        </div>
+        -->
+
       </div>
       <button type="submit" class="btn btn-primary" style="float:right;">Search</button>
     </form>
@@ -40,6 +72,7 @@
       <td>{{x.code}}</td>
       <td>{{x.departmnet}}</td>
       <td>{{x.instructor}}</td>
+      <td><button class="btn btn-primary">Register</button></td>
     </tr>
   </tbody>
 </table>
