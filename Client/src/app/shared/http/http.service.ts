@@ -1,6 +1,6 @@
 // DO NOT EDIT, this handles our http communication
 import { Injectable } from "@angular/core";
-import { HttpEventType, HttpClient, HttpErrorResponse, HttpRequest, HttpResponse } from "@angular/common/http";
+import { HttpEventType, HttpClient, HttpErrorResponse, HttpRequest, HttpResponse, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { retry } from "rxjs/operators";
 
@@ -105,5 +105,22 @@ export class HttpService {
         console.error(err.message);
 
         return true;
+    }
+
+    postStripe(url: string, model = null): Promise<any> {
+        const result =
+            this
+                ._httpClient
+                .post(url, model, {
+                    headers: new HttpHeaders({
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': 'Bearer ' + 'sk_test_51Hetv0KLeGJ9t0bvKLY0bZPFuFPZELPvJEgYfrg8Kj2Y8AHCuxghUdGTaa7f1B4ljmtoJQBad8eCUZTfLxel27dM00vwxuMYVj'
+                    })
+                })
+                .toPromise()
+                .then(response => {
+                    return Promise.resolve(response);
+                })
+        return result;
     }
 }
