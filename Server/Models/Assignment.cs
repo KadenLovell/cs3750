@@ -10,6 +10,8 @@ namespace Server.Models {
         public TimeSpan? DueTime { get; set; }
         public double MaxPoints { get; set; }
         public AssignmentType AssignmentType { get; set; }
+        public long CourseId { get; set; }
+        public Course Course { get; set; }
     }
     public enum AssignmentType : byte {
         text = 0,
