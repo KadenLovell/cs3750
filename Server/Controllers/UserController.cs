@@ -16,6 +16,7 @@ namespace Server.Controllers {
             _userService = userService;
             _httpContextAccessor = httpContextAccessor;
         }
+
         [HttpGet("activeuser")]
         public async Task<IActionResult> GetActiveUserAsync() {
             var result = await _userService.GetActiveUserAsync();

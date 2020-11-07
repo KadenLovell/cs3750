@@ -131,25 +131,26 @@ namespace Server.Services {
 
             await _repository.UpdateAsync(user);
 
+            var updatedUser = await _repository.GetUserById(user.Id);
+
             var result = new {
-                success = true,
-                id = user.Id,
-                avatar = user.Avatar,
-                username = user.Username,
-                email = user.Email,
-                role = user.Role,
-                firstName = user.FirstName,
-                lastName = user.LastName,
-                dateOfBirth = user.DateOfBirth?.ToString("d"),
-                streetAddress = user.StreetAddress,
-                city = user.City,
-                state = user.State,
-                zip = user.Zip,
-                phone = user.Phone,
-                bio = user.Bio,
-                linkedInUrl = user.LinkedInUrl,
-                githubUrl = user.LinkedInUrl,
-                facebookUrl = user.FacebookUrl
+                id = updatedUser.Id,
+                avatar = updatedUser.Avatar,
+                username = updatedUser.Username,
+                email = updatedUser.Email,
+                role = updatedUser.Role,
+                firstName = updatedUser.FirstName,
+                lastName = updatedUser.LastName,
+                dateOfBirth = updatedUser.DateOfBirth?.ToString("d"),
+                streetAddress = updatedUser.StreetAddress,
+                city = updatedUser.City,
+                state = updatedUser.State,
+                zip = updatedUser.Zip,
+                phone = updatedUser.Phone,
+                bio = updatedUser.Bio,
+                linkedInUrl = updatedUser.LinkedInUrl,
+                githubUrl = updatedUser.LinkedInUrl,
+                facebookUrl = updatedUser.FacebookUrl
             };
 
             return result;

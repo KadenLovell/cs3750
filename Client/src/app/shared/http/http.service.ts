@@ -29,15 +29,6 @@ export class HttpService {
                         return Promise.reject(err);
                     }
 
-                    if (err && err.status === 403) {
-                        // different from post
-                        this._router.navigate(["/"]);
-
-                        return Promise.reject(err);
-                    }
-
-                    // this._alertsService.addResponse(err);
-
                     return Promise.resolve(null);
                 });
 
@@ -55,45 +46,13 @@ export class HttpService {
                 .catch(err => {
                     if (err && err.status === 401) {
                         // this.navigate("/login");
-
                         return Promise.reject(err);
                     }
-
-                    // this._alertsService.addResponse(err);
 
                     return Promise.resolve({});
                 });
 
         return result;
-    }
-
-    upload(url: string, formData: FormData, uploading: (percentage: number) => void, uploaded: (response) => void, error: (reason: string) => void, completed: () => void) {
-        const req = new HttpRequest("POST", this.base + url, formData, {
-            reportProgress: true,
-            withCredentials: true
-        });
-
-        this
-            ._httpClient
-            .request(req)
-            .subscribe(
-                (event) => {
-                    if (event.type === HttpEventType.UploadProgress) {
-                        uploading(Math.round(event.loaded / event.total * 100));
-                    }
-                    else if (event instanceof HttpResponse) {
-                        uploaded(event.body);
-                    }
-                },
-                (err: HttpErrorResponse) => {
-                    // const reason = this._alertsService.getReason(err);
-
-                    // error(reason);
-                },
-                () => {
-                    completed();
-                }
-            );
     }
 
     private attemptViewDestroyedError(err): boolean {
