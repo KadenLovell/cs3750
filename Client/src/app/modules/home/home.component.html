@@ -11,7 +11,7 @@
 
   <div class="row">
     <div class=col-md-6 *ngFor="let x of rows">
-      <div class="card mt-2 mr-2">
+      <div (click)="loadCourse(x.id)" class="card mt-2 mr-2">
         <h5 class="card-header">Course: {{x.name}}, Code: {{x.code}}, Department: {{x.department}}</h5>
         <div class="card-body">
           Instructor: {{x.instructor}} <br />

@@ -56,7 +56,8 @@ namespace Server.Services {
                     email = user.Email,
                     firstname = user.FirstName,
                     lastname = user.LastName,
-                    dateOfBirth = user.DateOfBirth
+                    dateOfBirth = user.DateOfBirth,
+                    role = user.Role
                 }
             };
 

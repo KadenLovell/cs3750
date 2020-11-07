@@ -1,7 +1,7 @@
 <div *ngIf="!isLogin && sidebar" class="sidenav">
     <a (click)="clicked()" routerLink="/home">Home</a>
-    <a (click)="clicked()" routerLink="/classlist">Class List</a>
-    <a (click)="clicked()" routerLink="/coursesearch">Course Search</a>
+    <a (click)="clicked()" *ngIf="user.role" routerLink="/classlist">Class List</a>
+    <a (click)="clicked()" *ngIf="user.role" routerLink="/coursesearch">Course Search</a>
     <a (click)="clicked()" routerLink="/calendar">Calendar</a>
     <a (click)="clicked()" routerLink="/profilepage">Profile Page</a>
     <a (click)="clicked()" routerLink="/tuitionandfees">Tuition and Fees</a>

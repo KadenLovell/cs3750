@@ -55,4 +55,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
   resetViewstate() {
     this.errors = {};
   }
+
+  loadCourse(courseId) {
+    this.router.navigate(['course'], { relativeTo: this.route.parent });
+  }
 }

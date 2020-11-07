@@ -21,7 +21,6 @@ namespace Server.Persistence {
 
         public async Task AddAsync(TModel model) {
             if (model == null) throw new ArgumentNullException("entity");
-
             entities.Add(model);
             await _dataContext.SaveChangesAsync();
         }
@@ -36,7 +35,6 @@ namespace Server.Persistence {
             TModel entity = await entities.SingleOrDefaultAsync(s => s.Id == id);
             entities.Remove(entity);
             _dataContext.SaveChanges();
-
         }
         // public void test(){
         //     _dataContext.User.

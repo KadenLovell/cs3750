@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Server.Models {
     public class Course : IModel {
@@ -16,5 +17,6 @@ namespace Server.Models {
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
         public string Capacity { get; set; }
+        public List<Assignment> Assignments { get; set; }
     }
 }

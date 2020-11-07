@@ -17,6 +17,7 @@ export class UserService {
         const url = `/api/user/activeuser`;
         this._httpService.get(url).then(activeUser => {
             try {
+                console.log(activeUser);
                 const user: User = {
                     id: activeUser.id,
                     username: activeUser.username,

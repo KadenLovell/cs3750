@@ -23,6 +23,7 @@ namespace Server.Persistence {
                     .AsQueryable()
                     .OfType<Course>()
                     .Where(x => x.InstructorId == instructorId)
+                    .Include(x => x.Assignments)
                     .ToListAsync();
 
             return result;
@@ -32,6 +33,7 @@ namespace Server.Persistence {
                 await repository
                     .AsQueryable()
                     .OfType<Course>()
+                    .Include(x => x.Assignments)
                     .SingleOrDefaultAsync(x => x.Id == id);
 
             return result;

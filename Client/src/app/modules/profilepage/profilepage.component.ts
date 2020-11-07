@@ -30,20 +30,17 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
 
     this._profilePageService.loadUser().then(response => {
       this.model = response;
-      console.log(this.model);
     });
   }
 
   save() {
-    this._profilePageService.updateUser(this.model).then(response => {
-      console.log(this.model.avatar);
-      this.model = response;
-      this.errors = response.errors;
-
-      if (this.response && this.response.success) {
+    if (this.isValid(this.form)) {
+      this._profilePageService.updateUser(this.model).then(response => {
+        this.model = response;
+        this.errors = response.errors;
         this.view = 1;
-      }
-    });
+      });
+    }
   }
 
   handleUpload(event) {
@@ -51,7 +48,6 @@ export class ProfilePageComponent extends BaseComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      console.log(reader.result);
       this.model.avatar = reader.result.toString().split(',')[1];
     };
   }
