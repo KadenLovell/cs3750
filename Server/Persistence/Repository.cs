@@ -38,5 +38,8 @@ namespace Server.Persistence {
             _dataContext.SaveChanges();
 
         }
-    }
+        // public void test(){
+        //     _dataContext.User.
+
+        // }    
 }
