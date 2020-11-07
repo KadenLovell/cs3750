@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 // shared
 import { UserService } from "./shared/user/user.service";
+import { User } from "./shared/user/user";
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,9 @@ import { UserService } from "./shared/user/user.service";
 
 export class AppComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-
+  user: User;
   isLogin: boolean;
   sidebar: boolean = false;
-
 
   constructor(
     private readonly router: Router,
@@ -34,6 +34,11 @@ export class AppComponent {
   }
 
   toggleSidebar() {
+    if (!this.sidebar) {
+      this.user = this._userService.user;
+      console.log(this.user);
+    }
+
     this.sidebar = !this.sidebar
   }
 

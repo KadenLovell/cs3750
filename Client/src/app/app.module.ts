@@ -29,6 +29,7 @@ import { MatListModule } from '@angular/material/list';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { BaseComponent } from './base/base.component';
+import { CourseComponent } from './modules/course/course.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { BaseComponent } from './base/base.component';
     ProfilePageComponent,
     TuitionAndFeesComponent,
     BaseComponent,
+    CourseComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,7 @@ import { BaseComponent } from './base/base.component';
     RouterModule.forRoot([
       { path: 'calendar', component: CalendarComponent },
       { path: 'profilepage', component: ProfilePageComponent },
+      { path: 'course', component: CourseComponent },
       { path: 'coursesearch', component: CourseSearchComponent },
       { path: 'classlist', component: ClasslistComponent },
       { path: 'tuitionandfees', component: TuitionAndFeesComponent },
