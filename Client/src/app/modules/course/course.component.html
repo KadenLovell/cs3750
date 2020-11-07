@@ -1,1 +1,79 @@
-<p>course works!</p>
+<ng-container>
+    <div class="row">
+        <div class="col-md-6">
+            <div *ngIf="user.role" class="card mt-2 ml-2">
+                <h5 class="card-header">Add Assignment</h5>
+                <div class="card-body">
+                    <form #form="ngForm" (ngSubmit)="addAssignment()">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="title">Title: </label>
+                                <input #title="ngModel" class="form-control" id="title" name="title" type="text" [(ngModel)]="model.title" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="description">Description: </label>
+                                <input #description="ngModel" class="form-control" id="description" name="description" type="text" [(ngModel)]="model.description" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="dueDate">Due Date: </label>
+                                <input #dueDate="ngModel" class="form-control" id="dueDate" name="dueDate" type="date" [(ngModel)]="model.dueDate" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="dueTime">Due Time: </label>
+                                <select #dueTime="ngModel" class="form-control" id="dueTime" name="dueTime" [(ngModel)]="model.dueTime" required>
+                                    <option>12:00 am</option>
+                                    <option>1:00 am</option>
+                                    <option>2:00 am</option>
+                                    <option>3:00 am</option>
+                                    <option>4:00 am</option>
+                                    <option>5:00 am</option>
+                                    <option>6:00 am</option>
+                                    <option>7:00 am</option>
+                                    <option>8:00 am</option>
+                                    <option>9:00 am</option>
+                                    <option>10:00 am</option>
+                                    <option>11:00 am</option>
+                                    <option>12:00 pm</option>
+                                    <option>1:00 pm</option>
+                                    <option>2:00 pm</option>
+                                    <option>3:00 pm</option>
+                                    <option>4:00 pm</option>
+                                    <option>5:00 pm</option>
+                                    <option>6:00 pm</option>
+                                    <option>7:00 pm</option>
+                                    <option>8:00 pm</option>
+                                    <option>9:00 pm</option>
+                                    <option>10:00 pm</option>
+                                    <option>11:00 pm</option>
+                                    <option>11:59 pm</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="maxPoints">Max Points: </label>
+                                <input #maxPoints="ngModel" class="form-control" id="maxPoints" name="maxPoints" type="number" [(ngModel)]="model.maxPoints" required>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="submissionType">Submission Type: </label>
+                                <select #submissionType="ngModel" class="form-control" id="submissionType" name="submissionType" [(ngModel)]="model.submissionType" required>
+                                    <option value="0">Text</option>
+                                    <option value="1">File</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit" style="float:right">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class=col-md-6>
+            <div class="card mt-2 mr-2">
+                <h5 class="card-header">Assignment List</h5>
+                <div class="card-body">
+                    Assigments
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
