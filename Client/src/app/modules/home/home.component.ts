@@ -57,6 +57,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   loadCourse(courseId) {
-    this.router.navigate(['course'], { relativeTo: this.route.parent });
+    this.router.navigate(['course'], { state: { courseId: courseId }, relativeTo: this.route.parent });
   }
 }
