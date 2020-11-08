@@ -64,6 +64,95 @@
                             Capactiy is required.
                         </small>
                     </div>
+                    <div class="form-group col-md-3">
+                        <label for="startDate">Start Date: </label>
+                        <input #startDate="ngModel" class="form-control" id="startDate" name="startDate" type="date" [(ngModel)]="model.startDate" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="startTime">Start Time: </label>
+                        <select #startTime="ngModel" class="form-control" id="startTime" name="startTime" [(ngModel)]="model.startTime" required>
+                            <option>12:00 am</option>
+                            <option>1:00 am</option>
+                            <option>2:00 am</option>
+                            <option>3:00 am</option>
+                            <option>4:00 am</option>
+                            <option>5:00 am</option>
+                            <option>6:00 am</option>
+                            <option>7:00 am</option>
+                            <option>8:00 am</option>
+                            <option>9:00 am</option>
+                            <option>10:00 am</option>
+                            <option>11:00 am</option>
+                            <option>12:00 pm</option>
+                            <option>1:00 pm</option>
+                            <option>2:00 pm</option>
+                            <option>3:00 pm</option>
+                            <option>4:00 pm</option>
+                            <option>5:00 pm</option>
+                            <option>6:00 pm</option>
+                            <option>7:00 pm</option>
+                            <option>8:00 pm</option>
+                            <option>9:00 pm</option>
+                            <option>10:00 pm</option>
+                            <option>11:00 pm</option>
+                            <option>11:59 pm</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="endTime">End Time: </label>
+                      <select #endTime="ngModel" class="form-control" id="endTime" name="endTime" [(ngModel)]="model.endTime" required>
+                          <option>12:00 am</option>
+                          <option>1:00 am</option>
+                          <option>2:00 am</option>
+                          <option>3:00 am</option>
+                          <option>4:00 am</option>
+                          <option>5:00 am</option>
+                          <option>6:00 am</option>
+                          <option>7:00 am</option>
+                          <option>8:00 am</option>
+                          <option>9:00 am</option>
+                          <option>10:00 am</option>
+                          <option>11:00 am</option>
+                          <option>12:00 pm</option>
+                          <option>1:00 pm</option>
+                          <option>2:00 pm</option>
+                          <option>3:00 pm</option>
+                          <option>4:00 pm</option>
+                          <option>5:00 pm</option>
+                          <option>6:00 pm</option>
+                          <option>7:00 pm</option>
+                          <option>8:00 pm</option>
+                          <option>9:00 pm</option>
+                          <option>10:00 pm</option>
+                          <option>11:00 pm</option>
+                          <option>11:59 pm</option>
+                      </select>
+                  </div>
+              
+                  <div class="form-check">
+                    <input class="form-check-input" #monday="ngModel" id="monday" name="monday" type="checkbox" [(ngModel)]="model.monday">
+                    <label class="form-check-label" for="monday">Monday</label>
+                  </div>
+                  &nbsp;
+                  <div class="form-check">
+                    <input class="form-check-input" #tuesday="ngModel" id="tuesday" name="tuesday" type="checkbox" [(ngModel)]="model.tuesday">
+                    <label class="form-check-label" for="tuesday">Tuesday</label>
+                  </div>
+                  &nbsp;
+                  <div class="form-check">
+                    <input class="form-check-input" #wednesday="ngModel" id="wednesday" name="wednesday" type="checkbox" [(ngModel)]="model.wednesday">
+                    <label class="form-check-label" for="wednesday">Wednesday</label>
+                  </div>
+                  &nbsp;
+                  <div class="form-check">
+                    <input class="form-check-input" #thursday="ngModel" id="thursday" name="thursday" type="checkbox" [(ngModel)]="model.thursday">
+                    <label class="form-check-label" for="thursday">Thursday</label>
+                  </div>
+                  &nbsp;
+                  <div class="form-check">
+                    <input class="form-check-input" #friday="ngModel" id="friday" name="friday" type="checkbox" [(ngModel)]="model.friday">
+                    <label class="form-check-label" for="friday">Friday</label>
+                  </div>
                 </div>
                 <button type="submit" class="btn btn-primary" style="float:right;">Add</button>
             </form>
