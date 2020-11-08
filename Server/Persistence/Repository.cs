@@ -36,5 +36,9 @@ namespace Server.Persistence {
             entities.Remove(entity);
             _dataContext.SaveChanges();
         }
-    }
+        // public void test(){
+        //     _dataContext.User.
+
+        // }    
+}
 }
