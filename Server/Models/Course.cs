@@ -14,9 +14,17 @@ namespace Server.Models {
         public string Department { get; set; }
         public string CreditHours { get; set; }
         public string Location { get; set; }
+        public DateTime? StartDate { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
         public string Capacity { get; set; }
         public List<Assignment> Assignments { get; } = new List<Assignment>();
+        public bool Monday { get; set; }
+        public bool Tuesday { get; set; }
+        public bool Wednesday { get; set; }
+        public bool Thursday { get; set; }
+        public bool Friday { get; set; }
+
+
     }
 }

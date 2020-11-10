@@ -34,9 +34,15 @@ namespace Server.Services {
                     course.Department,
                     course.Capacity,
                     course.Instructor,
+                    course.StartDate,
                     course.StartTime,
                     course.EndTime,
-                    course.Code
+                    course.Code,
+                    course.Monday,
+                    course.Tuesday,
+                    course.Wednesday,
+                    course.Thursday,
+                    course.Friday
                 });
             }
 
@@ -59,9 +65,15 @@ namespace Server.Services {
                     course.Department,
                     course.Capacity,
                     course.Instructor,
+                    course.StartDate,
                     course.StartTime,
                     course.EndTime,
-                    course.Code
+                    course.Code,
+                    course.Monday,
+                    course.Tuesday,
+                    course.Wednesday,
+                    course.Thursday,
+                    course.Friday
                 });
             }
 
@@ -79,9 +91,15 @@ namespace Server.Services {
                 department = courses.Department,
                 creditHours = courses.CreditHours,
                 location = courses.Location,
+                startDate = courses.StartDate?.ToString("d"),
                 startTime = courses.StartTime?.ToString("d"),
                 endTime = courses.EndTime?.ToString("d"),
-                capacity = courses.Capacity
+                capacity = courses.Capacity,
+                monday = courses.Monday,
+                tuesday = courses.Tuesday,
+                wednesday = courses.Wednesday,
+                thursday = courses.Thursday,
+                friday = courses.Friday
             };
 
             return result;
@@ -103,9 +121,15 @@ namespace Server.Services {
                     Department = model.department,
                     CreditHours = model.creditHours,
                     Location = model.location,
-                    StartTime = null, // DateTime.Parse((string)model.startTime),
-                    EndTime = null, // DateTime.Parse((string)model.endTime),
+                    StartDate = model.startDate,
+                    StartTime = DateTime.Parse((string)model.startTime),
+                    EndTime = DateTime.Parse((string)model.endTime),
                     Capacity = model.capacity,
+                    Monday = model.monday,
+                    Tuesday = model.tuesday,
+                    Wednesday = model.wednesday,
+                    Thursday = model.thursday,
+                    Friday = model.friday,
                     CreatedDate = DateTime.Now,
                     ModifiedDate = null
                 };
@@ -152,9 +176,15 @@ namespace Server.Services {
                 course.Department = model.department;
                 course.CreditHours = model.creditHours;
                 course.Location = model.location;
+                course.StartDate = DateTime.Parse((string)model.startDate);
                 course.StartTime = DateTime.Parse((string)model.startTime);
                 course.EndTime = DateTime.Parse((string)model.endTime);
                 course.Capacity = model.capacity;
+                course.Monday = model.monday;
+                course.Tuesday = model.tuesday;
+                course.Wednesday = model.wednesday;
+                course.Thursday = model.thursday;
+                course.Friday = model.friday;
 
                 await _repository.UpdateAsync(course);
 
@@ -167,9 +197,15 @@ namespace Server.Services {
                     department = course.Department,
                     creditHours = course.CreditHours,
                     location = course.Location,
+                    startDate = course.StartDate?.ToString("d"),
                     startTime = course.StartTime?.ToString("d"),
                     endTime = course.EndTime?.ToString("d"),
                     capacity = course.Capacity,
+                    monday = course.Monday,
+                    tuesday = course.Tuesday,
+                    wednesday = course.Wednesday,
+                    thursday = course.Thursday,
+                    friday = course.Friday
                 };
 
                 return result;
@@ -194,9 +230,15 @@ namespace Server.Services {
                     course.Department,
                     course.Capacity,
                     course.Instructor,
+                    course.StartDate,
                     course.StartTime,
                     course.EndTime,
-                    course.Code
+                    course.Code,
+                    course.Monday,
+                    course.Tuesday,
+                    course.Wednesday,
+                    course.Thursday,
+                    course.Friday
                 });
             }
 
