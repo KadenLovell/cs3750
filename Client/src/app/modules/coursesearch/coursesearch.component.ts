@@ -34,4 +34,8 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
       this.rows = response;
     });
   }
+
+  register() {
+    // dch need to know courseSearchService register method
+  }
 }
