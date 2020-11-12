@@ -18,7 +18,7 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
   errors: any;
   view: any;
   rows: any;
-  userCourseIds: any;
+  userCourseIds: any[];
 
   get user(): User {
     return this._userService.user;
@@ -27,21 +27,23 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'department', 'instructor', 'code'];
 
   constructor(private readonly _courseSearchService: CourseSearchService, private readonly _userService: UserService) {
-      super();
+    super();
   }
 
   ngOnInit(): void {
     this._userService.loadUser();
     this.view = 1;
     this.model = {};
+    this.userCourseIds = [];
+
     this._courseSearchService.getUserCourses().then(response => {
-      this.userCourseIds = response;
-      console.log(this.userCourseIds);
+      for (var i = 0; i < response.length; i++) {
+        this.userCourseIds.push(response[i].courseId);
+      }
     });
 
     this._courseSearchService.getClasses().then(response => {
       this.rows = response;
-      console.log(this.rows);
     });
   }
 
@@ -51,14 +53,16 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
     });
   }
 
+  unregister(id) {
+    this.userCourseIds.splice(this.userCourseIds.indexOf(id), 1);
+  }
+
   register(id) {
     this.model.courseId = id;
     this.model.studentId = this.user.id;
 
     this._courseSearchService.registerUserCourse(this.model).then(response => {
-      // success dialog
-      // turn register button into an unregister
-      // maybe requery rows
+      this.userCourseIds.push(id);
     });
   }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Server.Models;
@@ -19,23 +20,26 @@ namespace Server.Services {
 
         public async Task<dynamic> GetUserCourseCoursesAsync() {
             var id = _httpContextAccessor.HttpContext.User.Identity.Id();
-            var userCourseCourses = await _repository.GetUserCoursesById(id);
+            var userCourses = await _repository.GetUserCoursesById(id);
 
-            if (userCourseCourses == null) {
+            if (userCourses == null) {
                 return null;
             }
 
-            var result = new {
-                id = userCourseCourses.Id,
-                courseId = userCourseCourses.CourseID,
-                userId = userCourseCourses.UserID
-            };
+            var result = new List<dynamic>();
 
+            foreach (var userCourse in userCourses) {
+                result.Add(new {
+                    id = userCourse.Id,
+                    courseId = Convert.ToInt64(userCourse.CourseID),
+                    userId = userCourse.UserID
+                });
+            }
             return result;
         }
 
         public async Task<dynamic> GetUserCourseAsync(long id) {
-            var userCourse = await _repository.GetUserCoursesById(id);
+            var userCourse = await _repository.GetUserCourseById(id);
 
             var result = new {
                 id = userCourse.Id
