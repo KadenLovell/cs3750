@@ -59,7 +59,8 @@ namespace Server {
              .AddScoped<AssignmentService>()
              .AddScoped<CourseService>()
              .AddScoped<LoginService>()
-             .AddScoped<UserService>();
+             .AddScoped<UserService>()
+             .AddScoped<UserCourseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

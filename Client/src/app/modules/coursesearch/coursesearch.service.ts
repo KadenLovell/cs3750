@@ -17,4 +17,10 @@ export class CourseSearchService {
 
         return await this._httpService.post(url, model);
     }
+
+        async registerUserCourse(model: any): Promise<any> {
+        const url = `/api/usercourses/add`;
+
+        return await this._httpService.post(url, model);
+    }
 }
