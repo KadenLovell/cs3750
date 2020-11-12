@@ -18,9 +18,16 @@ export class CourseSearchService {
         return await this._httpService.post(url, model);
     }
 
+<<<<<<< HEAD
     async getUserCourses(): Promise<any> {
         const url = `/api/usercourses/list`;
 
         return await this._httpService.get(url);
+=======
+        async registerUserCourse(model: any): Promise<any> {
+        const url = `/api/usercourses/add`;
+
+        return await this._httpService.post(url, model);
+>>>>>>> 878a2b78791e2d731a017d118b35eb2635c57394
     }
 }

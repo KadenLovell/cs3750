@@ -29,10 +29,11 @@ namespace Server.Persistence {
  
         public static async Task<UserCourses> CheckDuplicateEntry(this IRepository<UserCourses> repository,  long studentId, string courseId) {
             var result =
-            await repository
-            .AsQueryable()
-            .OfType<UserCourses>()
-            .SingleAsync(x => x.UserID == studentId && x.CourseID == courseId);
+                await repository
+                    .AsQueryable()
+                    .OfType<UserCourses>()
+                    .SingleOrDefaultAsync(x => x.UserID == studentId && x.CourseID == courseId);
+
             return result;
 
         }
