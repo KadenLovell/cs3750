@@ -14,6 +14,7 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
   errors: any;
   view: any;
   rows: any;
+  userCourseIds: any;
 
   displayedColumns: string[] = ['id', 'name', 'department', 'instructor', 'code'];
 
@@ -24,8 +25,14 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.view = 1;
     this.model = {};
+    this._courseSearchService.getUserCourses().then(response => {
+      this.userCourseIds = response;
+      console.log(this.userCourseIds);
+    });
+
     this._courseSearchService.getClasses().then(response => {
       this.rows = response;
+      console.log(this.rows);
     });
   }
 

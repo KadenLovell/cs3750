@@ -59,6 +59,7 @@ namespace Server {
              .AddScoped<AssignmentService>()
              .AddScoped<CourseService>()
              .AddScoped<LoginService>()
+             .AddScoped<UserCourseService>()
              .AddScoped<UserService>();
         }
 
