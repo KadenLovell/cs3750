@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Server.Persistence;
 using Server.Services;
+using Microsoft.EntityFrameworkCore;
+using Server.Models;
 
 namespace Server.Controllers {
     [Route("api/[controller]")]
@@ -16,6 +18,8 @@ namespace Server.Controllers {
 
         [HttpGet("list")]
         public async Task<IActionResult> GetCoursesAsync() {
+            //var x = await _context.Course.ToListAsync<Course>();
+            //x.FindAll(x => x.Name == "Math");
             var result = await _courseService.GetCoursesAsync();
             return Json(result);
         }
@@ -41,6 +45,9 @@ namespace Server.Controllers {
 
         [HttpPost("add")]
         public async Task<IActionResult> AddCourseAsync([FromBody] dynamic model) {
+            Course c = new Course();
+            c.Name = "Computer Tech";
+            //_context.Course.Add(c);
             var result = await _courseService.AddCourseAsync(model);
             return Json(result);
         }
