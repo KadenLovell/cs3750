@@ -61,7 +61,20 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
     this.model.courseId = id;
     this.model.studentId = this.user.id;
 
-    this._courseSearchService.registerUserCourse(this.model).then(response => {
+    this._courseSearchService.registerUserCourse(this.model).then(response => { // returns a false if registration failed
+      //console.log("Logging course register response: " + response.toString());
+      if (response == false) {
+        $('.toast-header').html('Operation failed');
+        $('.toast-body').html('Could not add registration for class');
+        $('.toast').toast({delay: 3000});
+        $('.toast').toast('show');
+      }
+      else {
+        $('.toast-header').html('Operation success');
+        $('.toast-body').html('Added registration for class');
+        $('.toast').toast({delay: 3000});
+        $('.toast').toast('show');
+      }
       this.userCourseIds.push(id);
     });
   }
