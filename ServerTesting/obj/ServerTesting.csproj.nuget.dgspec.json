@@ -46,6 +46,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
             "MSTest.TestAdapter": {
               "target": "Package",
               "version": "[2.1.0, )"
