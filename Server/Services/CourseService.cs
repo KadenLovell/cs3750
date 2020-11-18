@@ -23,7 +23,6 @@ namespace Server.Services {
                 return null;
             }
 
-
             var result = new List<dynamic>();
 
             foreach (var course in courses) {

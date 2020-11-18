@@ -1,12 +1,24 @@
 using Microsoft.EntityFrameworkCore;
 using Server.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Server.Persistence {
     public static partial class RepositoryExtensions {
         // linq syntax: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/
-        public static async Task<UserCourses> GetUserCoursesById(this IRepository<UserCourses> repository, long studentId) {
+        public static async Task<List<UserCourses>> GetUserCoursesById(this IRepository<UserCourses> repository, long studentId) {
+            var result =
+                await repository
+                    .AsQueryable()
+                    .OfType<UserCourses>()
+                    .Where(x => x.Id == studentId)
+                    .ToListAsync();
+
+            return result;
+        }
+
+        public static async Task<UserCourses> GetUserCourseById(this IRepository<UserCourses> repository, long studentId) {
             var result =
                 await repository
                     .AsQueryable()
@@ -16,8 +28,8 @@ namespace Server.Persistence {
             return result;
         }
 
-                //searching based on email
-        public static async Task<UserCourses> GetUserByEmailAsync(this IRepository<UserCourses> repository,  long studentId) {
+        //searching based on email
+        public static async Task<UserCourses> GetUserByEmailAsync(this IRepository<UserCourses> repository, long studentId) {
             var result =
                 await repository
                     .AsQueryable()
@@ -26,18 +38,19 @@ namespace Server.Persistence {
 
             return result;
         }
- 
-        public static async Task<UserCourses> CheckDuplicateEntry(this IRepository<UserCourses> repository,  long studentId, string courseId) {
+
+        public static async Task<UserCourses> CheckDuplicateEntry(this IRepository<UserCourses> repository, long studentId, string courseId) {
             var result =
-            await repository
-            .AsQueryable()
-            .OfType<UserCourses>()
-            .SingleAsync(x => x.UserID == studentId && x.CourseID == courseId);
+                await repository
+                    .AsQueryable()
+                    .OfType<UserCourses>()
+                    .SingleOrDefaultAsync(x => x.UserID == studentId && x.CourseID == courseId);
+
             return result;
 
         }
 
-        
+
 
         // public static async Task<bool> UserExistsByUsernameOrEmail(this IRepository<User> repository, string username, string email) {
         //     var result =

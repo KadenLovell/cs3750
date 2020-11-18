@@ -34,7 +34,6 @@ namespace Server.Services {
 
         public async Task<dynamic> GetUserAsync(long id) {
             var user = await _repository.GetUserById(id);
-            
 
             var result = new {
                 id = user.Id,

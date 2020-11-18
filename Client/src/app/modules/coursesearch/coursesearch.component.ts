@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CourseSearchService } from './coursesearch.service';
 import { BaseComponent } from '../../base/base.component';
 
+// shared
+import { User } from "../../shared/user/user";
+import { UserService } from "../../shared/user/user.service";
+
 @Component({
   selector: 'app-coursesearch',
   templateUrl: './coursesearch.component.html',
@@ -14,16 +18,30 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
   errors: any;
   view: any;
   rows: any;
+  userCourseIds: any[];
+
+  get user(): User {
+    return this._userService.user;
+  }
 
   displayedColumns: string[] = ['id', 'name', 'department', 'instructor', 'code'];
 
-  constructor(private readonly _courseSearchService: CourseSearchService) {
+  constructor(private readonly _courseSearchService: CourseSearchService, private readonly _userService: UserService) {
     super();
   }
 
   ngOnInit(): void {
+    this._userService.loadUser();
     this.view = 1;
     this.model = {};
+    this.userCourseIds = [];
+
+    this._courseSearchService.getUserCourses().then(response => {
+      for (var i = 0; i < response.length; i++) {
+        this.userCourseIds.push(response[i].courseId);
+      }
+    });
+
     this._courseSearchService.getClasses().then(response => {
       this.rows = response;
     });
@@ -35,7 +53,29 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
     });
   }
 
-  register() {
-    // dch need to know courseSearchService register method
+  unregister(id) {
+    this.userCourseIds.splice(this.userCourseIds.indexOf(id), 1);
+  }
+
+  register(id) {
+    this.model.courseId = id;
+    this.model.studentId = this.user.id;
+
+    this._courseSearchService.registerUserCourse(this.model).then(response => { // returns a false if registration failed
+      //console.log("Logging course register response: " + response.toString());
+      if (response == false) {
+        $('.toast-header').html('Operation failed');
+        $('.toast-body').html('Could not add registration for class');
+        $('.toast').toast({delay: 3000});
+        $('.toast').toast('show');
+      }
+      else {
+        $('.toast-header').html('Operation success');
+        $('.toast-body').html('Added registration for class');
+        $('.toast').toast({delay: 3000});
+        $('.toast').toast('show');
+      }
+      this.userCourseIds.push(id);
+    });
   }
 }

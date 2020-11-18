@@ -24,7 +24,5 @@ namespace Server.Models {
         public bool Wednesday { get; set; }
         public bool Thursday { get; set; }
         public bool Friday { get; set; }
-
-
     }
 }
