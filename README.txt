@@ -12,6 +12,7 @@ adding the entity framework cli (only needs to ever be ran once):
 `dotnet tool install --global dotnet-ef`
 
 creating the database:
+Drop the existing database if there is one.
 Delete the Migrations folder in the ./Server directory:
 `dotnet ef migrations add InitialCreate`
 `dotnet ef database update`
