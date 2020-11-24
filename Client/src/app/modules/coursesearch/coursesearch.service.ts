@@ -29,4 +29,10 @@ export class CourseSearchService {
 
         return await this._httpService.get(url);
     }
+
+    async deleteUserCourse(model: any): Promise<any> {
+        const url = `/api/usercourses/delete`;
+
+        return await this._httpService.post(url, model);
+    }
 }

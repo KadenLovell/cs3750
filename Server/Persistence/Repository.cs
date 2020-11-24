@@ -31,14 +31,10 @@ namespace Server.Persistence {
             await _dataContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(long id) {
-            TModel entity = await entities.SingleOrDefaultAsync(s => s.Id == id);
-            entities.Remove(entity);
-            _dataContext.SaveChanges();
+        public async Task DeleteAsync(TModel model) {
+            if (model == null) throw new ArgumentNullException("entity");
+            entities.Remove(model);
+            await _dataContext.SaveChangesAsync();
         }
-        // public void test(){
-        //     _dataContext.User.
-
-        // }    
-}
+    }
 }

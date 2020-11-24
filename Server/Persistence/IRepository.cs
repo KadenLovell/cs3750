@@ -7,6 +7,6 @@ namespace Server.Persistence {
         IQueryable AsQueryable();
         Task AddAsync(TModel model);
         Task UpdateAsync(TModel model);
-        Task DeleteAsync(long id);
+        Task DeleteAsync(TModel model);
     }
 }

@@ -30,5 +30,11 @@ namespace Server.Controllers {
             var result = await _userCoursesService.AddUserCourseAsync(model);
             return Json(result);
         }
+
+        [HttpPost("delete")]
+        public async Task<IActionResult> DeleteUserCourseAsync([FromBody] dynamic model) {
+            var result = await _userCoursesService.DeleteUserCourseAsync((long)model.userCourseId);
+            return Json(result);
+        }
     }
 }

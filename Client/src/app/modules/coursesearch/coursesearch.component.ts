@@ -54,7 +54,12 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
   }
 
   unregister(id) {
-    this.userCourseIds.splice(this.userCourseIds.indexOf(id), 1);
+    this.model.userCourseId = id;
+    this._courseSearchService.deleteUserCourse(this.model).then(response => {
+      if(response.success) {
+        this.userCourseIds.splice(this.userCourseIds.indexOf(id), 1);
+      }
+    })
   }
 
   register(id) {

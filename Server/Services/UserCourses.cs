@@ -94,7 +94,21 @@ namespace Server.Services {
 
             return result;
         }
-
+        public async Task<dynamic> DeleteUserCourseAsync(long id) {
+            dynamic result;
+            try {
+                var userCourse = await _repository.GetUserCourseById(id);
+                await _repository.DeleteAsync(userCourse);
+            } catch {
+                result = new {
+                    success = false
+                };
+            }
+            result = new {
+                success = true
+            };
+            return result;
+        }
         // public async Task<dynamic> UpdateUserCourseAsync(dynamic model) {
         // var userCourse = await _repository.GetUserCourseById((long)model.id);
 

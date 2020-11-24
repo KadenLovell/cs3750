@@ -26,7 +26,7 @@ namespace Server.Services {
             var result = new List<dynamic>();
 
             foreach (var course in courses) {
-                result.Add(new {
+                result.Add( new {
                     course.Id,
                     course.Name,
                     course.CreditHours,
@@ -42,14 +42,14 @@ namespace Server.Services {
                     course.Wednesday,
                     course.Thursday,
                     course.Friday
-                });
+                } );
             }
 
             return result;
         }
 
         public async Task<dynamic> GetCoursesByInstructorIdAsync(long instructorId) {
-            var courses = await _repository.GetCoursesByInstructorIdAsync(instructorId);
+            var courses = await _repository.GetCoursesByInstructorIdAsync( instructorId );
             if (courses == null || courses.Count == 0) {
                 return null;
             }
@@ -57,7 +57,7 @@ namespace Server.Services {
             var result = new List<dynamic>();
 
             foreach (var course in courses) {
-                result.Add(new {
+                result.Add( new {
                     course.Id,
                     course.Name,
                     course.CreditHours,
@@ -73,14 +73,14 @@ namespace Server.Services {
                     course.Wednesday,
                     course.Thursday,
                     course.Friday
-                });
+                } );
             }
 
             return result;
         }
 
         public async Task<dynamic> GetCourseAsync(long id) {
-            var courses = await _repository.GetCourseByIdAsync(id);
+            var courses = await _repository.GetCourseByIdAsync( id );
 
             var result = new {
                 id = courses.Id,
@@ -90,9 +90,9 @@ namespace Server.Services {
                 department = courses.Department,
                 creditHours = courses.CreditHours,
                 location = courses.Location,
-                startDate = courses.StartDate?.ToString("d"),
-                startTime = courses.StartTime?.ToString("d"),
-                endTime = courses.EndTime?.ToString("d"),
+                startDate = courses.StartDate?.ToString( "d" ),
+                startTime = courses.StartTime?.ToString( "d" ),
+                endTime = courses.EndTime?.ToString( "d" ),
                 capacity = courses.Capacity,
                 monday = courses.Monday,
                 tuesday = courses.Tuesday,
@@ -105,7 +105,7 @@ namespace Server.Services {
         }
 
         public async Task<dynamic> AddCourseAsync(dynamic model) {
-            var user = await _userRepository.GetUserById(_httpContextAccessor.HttpContext.User.Identity.Id());
+            var user = await _userRepository.GetUserById( _httpContextAccessor.HttpContext.User.Identity.Id() );
             if (user == null) {
                 return null;
             }
@@ -121,8 +121,8 @@ namespace Server.Services {
                     CreditHours = model.creditHours,
                     Location = model.location,
                     StartDate = model.startDate,
-                    StartTime = DateTime.Parse((string)model.startTime),
-                    EndTime = DateTime.Parse((string)model.endTime),
+                    StartTime = DateTime.Parse( (string) model.startTime ),
+                    EndTime = DateTime.Parse( (string) model.endTime ),
                     Capacity = model.capacity,
                     Monday = model.monday,
                     Tuesday = model.tuesday,
@@ -133,7 +133,7 @@ namespace Server.Services {
                     ModifiedDate = null
                 };
 
-                await _repository.AddAsync(course);
+                await _repository.AddAsync( course );
 
                 var result = new {
                     success = true,
@@ -156,13 +156,13 @@ namespace Server.Services {
         }
 
         public async Task<dynamic> UpdateCourseAsync(dynamic model) {
-            var user = await _userRepository.GetUserById(_httpContextAccessor.HttpContext.User.Identity.Id());
+            var user = await _userRepository.GetUserById( _httpContextAccessor.HttpContext.User.Identity.Id() );
 
             if (user == null) {
                 return null;
             }
 
-            var course = await _repository.GetCourseByIdAsync((long)model.id);
+            var course = await _repository.GetCourseByIdAsync( (long) model.id );
 
             if (course == null) {
                 return null;
@@ -175,9 +175,9 @@ namespace Server.Services {
                 course.Department = model.department;
                 course.CreditHours = model.creditHours;
                 course.Location = model.location;
-                course.StartDate = DateTime.Parse((string)model.startDate);
-                course.StartTime = DateTime.Parse((string)model.startTime);
-                course.EndTime = DateTime.Parse((string)model.endTime);
+                course.StartDate = DateTime.Parse( (string) model.startDate );
+                course.StartTime = DateTime.Parse( (string) model.startTime );
+                course.EndTime = DateTime.Parse( (string) model.endTime );
                 course.Capacity = model.capacity;
                 course.Monday = model.monday;
                 course.Tuesday = model.tuesday;
@@ -185,7 +185,7 @@ namespace Server.Services {
                 course.Thursday = model.thursday;
                 course.Friday = model.friday;
 
-                await _repository.UpdateAsync(course);
+                await _repository.UpdateAsync( course );
 
                 var result = new {
                     success = true,
@@ -196,9 +196,9 @@ namespace Server.Services {
                     department = course.Department,
                     creditHours = course.CreditHours,
                     location = course.Location,
-                    startDate = course.StartDate?.ToString("d"),
-                    startTime = course.StartTime?.ToString("d"),
-                    endTime = course.EndTime?.ToString("d"),
+                    startDate = course.StartDate?.ToString( "d" ),
+                    startTime = course.StartTime?.ToString( "d" ),
+                    endTime = course.EndTime?.ToString( "d" ),
                     capacity = course.Capacity,
                     monday = course.Monday,
                     tuesday = course.Tuesday,
@@ -214,7 +214,7 @@ namespace Server.Services {
         }
 
         public async Task<dynamic> GetCourseSearchAsync(dynamic model) {
-            var courses = await _repository.SearchCourses((string)model.name, (string)model.department, (string)model.instructor);
+            var courses = await _repository.SearchCourses( (string) model.name, (string) model.department, (string) model.instructor );
             if (courses == null || courses.Count == 0) {
                 return null;
             }
@@ -222,7 +222,7 @@ namespace Server.Services {
             var result = new List<dynamic>();
 
             foreach (var course in courses) {
-                result.Add(new {
+                result.Add( new {
                     course.Id,
                     course.Name,
                     course.CreditHours,
@@ -238,7 +238,7 @@ namespace Server.Services {
                     course.Wednesday,
                     course.Thursday,
                     course.Friday
-                });
+                } );
             }
 
             return result;
