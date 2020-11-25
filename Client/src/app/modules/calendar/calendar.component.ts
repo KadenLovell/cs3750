@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '../../base/base.component';
+import { CalendarService } from './calendar.service'
 
 export interface DialogData {
   action: string;
@@ -30,23 +31,34 @@ const colors: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['calendar.component.scss'],
   templateUrl: 'calendar.component.html',
+  providers: [CalendarService],
   encapsulation: ViewEncapsulation.None,
 })
 export class CalendarComponent extends BaseComponent implements OnInit, OnDestroy {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
   private readonly darkThemeClass = 'dark-theme';
   view: CalendarView = CalendarView.Month;
+  courses: any[];
 
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
-  constructor(@Inject(DOCUMENT) private document, private modal: MatDialog) {
+  constructor(private readonly _calendarService: CalendarService, @Inject(DOCUMENT) private document, private modal: MatDialog) {
     super();
   }
 
   ngOnInit(): void {
     this.document.body.classList.add(this.darkThemeClass);
+    this._calendarService.getCourses().then(response => {
+      this.courses = response;
+      
+      for (var i = 0; i < this.courses.length; i++) {
+        this.addEvent(this.courses[i]);
+        console.log(this.courses[i]);
+      }
+    });
   }
+
   ngOnDestroy(): void {
     this.document.body.classList.remove(this.darkThemeClass);
   }
@@ -70,47 +82,43 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
   ];
 
   refresh: Subject<any> = new Subject();
-
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ];
+   events: CalendarEvent[] = [];
+  //     start: subDays(startOfDay(new Date()), 1),
+  //     end: addDays(new Date(), 1),
+  //     title: 'A 3 day event',
+  //     color: colors.red,
+  //     actions: this.actions,
+  //     allDay: true,
+  //     resizable: {
+  //       beforeStart: true,
+  //       afterEnd: true,
+  //     },
+  //     draggable: true,
+  //   },
+  //   {
+  //     start: startOfDay(new Date()),
+  //     title: 'An event with no end date',
+  //     color: colors.yellow,
+  //     actions: this.actions,
+  //   },
+  //   {
+  //     start: subDays(endOfMonth(new Date()), 3),
+  //     end: addDays(endOfMonth(new Date()), 3),
+  //     title: 'A long event that spans 2 months',
+  //     color: colors.blue,
+  //     allDay: true,
+  //   },
+  //   {
+  //     start: addHours(startOfDay(new Date()), 2),
+  //     end: addHours(new Date(), 2),
+  //     title: 'A draggable and resizable event',
+  //     color: colors.yellow,
+  //     actions: this.actions,
+  //     resizable: {
+  //       beforeStart: true,
+  //       afterEnd: true,
+  //     },
+  //     draggable: true,
 
   activeDayIsOpen: boolean = true;
 
@@ -155,13 +163,13 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
     });
   }
 
-  addEvent(): void {
+  addEvent(course): void {
     this.events = [
       ...this.events,
       {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
+        title: course.name,
+        start: startOfDay(new Date(course.startDate)),
+        end: endOfDay(new Date(course.startDate)),
         color: colors.red,
         draggable: true,
         resizable: {
