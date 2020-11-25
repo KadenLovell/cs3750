@@ -43,9 +43,15 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.user) {
-      this._homeService.getCourses(this.user.id).then(response => {
+    if (this.user && this.user.role) {
+      this._homeService.getInstructorCourses(this.user.id).then(response => {
         this.rows = response;
+        console.log(this.rows);
+      });
+    } else if(this.user && !this.user.role) {
+      this._homeService.getStudentCourses().then(response => {
+        this.rows = response;
+        console.log(this.rows);
       });
     }
     this.view = 1;

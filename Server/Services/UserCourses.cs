@@ -4,17 +4,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Server.Models;
 using Server.Persistence;
-//rename to add services
-namespace Server.Services {
 
+namespace Server.Services {
     public class UserCourseService {
 
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IRepository<UserCourses> _repository;
-        private readonly IRepository<UserCourses> _userCoursesRepository;
         public UserCourseService(IHttpContextAccessor httpContextAccessor, IRepository<UserCourses> repository) {
             _repository = repository;
-            // _userCoursesRepository = _userCoursesRepository;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -32,7 +29,11 @@ namespace Server.Services {
                 result.Add(new {
                     id = userCourse.Id,
                     courseId = Convert.ToInt64(userCourse.CourseID),
-                    userId = userCourse.UserID
+                    userId = userCourse.UserID,
+                    course = new {
+                        userCourse.Course.Name,
+                        userCourse.Course.Description                    
+                    }
                 });
             }
             return result;
@@ -49,39 +50,22 @@ namespace Server.Services {
         }
 
         public async Task<dynamic> AddUserCourseAsync(dynamic model) {
-            //if (model.studentId != null, model.courseId != null){
-            //i need to prevent student from registering again
-            //if(userID = )
-            int studentID = (int)model.studentId;
-            string courseID = (string)model.courseId;
+            var studentID = (long)model.studentId;
+            var courseID = (long)model.courseId;
 
             var result2 = await _repository.CheckDuplicateEntry(studentID, courseID);
             if (result2 != null) {
-                //send better message than false "dupliacte classs"
                 return false;
             }
 
-            // var course = await _courseRepository.GetCourseByIdAsync(Convert.ToInt64(courseID));
-
-            // if userList.Size >= course.Capacity {
-            // return "class is full"
-            // }
             var userCourse = new UserCourses {
                 UserID = model.studentId,
                 CourseID = model.courseId,
-                CreatedDate = DateTime.Now, // DateTime.Parse((string)model.startTime),
-                ModifiedDate = DateTime.Now // DateTime.Parse((string)model.endTime),
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now 
             };
+
             await _repository.AddAsync(userCourse);
-
-            // }
-
-            // var userCourse = new UserCourse {
-            //     Course = model.course,
-            //     User = model.user,
-            // };
-
-            // await _repository.AddAsync(user);
 
             var result = new {
                 success = true,
@@ -94,6 +78,7 @@ namespace Server.Services {
 
             return result;
         }
+
         public async Task<dynamic> DeleteUserCourseAsync(long id) {
             dynamic result;
             try {
