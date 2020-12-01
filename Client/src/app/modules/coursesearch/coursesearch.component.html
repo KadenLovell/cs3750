@@ -15,6 +15,11 @@
         </div>
 
         <div class="form-group col-md-4">
+          <label for="creditHours">Credit Hours: </label>
+          <input #department="ngModel" class="form-control" id="creditHours" name="creditHours" type="text" required [(ngModel)]="model.creditHours">
+        </div>
+
+        <div class="form-group col-md-4">
           <label for="instructor">Instructor: </label>
           <input #instructor="ngModel" class="form-control" id="instructor" name="instructor" type="text" required [(ngModel)]="model.instructor">
         </div>
@@ -144,6 +149,7 @@
       <th>Code</th>
       <th>Department</th>
       <th>Instructor</th>
+      <th>Credit Hours</th>
     </tr>
   </thead>
   <tbody>
@@ -153,9 +159,10 @@
       <td>{{x.code}}</td>
       <td>{{x.departmnet}}</td>
       <td>{{x.instructor}}</td>
+      <td>{{x.creditHours}}</td>
       <td>
-        <button *ngIf="userCourseIds.includes(x.id)" class="btn btn-primary" (click)="unregister(x.id)">Unregister</button>
-        <button *ngIf="!userCourseIds.includes(x.id)" class="btn btn-primary" (click)="register(x.id)">Register</button></td>
+        <button *ngIf="userCourseIds.includes(x.id, x.creditHours)" class="btn btn-primary" (click)="unregister(x.id, x.creditHours)">Unregister</button>
+        <button *ngIf="!userCourseIds.includes(x.id, x.creditHours)" class="btn btn-primary" (click)="register(x.id, x.creditHours)">Register</button></td>
     </tr>
   </tbody>
 </table>

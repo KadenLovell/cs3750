@@ -32,7 +32,8 @@ namespace Server.Services {
                 result.Add(new {
                     id = userCourse.Id,
                     courseId = Convert.ToInt64(userCourse.CourseID),
-                    userId = userCourse.UserID
+                    userId = userCourse.UserID,
+                    credits = userCourse.CreditHours
                 });
             }
             return result;
@@ -54,6 +55,7 @@ namespace Server.Services {
             //if(userID = )
             int studentID = (int)model.studentId;
             string courseID = (string)model.courseId;
+            int creditHours = (int)model.creditHours;
 
             var result2 = await _repository.CheckDuplicateEntry(studentID, courseID);
             if (result2 != null) {
@@ -69,6 +71,7 @@ namespace Server.Services {
             var userCourse = new UserCourses {
                 UserID = model.studentId,
                 CourseID = model.courseId,
+                CreditHours = model.creditHours,
                 CreatedDate = DateTime.Now, // DateTime.Parse((string)model.startTime),
                 ModifiedDate = DateTime.Now // DateTime.Parse((string)model.endTime),
             };
@@ -89,6 +92,7 @@ namespace Server.Services {
                     id = userCourse.Id,
                     user = userCourse.UserID,
                     course = userCourse.CourseID,
+                    creditHours = userCourse.CreditHours
                 }
             };
 

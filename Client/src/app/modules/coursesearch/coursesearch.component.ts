@@ -53,7 +53,7 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
     });
   }
 
-  unregister(id) {
+  unregister(id, creditHours) {
     this.model.userCourseId = id;
     this._courseSearchService.deleteUserCourse(this.model).then(response => {
       if(response.success) {
@@ -62,9 +62,10 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
     })
   }
 
-  register(id) {
+  register(id, creditHours) {
     this.model.courseId = id;
     this.model.studentId = this.user.id;
+    this.model.creditHours = creditHours;
 
     this._courseSearchService.registerUserCourse(this.model).then(response => { // returns a false if registration failed
       //console.log("Logging course register response: " + response.toString());
