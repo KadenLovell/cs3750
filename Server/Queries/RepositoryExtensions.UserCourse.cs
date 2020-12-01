@@ -12,7 +12,7 @@ namespace Server.Persistence {
                 await repository
                     .AsQueryable()
                     .OfType<UserCourses>()
-                    .Where(x => x.Id == studentId)
+                    .Where(x => x.UserID == studentId)
                     .Include(x => x.Course)
                     .ToListAsync();
 

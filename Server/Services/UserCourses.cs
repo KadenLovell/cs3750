@@ -31,8 +31,13 @@ namespace Server.Services {
                     courseId = Convert.ToInt64(userCourse.CourseID),
                     userId = userCourse.UserID,
                     course = new {
-                        userCourse.Course.Name,
-                        userCourse.Course.Description                    
+                        id = userCourse.CourseID,
+                        name = userCourse.Course.Name,
+                        description = userCourse.Course.Description,
+                        code = userCourse.Course.Code,
+                        department = userCourse.Course.Department,
+                        creditHours = userCourse.Course.CreditHours,
+                        instructor = userCourse.Course.Instructor
                     }
                 });
             }
@@ -94,26 +99,6 @@ namespace Server.Services {
             };
             return result;
         }
-        // public async Task<dynamic> UpdateUserCourseAsync(dynamic model) {
-        // var userCourse = await _repository.GetUserCourseById((long)model.id);
 
-        // if (userCourse == null) {
-        //     return null;
-        // }
-
-        // userCourse.user = model.user;
-        // userCourse.course = model.course;
-
-        // await _repository.UpdateAsync(userCourse);
-
-        // var result = new {
-        // success = true
-        // id = userCourse.Id,
-        // user = userCourse.User,
-        // course = userCourse.Course
-        // };
-
-        // return result;
-        // }
     }
 }
