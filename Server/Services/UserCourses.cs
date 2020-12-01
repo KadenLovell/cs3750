@@ -51,7 +51,7 @@ namespace Server.Services {
             //i need to prevent student from registering again
             //if(userID = )
             int studentID = (int)model.studentId;
-            string courseID = (string)model.courseId;
+            long courseID = (long)model.courseId;
             int creditHours = (int)model.creditHours;
 
             var result2 = await _repository.CheckDuplicateEntry(studentID, courseID);
