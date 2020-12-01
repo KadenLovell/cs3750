@@ -9,13 +9,33 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="user.role">
     <div class=col-md-6 *ngFor="let x of rows">
       <div (click)="loadCourse(x.id)" class="card mt-2 mr-2">
         <h5 class="card-header">Course: {{x.name}}, Code: {{x.code}}, Department: {{x.department}}</h5>
         <div class="card-body">
           Instructor: {{x.instructor}} <br />
           Credit hours: {{x.creditHours}}
+        </div>
+      </div>
+    </div>
+    <div class=col-md-12>
+      <div class="card mt-2 mr-2">
+        <h5 class="card-header">Calendar</h5>
+        <div class="card-body">
+          <calendar-component></calendar-component>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!user.role">
+    <div class=col-md-6 *ngFor="let x of rows">
+      <div (click)="loadCourse(x.course.id)" class="card mt-2 mr-2">
+        <h5 class="card-header">Course: {{x.course.name}}, Code: {{x.course.code}}, Department: {{x.course.department}}</h5>
+        <div class="card-body">
+          Instructor: {{x.course.instructor}} <br />
+          Credit hours: {{x.course.creditHours}}
         </div>
       </div>
     </div>

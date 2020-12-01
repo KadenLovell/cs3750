@@ -1,8 +1,9 @@
-import { Inject, ViewEncapsulation, Component, ChangeDetectionStrategy, ViewChild, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Inject, ViewEncapsulation, Component, ChangeDetectionStrategy, ViewChild, OnDestroy, OnInit, ChangeDetectorRef, TemplateRef } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
+import { startOfDay, endOfDay, isSameDay, isSameMonth } from 'date-fns';
 import { Subject } from 'rxjs';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
+import { RRule } from 'rrule';
+import { CalendarEvent, CalendarWeekViewBeforeRenderEvent, CalendarMonthViewBeforeRenderEvent, CalendarDayViewBeforeRenderEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '../../base/base.component';
 import { CalendarService } from './calendar.service'
@@ -11,6 +12,18 @@ export interface DialogData {
   action: string;
   event: CalendarEvent;
 }
+
+interface RecurringEvent {
+  title: string;
+  color: any;
+  rrule?: {
+    freq: any;
+    bymonth?: number;
+    bymonthday?: number;
+    byweekday?: any;
+  };
+}
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -43,7 +56,7 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
   CalendarView = CalendarView;
 
   viewDate: Date = new Date();
-  constructor(private readonly _calendarService: CalendarService, @Inject(DOCUMENT) private document, private modal: MatDialog) {
+  constructor(private cdr: ChangeDetectorRef, private readonly _calendarService: CalendarService, @Inject(DOCUMENT) private document, private modal: MatDialog) {
     super();
   }
 
@@ -53,8 +66,8 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
       this.courses = response;
       
       for (var i = 0; i < this.courses.length; i++) {
-        this.addEvent(this.courses[i]);
-        console.log(this.courses[i]);
+        // this.addEvent(this.courses[i]);
+        this.updateCalendarEvents(this.courses[i]);
       }
     });
   }
@@ -82,47 +95,18 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
   ];
 
   refresh: Subject<any> = new Subject();
-   events: CalendarEvent[] = [];
-  //     start: subDays(startOfDay(new Date()), 1),
-  //     end: addDays(new Date(), 1),
-  //     title: 'A 3 day event',
-  //     color: colors.red,
-  //     actions: this.actions,
-  //     allDay: true,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-  //   },
-  //   {
-  //     start: startOfDay(new Date()),
-  //     title: 'An event with no end date',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //   },
-  //   {
-  //     start: subDays(endOfMonth(new Date()), 3),
-  //     end: addDays(endOfMonth(new Date()), 3),
-  //     title: 'A long event that spans 2 months',
-  //     color: colors.blue,
-  //     allDay: true,
-  //   },
-  //   {
-  //     start: addHours(startOfDay(new Date()), 2),
-  //     end: addHours(new Date(), 2),
-  //     title: 'A draggable and resizable event',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-
+  events: CalendarEvent[] = [];
+  recurringEvents: RecurringEvent[] = [
+    {
+      title: 'Recurs weekly on mondays',
+      color: colors.red,
+      rrule: {
+        freq: RRule.WEEKLY,
+        byweekday: [RRule.MO],
+      },
+    },
+  ];
   activeDayIsOpen: boolean = true;
-
-  // constructor(private modal: NgbModal) { }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -178,6 +162,29 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
         },
       },
     ];
+  }
+
+  updateCalendarEvents(course): void {{
+      this.recurringEvents.forEach((event) => {
+        var endDate = new Date(course.startDate);
+        endDate.setMonth(endDate.getMonth() + 4);
+        const rule: RRule = new RRule({
+          ...event.rrule,
+          dtstart: startOfDay(new Date(course.startDate)),
+          until: endOfDay(endDate)
+        });
+        const { title, color } = event;
+
+        rule.all().forEach((date) => {
+          this.events.push({
+            title,
+            color,
+            start: startOfDay(new Date(date)),
+          });
+        });
+      });
+      this.cdr.detectChanges();
+    }
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {

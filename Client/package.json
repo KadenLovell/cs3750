@@ -28,6 +28,7 @@
     "flatpickr": "^4.6.6",
     "jquery": "^3.5.1",
     "particles.js": "^2.0.0",
+    "rrule": "^2.6.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

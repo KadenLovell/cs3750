@@ -59,7 +59,7 @@
 
                     <div class="form-group col-md-3">
                         <label for="capacity">Capacity: </label>
-                        <input #capacity="ngModel" type="number" id="capacity" name="capacity" required [(ngModel)]="model.capacity">
+                        <input #capacity="ngModel" type="number" class="form-control" id="capacity" name="capacity" required [(ngModel)]="model.capacity">
                         <small class="text-danger form-text" *ngIf="(capacity.dirty || capacity.touched) && capacity.errors && capacity.errors.required">
                             Capactiy is required.
                         </small>
@@ -157,5 +157,5 @@
                 <button type="submit" class="btn btn-primary" style="float:right;">Add</button>
             </form>
         </div>
-t    </div>
+    </div>
 </ng-template>

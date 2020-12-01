@@ -12,7 +12,8 @@ namespace Server.Persistence {
                 await repository
                     .AsQueryable()
                     .OfType<UserCourses>()
-                    .Where(x => x.Id == studentId)
+                    .Where(x => x.UserID == studentId)
+                    .Include(x => x.Course)
                     .ToListAsync();
 
             return result;
@@ -23,12 +24,12 @@ namespace Server.Persistence {
                 await repository
                     .AsQueryable()
                     .OfType<UserCourses>()
+                    .Include(x => x.Course)
                     .SingleOrDefaultAsync(x => x.Id == studentId);
 
             return result;
         }
 
-        //searching based on email
         public static async Task<UserCourses> GetUserByEmailAsync(this IRepository<UserCourses> repository, long studentId) {
             var result =
                 await repository
@@ -39,7 +40,7 @@ namespace Server.Persistence {
             return result;
         }
 
-        public static async Task<UserCourses> CheckDuplicateEntry(this IRepository<UserCourses> repository, long studentId, string courseId) {
+        public static async Task<UserCourses> CheckDuplicateEntry(this IRepository<UserCourses> repository, long studentId, long courseId) {
             var result =
                 await repository
                     .AsQueryable()
@@ -47,19 +48,6 @@ namespace Server.Persistence {
                     .SingleOrDefaultAsync(x => x.UserID == studentId && x.CourseID == courseId);
 
             return result;
-
         }
-
-
-
-        // public static async Task<bool> UserExistsByUsernameOrEmail(this IRepository<User> repository, string username, string email) {
-        //     var result =
-        //         await repository
-        //             .AsQueryable()
-        //             .OfType<User>()
-        //             .AnyAsync(x => x.Username == username || x.Email.ToLower() == email.ToLower());
-
-        //     return result;
-        // }
     }
 }
