@@ -12,7 +12,7 @@ namespace Server.Models {
         public string Instructor { get; set; }
         public string Description { get; set; }
         public string Department { get; set; }
-        public string CreditHours { get; set; }
+        public int CreditHours { get; set; }
         public string Location { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? StartTime { get; set; }

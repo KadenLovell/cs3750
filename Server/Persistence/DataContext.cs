@@ -9,6 +9,7 @@ namespace Server.Persistence {
         public DbSet<Course> Course { get; set; }
         public DbSet<Assignment> Assignment { get; set; }
         public DbSet<UserCourses> UserCourses { get; set; }
+        public DbSet<UserAssignment> UserAssignments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.Entity<Course>()
                 .HasMany(x => x.Assignments);

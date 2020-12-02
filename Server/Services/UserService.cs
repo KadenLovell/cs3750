@@ -87,6 +87,7 @@ namespace Server.Services {
                 Password = model.password,
                 CreatedDate = DateTime.Now,
                 ModifiedDate = null,
+                Fees = 0
             };
 
             await _repository.AddAsync(user);
@@ -101,6 +102,7 @@ namespace Server.Services {
                     firstname = user.FirstName,
                     lastname = user.LastName,
                     dateOfBirth = user.DateOfBirth,
+                    Fees = 0
                 }
             };
 

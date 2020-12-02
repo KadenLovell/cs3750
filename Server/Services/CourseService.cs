@@ -175,9 +175,9 @@ namespace Server.Services {
                 course.Department = model.department;
                 course.CreditHours = model.creditHours;
                 course.Location = model.location;
-                course.StartDate = DateTime.Parse( (string) model.startDate );
-                course.StartTime = DateTime.Parse( (string) model.startTime );
-                course.EndTime = DateTime.Parse( (string) model.endTime );
+                course.StartDate = DateTime.Parse((string) model.startDate);
+                course.StartTime = DateTime.Parse((string) model.startTime);
+                course.EndTime = DateTime.Parse((string) model.endTime);
                 course.Capacity = model.capacity;
                 course.Monday = model.monday;
                 course.Tuesday = model.tuesday;
@@ -196,9 +196,9 @@ namespace Server.Services {
                     department = course.Department,
                     creditHours = course.CreditHours,
                     location = course.Location,
-                    startDate = course.StartDate?.ToString( "d" ),
-                    startTime = course.StartTime?.ToString( "d" ),
-                    endTime = course.EndTime?.ToString( "d" ),
+                    startDate = course.StartDate?.ToString("d"),
+                    startTime = course.StartTime?.ToString("d"),
+                    endTime = course.EndTime?.ToString("d"),
                     capacity = course.Capacity,
                     monday = course.Monday,
                     tuesday = course.Tuesday,

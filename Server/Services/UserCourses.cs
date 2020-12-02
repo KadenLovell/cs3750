@@ -30,7 +30,7 @@ namespace Server.Services {
                     id = userCourse.Id,
                     courseId = Convert.ToInt64(userCourse.CourseID),
                     userId = userCourse.UserID,
-                    credits = userCourse.CreditHours,
+                    credits = userCourse.Course.CreditHours,
                     course = new {
                         name = userCourse.Course.Name,
                         code = userCourse.Course.Code,
@@ -54,12 +54,8 @@ namespace Server.Services {
         }
 
         public async Task<dynamic> AddUserCourseAsync(dynamic model) {
-            //if (model.studentId != null, model.courseId != null){
-            //i need to prevent student from registering again
-            //if(userID = )
             int studentID = (int)model.studentId;
             long courseID = (long)model.courseId;
-            int creditHours = (int)model.creditHours;
 
             var result2 = await _repository.CheckDuplicateEntry(studentID, courseID);
             if (result2 != null) {
@@ -69,9 +65,8 @@ namespace Server.Services {
             var userCourse = new UserCourses {
                 UserID = model.studentId,
                 CourseID = model.courseId,
-                CreditHours = model.creditHours,
-                CreatedDate = DateTime.Now, // DateTime.Parse((string)model.startTime),
-                ModifiedDate = DateTime.Now // DateTime.Parse((string)model.endTime),
+                CreatedDate = DateTime.Now,
+                ModifiedDate = DateTime.Now
             };
 
             await _repository.AddAsync(userCourse);
@@ -81,8 +76,7 @@ namespace Server.Services {
                 userCourse = new {
                     id = userCourse.Id,
                     user = userCourse.UserID,
-                    course = userCourse.CourseID,
-                    creditHours = userCourse.CreditHours
+                    course = userCourse.CourseID
                 }
             };
 

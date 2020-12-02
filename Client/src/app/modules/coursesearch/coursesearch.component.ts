@@ -62,10 +62,9 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
     })
   }
 
-  register(id, creditHours) {
+  register(id) {
     this.model.courseId = id;
     this.model.studentId = this.user.id;
-    this.model.creditHours = creditHours;
 
     this._courseSearchService.registerUserCourse(this.model).then(response => { // returns a false if registration failed
       //console.log("Logging course register response: " + response.toString());
@@ -89,17 +88,15 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
 
   }
 
-  calculateFees(){
-  let fees = 5600; //temporary until we figure out why this value won't change
+  calculateFees() {
     this._courseSearchService.getUserCourses().then(response => {
-      for (var i = 0; i < response.length; i++) { 
-        if(response[i].userId === this.user.id){ //if the userID matches the currentUser id
-            fees = fees + response[i].credits; //fees is equal to the sum of credit hours * 800
-        } 
+      for (var i = 0; i < response.length; i++) {
+        this.user.fees += 800 * response[i].credits;
+        console.log(800 * response[i].credits);
       }
     });
-    //user service  updates user with fees
-    this.user.fees = fees; //
+    console.log(this.user.fees);
+
     this._courseSearchService.updateFees(this.user).then(response => {
     });
   }
