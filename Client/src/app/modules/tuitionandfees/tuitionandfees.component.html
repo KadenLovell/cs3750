@@ -1,5 +1,6 @@
 <!-- stripe-payment.component.html -->
-<form (ngSubmit)="createStripeToken()" class="checkout">
+
+<form (ngSubmit)="createStripeToken(_totalAmount)" class="checkout">
     <label for="card-info">Card Info</label>
     <div id="form-field">
         <div id="card-info" #cardInfo></div>
@@ -12,3 +13,4 @@
         </mat-error>
     </div>
 </form>
+

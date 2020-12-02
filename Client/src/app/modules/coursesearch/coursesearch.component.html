@@ -161,8 +161,8 @@
       <td>{{x.instructor}}</td>
       <td>{{x.creditHours}}</td>
       <td>
-        <button *ngIf="userCourseIds.includes(x.id, x.creditHours)" class="btn btn-primary" (click)="unregister(x.id, x.creditHours)">Unregister</button>
-        <button *ngIf="!userCourseIds.includes(x.id, x.creditHours)" class="btn btn-primary" (click)="register(x.id, x.creditHours)">Register</button></td>
+        <button *ngIf="userCourseIds.includes(x.id)" class="btn btn-primary" (click)="unregister(x.id)">Unregister</button>
+        <button *ngIf="!userCourseIds.includes(x.id)" class="btn btn-primary" (click)="register(x.id, x.creditHours); calculateFees(x.id, x.creditHours);">Register</button></td>
     </tr>
   </tbody>
 </table>

@@ -41,5 +41,11 @@ namespace Server.Controllers {
             var result = await _userService.UpdateUserAsync(model);
             return Json(result);
         }
+
+        [HttpPost("updatefees")]
+        public async Task<IActionResult> UpdateFees([FromBody] dynamic model) {
+            var result = await _userService.UpdateFees(model);
+            return Json(result);
+        }
     }
 }

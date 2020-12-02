@@ -53,7 +53,7 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
     });
   }
 
-  unregister(id, creditHours) {
+  unregister(id) {
     this.model.userCourseId = id;
     this._courseSearchService.deleteUserCourse(this.model).then(response => {
       if(response.success) {
@@ -86,5 +86,24 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
       }
       this.userCourseIds.push(id);
     });
+
   }
-}
+
+  calculateFees(){
+  let fees = 5600; //temporary until we figure out why this value won't change
+    this._courseSearchService.getUserCourses().then(response => {
+      for (var i = 0; i < response.length; i++) { 
+        if(response[i].userId === this.user.id){ //if the userID matches the currentUser id
+            fees = fees + response[i].credits; //fees is equal to the sum of credit hours * 800
+        } 
+      }
+    });
+    //user service  updates user with fees
+    this.user.fees = fees; //
+    this._courseSearchService.updateFees(this.user).then(response => {
+    });
+  }
+      //when a user registers for a class I want to be able to sum all creditHours that the user has for 
+      //userCourse and add it to the User Model in the database for the fees column
+
+  }

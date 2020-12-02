@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
+import { OnInit, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { TuitionAndFeesService } from './tuitionandfees.service';
+import { User } from "../../shared/user/user";
+import { UserService } from "../../shared/user/user.service";
 
 @Component({
   selector: 'app-stripe-payment',
@@ -8,13 +10,16 @@ import { TuitionAndFeesService } from './tuitionandfees.service';
   styleUrls: ['./tuitionandfees.component.scss'],
   providers: [TuitionAndFeesService]
 })
-export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit {
+export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit {
   @ViewChild('cardInfo') cardInfo: ElementRef;
   _totalAmount: number;
   card: any;
   cardHandler = this.onChange.bind(this);
   cardError: string;
-  constructor(private readonly _tuitionAndFeesService: TuitionAndFeesService, private cd: ChangeDetectorRef, private http: HttpClient) { }
+  get user(): User {
+    return this._userService.user;
+  }
+  constructor(private readonly _tuitionAndFeesService: TuitionAndFeesService, private cd: ChangeDetectorRef, private http: HttpClient, private readonly _userService: UserService) { }
 
   ngOnDestroy() {
     if (this.card) {
@@ -22,6 +27,11 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit {
       this.card.removeEventListener('change', this.cardHandler);
       this.card.destroy();
     }
+  }
+
+  ngOnInit(): void {
+    this._totalAmount = this.user.fees;
+
   }
 
   ngAfterViewInit() {
@@ -59,15 +69,16 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit {
     this.cd.detectChanges();
   }
 
-  async createStripeToken() {
+  async createStripeToken(amount) {
     const { token, error } = await stripe.createToken(this.card);
     if (token) {
       this.onSuccess(token);
-      this.sendPostRequest(token);
+      this.sendPostRequest(token, amount);
     } else {
       this.onError(error);
     }
   }
+
 
   onSuccess(token) {
   }
@@ -78,10 +89,10 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit {
     }
   }
 
-  sendPostRequest(token) {
+  sendPostRequest(token, amount) {
     const body = new HttpParams({
       fromObject: {
-        amount: '200',
+        amount: amount, // amount is equal to amount user chooses
         currency: 'usd',
         source: `${token.id}`,
         description: 'testAPIcall',

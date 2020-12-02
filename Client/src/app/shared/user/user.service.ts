@@ -24,7 +24,8 @@ export class UserService {
                     lastname: activeUser.lastname,
                     email: activeUser.email,
                     role: activeUser.role,
-                    authorized: true
+                    authorized: true,
+                    fees: activeUser.fees
                 }
 
                 this.user = user;
@@ -38,7 +39,8 @@ export class UserService {
                     lastname: null,
                     email: null,
                     role: null,
-                    authorized: false
+                    authorized: false,
+                    fees: null
                 };
                 this.user = user;
 

@@ -6,4 +6,5 @@ export interface User {
     email: string;
     role: string;
     authorized: boolean;
+    fees: number;
 }

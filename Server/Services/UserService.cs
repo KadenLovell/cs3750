@@ -26,7 +26,8 @@ namespace Server.Services {
                 firstname = user.FirstName,
                 lastname = user.LastName,
                 email = user.Email,
-                role = user.Role
+                role = user.Role,
+                fees = user.Fees
             };
 
             return result;
@@ -52,7 +53,8 @@ namespace Server.Services {
                 bio = user.Bio,
                 linkedInUrl = user.LinkedInUrl,
                 githubUrl = user.LinkedInUrl,
-                facebookUrl = user.FacebookUrl
+                facebookUrl = user.FacebookUrl,
+                fees = user.Fees
             };
 
             return result;
@@ -84,7 +86,7 @@ namespace Server.Services {
                 Role = model.role,
                 Password = model.password,
                 CreatedDate = DateTime.Now,
-                ModifiedDate = null
+                ModifiedDate = null,
             };
 
             await _repository.AddAsync(user);
@@ -98,7 +100,7 @@ namespace Server.Services {
                     role = user.Role,
                     firstname = user.FirstName,
                     lastname = user.LastName,
-                    dateOfBirth = user.DateOfBirth
+                    dateOfBirth = user.DateOfBirth,
                 }
             };
 
@@ -128,6 +130,7 @@ namespace Server.Services {
             user.LinkedInUrl = model.linkedInUrl;
             user.GithubUrl = model.githubUrl;
             user.FacebookUrl = model.facebookUrl;
+            user.Fees = model.fees;
 
             await _repository.UpdateAsync(user);
 
@@ -150,7 +153,28 @@ namespace Server.Services {
                 bio = updatedUser.Bio,
                 linkedInUrl = updatedUser.LinkedInUrl,
                 githubUrl = updatedUser.LinkedInUrl,
-                facebookUrl = updatedUser.FacebookUrl
+                facebookUrl = updatedUser.FacebookUrl,
+                fees = updatedUser.Fees
+            };
+
+            return result;
+        }
+
+         public async Task<dynamic> UpdateFees(dynamic model) {
+
+            var user = await _repository.GetUserById((long)model.id);
+
+            if (user == null) {
+                return null;
+            }
+
+            user.Fees = model.fees;
+
+            await _repository.UpdateAsync(user);
+
+            var result = new {
+                id = user.Id,
+                fees = user.Fees
             };
 
             return result;
