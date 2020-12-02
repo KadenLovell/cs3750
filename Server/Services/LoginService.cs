@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -38,9 +39,9 @@ namespace Server.Services {
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
-
             var authProperties = new AuthenticationProperties {
-                IsPersistent = false,
+                IsPersistent = true,
+                ExpiresUtc = DateTime.UtcNow.AddMinutes(360),
                 RedirectUri = "https://localhost:4200/login"
             };
 

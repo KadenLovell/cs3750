@@ -14,8 +14,11 @@
   <div class="card m-2">
     <h5 class="card-header">User Info</h5>
     <div class="card-body">
-      <div class=col-md-3>
-        <img alt="http://i38.photobucket.com/albums/e149/eloginko/hello_zpsc60ffbf3.gif" src="data:image/png;base64,{{model.avatar}}" />
+      <div *ngIf="model.avatar" class=col-md-3>
+        <img src="data:image/png;base64,{{model.avatar}}" />
+      </div>
+      <div *ngIf="!model.avatar" class=col-md-3>
+        <img src="http://i38.photobucket.com/albums/e149/eloginko/hello_zpsc60ffbf3.gif" />
       </div>
       <div class="row">
         <div class="col-md-3">

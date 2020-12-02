@@ -27,7 +27,7 @@ namespace Server {
             })
             .AddCookie(options => {
                 options.Cookie.HttpOnly = false;
-                options.Cookie.SameSite = SameSiteMode.Lax;
+                options.Cookie.SameSite = SameSiteMode.None;
                 options.Cookie.Name = "auth_cookie";
                 options.ExpireTimeSpan = TimeSpan.FromHours(6);
                 options.Events = new CookieAuthenticationEvents {

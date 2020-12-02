@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { startOfDay, endOfDay, isSameDay, isSameMonth } from 'date-fns';
 import { Subject } from 'rxjs';
 import { RRule } from 'rrule';
-import { CalendarEvent, CalendarWeekViewBeforeRenderEvent, CalendarMonthViewBeforeRenderEvent, CalendarDayViewBeforeRenderEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { MatDialog } from '@angular/material/dialog';
 import { BaseComponent } from '../../base/base.component';
 import { CalendarService } from './calendar.service'
@@ -14,6 +14,8 @@ export interface DialogData {
 }
 
 interface RecurringEvent {
+  startDate: Date;
+  endDate: Date;
   title: string;
   color: any;
   rrule?: {
@@ -64,11 +66,10 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
     this.document.body.classList.add(this.darkThemeClass);
     this._calendarService.getCourses().then(response => {
       this.courses = response;
-      
       for (var i = 0; i < this.courses.length; i++) {
-        // this.addEvent(this.courses[i]);
-        this.updateCalendarEvents(this.courses[i]);
-      }
+      this.addRecurringEvent(this.courses[i]);
+    }
+    this.updateCalendarEvents();
     });
   }
 
@@ -76,36 +77,10 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
     this.document.body.classList.remove(this.darkThemeClass);
   }
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
+  actions: CalendarEventAction[] = [];
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[] = [];
-  recurringEvents: RecurringEvent[] = [
-    {
-      title: 'Recurs weekly on mondays',
-      color: colors.red,
-      rrule: {
-        freq: RRule.WEEKLY,
-        byweekday: [RRule.MO],
-      },
-    },
-  ];
+  recurringEvents: RecurringEvent[] = [];
   activeDayIsOpen: boolean = true;
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -147,30 +122,50 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
     });
   }
 
-  addEvent(course): void {
-    this.events = [
-      ...this.events,
+  addRecurringEvent(course): void {
+    var weekdays = [];
+    if(course.monday) {
+      weekdays.push(RRule.MO);
+    }
+
+    if(course.tuesday) {
+      weekdays.push(RRule.TU);
+    }
+    
+    if(course.wednesday) {
+      weekdays.push(RRule.WE);
+    }
+
+    if(course.thursday) {
+      weekdays.push(RRule.TH);
+    }
+
+    if(course.friday) {
+      weekdays.push(RRule.FR);
+    }
+    console.log(course);
+    let color = colors[Math.floor(Math.random() * colors.length)];
+    this.recurringEvents = [ 
+      ...this.recurringEvents, 
       {
-        title: course.name,
-        start: startOfDay(new Date(course.startDate)),
-        end: endOfDay(new Date(course.startDate)),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
+      startDate: new Date(course.startDate),
+      endDate: new Date(course.startDate),
+      title: `${course.name}, start-${new Date(course.startTime).getHours()}:00, end-${new Date(course.endTime).getHours()}:00`,
+      color: color,
+      rrule: {
+        freq: RRule.WEEKLY,
+        byweekday: weekdays,
       },
-    ];
+    }];
   }
 
-  updateCalendarEvents(course): void {{
+  updateCalendarEvents(): void {{
       this.recurringEvents.forEach((event) => {
-        var endDate = new Date(course.startDate);
-        endDate.setMonth(endDate.getMonth() + 4);
+        var startDate = event.startDate;
+        var endDate = event.endDate.setMonth(event.endDate.getMonth() + 4);
         const rule: RRule = new RRule({
           ...event.rrule,
-          dtstart: startOfDay(new Date(course.startDate)),
+          dtstart: startOfDay(startDate),
           until: endOfDay(endDate)
         });
         const { title, color } = event;

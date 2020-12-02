@@ -30,7 +30,6 @@ export class UserService {
 
                 this.user = user;
             }
-
             catch (e) {
                 const user: User = {
                     id: null,
