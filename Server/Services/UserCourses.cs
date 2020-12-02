@@ -30,7 +30,14 @@ namespace Server.Services {
                     id = userCourse.Id,
                     courseId = Convert.ToInt64(userCourse.CourseID),
                     userId = userCourse.UserID,
-                    credits = userCourse.CreditHours
+                    credits = userCourse.CreditHours,
+                    course = new {
+                        name = userCourse.Course.Name,
+                        code = userCourse.Course.Code,
+                        department = userCourse.Course.Department,
+                        instructor = userCourse.Course.Instructor,
+                        creditHours = userCourse.Course.CreditHours
+                    }
                 });
             }
             return result;
