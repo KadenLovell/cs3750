@@ -48,7 +48,7 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit
     this._courseSearchService.updateFees(this.user).then(response => {
     });
   }
-  
+   
 
   ngAfterViewInit() {
     this.initiateCardElement();
@@ -93,6 +93,11 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit
     } else {
       this.onError(error);
     }
+  }
+
+  payDifferentAmount() {
+    var inputValue = (<HTMLInputElement>document.getElementById("amount")).value;
+    this.createStripeToken(inputValue);
   }
 
 

@@ -7,6 +7,14 @@
         <button id="submit-button" type="submit">
             Pay ${{_totalAmount}}
         </button>
+
+        <div class="form-inline">
+            <button id="submit-button2" type="submit" class="form-control" (click)="payDifferentAmount()">
+                Pay
+            </button>
+            <input type="amount" class="form-control" id="amount" placeholder="Other Amount">
+        </div>
+
         <mat-error id="card-errors" role="alert" *ngIf="cardError">
             <mat-icon style="color: #f44336">cancel</mat-icon>
             &nbsp;{{ cardError }}
