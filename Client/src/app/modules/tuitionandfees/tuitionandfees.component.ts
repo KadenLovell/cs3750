@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { OnInit, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { TuitionAndFeesService } from './tuitionandfees.service';
+import { CourseSearchService } from '../coursesearch/coursesearch.service';
 import { User } from "../../shared/user/user";
 import { UserService } from "../../shared/user/user.service";
 
@@ -8,9 +9,10 @@ import { UserService } from "../../shared/user/user.service";
   selector: 'app-stripe-payment',
   templateUrl: './tuitionandfees.component.html',
   styleUrls: ['./tuitionandfees.component.scss'],
-  providers: [TuitionAndFeesService]
+  providers: [TuitionAndFeesService, CourseSearchService]
 })
 export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit {
+  [x: string]: any;
   @ViewChild('cardInfo') cardInfo: ElementRef;
   _totalAmount: number;
   card: any;
@@ -19,7 +21,7 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit
   get user(): User {
     return this._userService.user;
   }
-  constructor(private readonly _tuitionAndFeesService: TuitionAndFeesService, private cd: ChangeDetectorRef, private http: HttpClient, private readonly _userService: UserService) { }
+  constructor(private readonly _tuitionAndFeesService: TuitionAndFeesService, private cd: ChangeDetectorRef, private http: HttpClient, private readonly _userService: UserService, private readonly _courseSearchService: CourseSearchService) { }
 
   ngOnDestroy() {
     if (this.card) {
@@ -30,9 +32,23 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit
   }
 
   ngOnInit(): void {
+    this.calculateFees();
     this._totalAmount = this.user.fees;
-
   }
+
+  calculateFees(){
+    this._courseSearchService.getUserCourses().then(response => {
+      for (var i = 0; i < response.length; i++) {
+        this.user.fees += 800 * response[i].credits;
+        console.log(800 * response[i].credits);
+      }
+    });
+    console.log(this.user.fees);
+
+    this._courseSearchService.updateFees(this.user).then(response => {
+    });
+  }
+  
 
   ngAfterViewInit() {
     this.initiateCardElement();
