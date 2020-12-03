@@ -57,7 +57,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
           email: this.response.user.email,
           role: this.response.user.role,
           authorized: true,
-          fees: this.response.user.fees
+          fees: this.response.user.fees,
+          paid: this.response.user.paid
         };
 
         this._userService.setUser(user);

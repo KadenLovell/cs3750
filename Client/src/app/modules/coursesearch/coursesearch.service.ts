@@ -30,6 +30,12 @@ export class CourseSearchService {
         return await this._httpService.post(url, model);
     }
 
+    async updatePaid(model: any): Promise<any> {
+        const url = `/api/user/updatepaid`;
+
+        return await this._httpService.post(url, model);
+    }
+
     async getUserCourses(): Promise<any> {
         const url = `/api/usercourses/list`;
 

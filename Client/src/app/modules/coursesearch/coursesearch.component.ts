@@ -88,18 +88,6 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
 
   }
 
-  calculateFees() {
-    this._courseSearchService.getUserCourses().then(response => {
-      for (var i = 0; i < response.length; i++) {
-        this.user.fees += 800 * response[i].credits;
-        console.log(800 * response[i].credits);
-      }
-    });
-    console.log(this.user.fees);
-
-    this._courseSearchService.updateFees(this.user).then(response => {
-    });
-  }
       //when a user registers for a class I want to be able to sum all creditHours that the user has for 
       //userCourse and add it to the User Model in the database for the fees column
 

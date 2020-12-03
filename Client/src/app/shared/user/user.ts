@@ -7,4 +7,5 @@ export interface User {
     role: string;
     authorized: boolean;
     fees: number;
+    paid: boolean;
 }

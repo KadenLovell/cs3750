@@ -24,5 +24,7 @@ namespace Server.Models {
         public bool Role { get; set; }
         public byte[] Avatar { get; set; }
         public int Fees { get; set; }
+        public bool Paid { get; set; }
+
     }
 }

@@ -181,5 +181,25 @@ namespace Server.Services {
 
             return result;
         }
+
+        public async Task<dynamic> UpdatePaid(dynamic model) {
+
+            var user = await _repository.GetUserById((long)model.id);
+
+            if (user == null) {
+                return null;
+            }
+
+            user.Paid = model.paid;
+
+            await _repository.UpdateAsync(user);
+
+            var result = new {
+                id = user.Id,
+                fees = user.Paid
+            };
+
+            return result;
+        }
     }
 }

@@ -33,20 +33,23 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit
 
   ngOnInit(): void {
     this.calculateFees();
-    this._totalAmount = this.user.fees;
   }
 
   calculateFees(){
+    console.log("this.user.paid = " + this.user.paid)
+    if (this.user.paid == false){
     this._courseSearchService.getUserCourses().then(response => {
+      this.user.fees = 0;
       for (var i = 0; i < response.length; i++) {
         this.user.fees += 800 * response[i].credits;
         console.log(800 * response[i].credits);
       }
+      this._courseSearchService.updateFees(this.user).then(response => {
+      });
+      this._totalAmount = this.user.fees;
     });
     console.log(this.user.fees);
-
-    this._courseSearchService.updateFees(this.user).then(response => {
-    });
+  }
   }
    
 
@@ -88,7 +91,8 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit
   async createStripeToken(amount) {
     const { token, error } = await stripe.createToken(this.card);
     if (token) {
-      this.onSuccess(token);
+      console.log("this is the amount = " + amount + " create");
+      this.onSuccess(token, amount);
       this.sendPostRequest(token, amount);
     } else {
       this.onError(error);
@@ -98,10 +102,30 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit
   payDifferentAmount() {
     var inputValue = (<HTMLInputElement>document.getElementById("amount")).value;
     this.createStripeToken(inputValue);
+    console.log("this is the amount = " + inputValue + " in Pay different");
+
   }
 
 
-  onSuccess(token) {
+  onSuccess(token, amount) {
+    if (this.user.paid == false){
+    console.log("this is the amount = " + amount);
+    if(amount < this.user.fees){
+      this.user.fees = this.user.fees - amount;
+    }
+    else{
+      this.user.fees = 0;
+      this.user.paid = true;
+    }
+    this._courseSearchService.updateFees(this.user).then(response => {
+      this._totalAmount = this.user.fees;
+      if(this._totalAmount == 0){
+        this.user.paid = true;
+      }
+      this._courseSearchService.updatePaid(this.user).then(response => {
+      });
+    });
+  }
   }
 
   onError(error) {
