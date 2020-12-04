@@ -58,34 +58,32 @@ export class CourseSearchComponent extends BaseComponent implements OnInit {
     this._courseSearchService.deleteUserCourse(this.model).then(response => {
       if(response.success) {
         this.userCourseIds.splice(this.userCourseIds.indexOf(id), 1);
+        this.deductFees(response.userCourse.creditHours);
+
       }
-    })
+    });
   }
 
   register(id) {
     this.model.courseId = id;
     this.model.studentId = this.user.id;
-
-    this._courseSearchService.registerUserCourse(this.model).then(response => { // returns a false if registration failed
-      //console.log("Logging course register response: " + response.toString());
-      if (response == false) {
-        // var x = document.getElementById("toast");
-        // document.getElementById("toast-header").innerHTML = "Operation failed";
-        // document.getElementById("toast-body").innerHTML = "Could not add registration for class";
-        // x.className = "show";
-        // setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-
-      }
-      else {        
-        // var x = document.getElementById("toast");
-        // document.getElementById("toast-header").innerHTML = "Operation success";
-        // document.getElementById("toast-body").innerHTML = "Added registration for class";
-        // x.className = "show";
-        // setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    this.model.id = this.user.id;
+    this._courseSearchService.registerUserCourse(this.model).then(response => { 
+      if(response.success){
+        this.addFees(response.userCourse.creditHours);
       }
       this.userCourseIds.push(id);
     });
+  }
 
+  addFees(creditHours){
+    this.user.fees += creditHours * 800;
+    this._courseSearchService.updateFees(this.user).then(response => {});
+  }
+
+  deductFees(creditHours){
+    this.user.fees -= creditHours * 800;
+    this._courseSearchService.updateFees(this.user).then(response => {});
   }
 
       //when a user registers for a class I want to be able to sum all creditHours that the user has for 
