@@ -1,30 +1,23 @@
 <!-- <mat-sidenav-container> -->
 <ng-container>
-
-  <!-- <div class="row" *ngIf="!user.role">
-    <div class=col-md-6 *ngFor="let x of rows">
-      <div (click)="loadAssignment(x.assignment.id); loadCourse(x.id);" class="card mt-2 mr-3" style="width:18rem; height:80vh; float: right;">
-        <h5 class="card-header">TODO:</h5>
-        <div class="card-body">
-          Course: {{x.course.code}} <br />
-          Assignment: {{x.assignment.title}} <br />
-          Due: {{x.assignment.dueDate}}
-        </div>
-      </div>
-    </div>
-  </div> -->
+  
   <div class="card mt-2 mr-3" style="width:18rem; height:80vh; float: right;">
     <h5 class="card-header">TODO:</h5>
-    <div class="card-body">
-      <a class="notification-link" routerLink="/coursesearch">CLASS A ASSIGNMENT 1</a>
-      <br />
-      <a class="notification-link" routerLink="/coursesearch">CLASS B ASSIGNMENT 1</a>
-    </div>
+      <div class="card-body">
+          <table class="table table-hover">
+              <tbody>
+                  <tr (click)="loadCourse(x[0].courseId)" *ngFor="let x of rows2">
+                      <td>{{x[0].title}}</td>
+                      <td>{{x[0].dueDate}}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
   </div>
 
   <div class="row" *ngIf="user.role">
     <div class=col-md-6 *ngFor="let x of rows">
-      <div (click)="loadCourse(x.id)" class="card mt-2 mr-2">
+      <div (click)="loadCourse(x.courseId)" class="card mt-2 mr-2">
         <h5 class="card-header">Course: {{x.name}}, Code: {{x.code}}, Department: {{x.department}}</h5>
         <div class="card-body">
           Instructor: {{x.instructor}} <br />
@@ -44,7 +37,7 @@
 
   <div class="row" *ngIf="!user.role">
     <div class=col-md-6 *ngFor="let x of rows">
-      <div (click)="loadCourse(x.course.id)" class="card mt-2 mr-2">
+      <div (click)="loadCourse(x.courseId)" class="card mt-2 mr-2">
         <h5 class="card-header">Course: {{x.course.name}}, Code: {{x.course.code}}, Department: {{x.course.department}}</h5>
         <div class="card-body">
           Instructor: {{x.course.instructor}} <br />
