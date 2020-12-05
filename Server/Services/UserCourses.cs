@@ -70,23 +70,27 @@ namespace Server.Services {
             };
 
             await _repository.AddAsync(userCourse);
-
+            var userCourse2 = await _repository.GetUserCourseById(userCourse.Id);
             var result = new {
                 success = true,
                 userCourse = new {
                     id = userCourse.Id,
                     user = userCourse.UserID,
-                    course = userCourse.CourseID
+                    course = userCourse.CourseID,
+                    creditHours = userCourse2.Course.CreditHours
                 }
             };
 
             return result;
         }
 
-        public async Task<dynamic> DeleteUserCourseAsync(long id) {
+        public async Task<dynamic> DeleteUserCourseAsync(long courseId) {
+            var studentId = _httpContextAccessor.HttpContext.User.Identity.Id();
+            int creditHours = 0;
             dynamic result;
             try {
-                var userCourse = await _repository.GetUserCourseById(id);
+                var userCourse = await _repository.GetUserCourseByStudentIdAndCourseId(studentId, courseId);
+                creditHours = userCourse.Course.CreditHours;
                 await _repository.DeleteAsync(userCourse);
             } catch {
                 result = new {
@@ -94,7 +98,10 @@ namespace Server.Services {
                 };
             }
             result = new {
-                success = true
+                success = true,
+                userCourse = new {
+                    creditHours
+                }
             };
             return result;
         }

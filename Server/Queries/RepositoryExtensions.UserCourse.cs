@@ -30,6 +30,17 @@ namespace Server.Persistence {
             return result;
         }
 
+        public static async Task<UserCourses> GetUserCourseByStudentIdAndCourseId(this IRepository<UserCourses> repository, long studentId, long courseId) {
+            var result =
+                await repository
+                    .AsQueryable()
+                    .OfType<UserCourses>()
+                    .Include(x => x.Course)
+                    .SingleOrDefaultAsync(x => x.UserID == studentId && x.CourseID == courseId);
+
+            return result;
+        }
+
         public static async Task<UserCourses> GetUserByEmailAsync(this IRepository<UserCourses> repository, long studentId) {
             var result =
                 await repository

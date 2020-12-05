@@ -9,6 +9,7 @@ import { BaseComponent } from '../../base/base.component';
 // shared
 import { User } from "../../shared/user/user";
 import { UserService } from "../../shared/user/user.service";
+//import { CourseService } from "../course/course.service";
 
 @Component({
   selector: 'app-home',
@@ -38,7 +39,10 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private readonly router: Router,
     private readonly _homeService: HomeService,
     private breakpointObserver: BreakpointObserver,
-    private readonly _userService: UserService) {
+    private readonly _userService: UserService,
+    //private readonly _courseService: CourseService
+    ) 
+    {
     super();
   }
 
@@ -54,6 +58,9 @@ export class HomeComponent extends BaseComponent implements OnInit {
         this.rows = response;
         console.log(this.rows);
       });
+      // this._courseService.getAssignments().then(response =>{ //get student assignments
+      //   this.rows = response;
+      // });
     }
     this.view = 1;
     this.model = {};
@@ -65,5 +72,9 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   loadCourse(courseId) {
     this.router.navigate(['course'], { state: { courseId: courseId }, relativeTo: this.route.parent });
+  }
+
+  loadAssignment(assignmentId) {
+    this.router.navigate(['assignment'], { state: { assignmentId: assignmentId }, relativeTo: this.route.parent });
   }
 }

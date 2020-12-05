@@ -1,18 +1,19 @@
 <!-- stripe-payment.component.html -->
 
-<form (ngSubmit)="createStripeToken(_totalAmount)" class="checkout">
+<form (ngSubmit)="createStripeToken()" class="checkout">
     <label for="card-info">Card Info</label>
     <div id="form-field">
         <div id="card-info" #cardInfo></div>
-        <button id="submit-button" type="submit">
-            Pay ${{_totalAmount}}
-        </button>
+        <label>
+            Amount Due {{_totalAmount}}
+        </label>
 
         <div class="form-inline">
-            <button id="submit-button2" type="submit" class="form-control" (click)="payDifferentAmount()">
+            <button id="submit-button" type="submit" class="form-control" [disabled]="_totalAmount<=0">
                 Pay
             </button>
-            <input type="amount" class="form-control" id="amount" placeholder="Other Amount">
+            <input class="form-check-input" #amount="ngModel" id="amount" name="amount" type="text" [(ngModel)]="model.amount">
+
         </div>
 
         <mat-error id="card-errors" role="alert" *ngIf="cardError">

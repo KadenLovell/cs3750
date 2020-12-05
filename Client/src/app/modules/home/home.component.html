@@ -1,5 +1,18 @@
 <!-- <mat-sidenav-container> -->
 <ng-container>
+
+  <!-- <div class="row" *ngIf="!user.role">
+    <div class=col-md-6 *ngFor="let x of rows">
+      <div (click)="loadAssignment(x.assignment.id); loadCourse(x.id);" class="card mt-2 mr-3" style="width:18rem; height:80vh; float: right;">
+        <h5 class="card-header">TODO:</h5>
+        <div class="card-body">
+          Course: {{x.course.code}} <br />
+          Assignment: {{x.assignment.title}} <br />
+          Due: {{x.assignment.dueDate}}
+        </div>
+      </div>
+    </div>
+  </div> -->
   <div class="card mt-2 mr-3" style="width:18rem; height:80vh; float: right;">
     <h5 class="card-header">TODO:</h5>
     <div class="card-body">
