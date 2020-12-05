@@ -25,7 +25,7 @@ namespace Server.Persistence {
                     .AsQueryable()
                     .OfType<UserCourses>()
                     .Include(x => x.Course)
-                    .SingleOrDefaultAsync(x => x.UserID == studentId);
+                    .SingleOrDefaultAsync(x => x.Id == studentId);
 
             return result;
         }
