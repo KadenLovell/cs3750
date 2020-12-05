@@ -91,6 +91,10 @@
                                 <td>{{x.maxPoints}}</td>
                                 <td *ngIf="x.submissionType === 0">Text</td>
                                 <td *ngIf="x.submissionType === 1">File</td>
+                                <td>
+                                    <input id="fileInput" type="file" style="display:none;" />
+                                    <input type="button" class="btn btn-secondary" value="Submit" (click)="uploadFile(x.id)" />
+                                </td>
                             </tr>
                         </tbody>
                     </table>

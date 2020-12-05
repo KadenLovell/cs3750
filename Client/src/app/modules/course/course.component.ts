@@ -55,4 +55,38 @@ export class CourseComponent extends BaseComponent implements OnInit {
       this.rows = response;
     });
   }
+
+  
+  uploadFile(id) {
+    this.model.assignmentId = id;
+    this.model.userId = this.user.id;
+    //console.log(this.model);  // log to show we're getting the userId and assignmentId correctly
+    var x = document.getElementById('fileInput');
+    x.click();
+
+    document.getElementById("fileInput").onchange= function(e: Event) {
+      let file = (<HTMLInputElement>e.target).files[0];
+      // this.model.fileHeader = file;
+
+      const reader = new FileReader()
+      reader.readAsDataURL(file);
+
+      // dch
+      // var self = this; and using self to access the context didn't work for me
+      // nor did trying to bind the onload function to this context
+
+      var fileData;
+      reader.onload = () => {
+        console.log(file);
+        console.log(reader.result.toString());
+        //fileData = reader.result.toString();
+      };
+      //this.model.fileData = fileData;
+    }
+  }
+
+  foo() {
+    console.log('hello world');
+  }
+
 }
