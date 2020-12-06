@@ -26,8 +26,9 @@ namespace Server.Services {
                 CourseId = model.courseId,
                 UserId = model.userId,
                 AssignmentId = model.assignmentId,
-                FileContent = model.fileContent,
-                TextContent = model.textContent
+                FileContent = model.content,
+                TextContent = model.textContent,
+                ContentType = model.contentType
             };
 
             await _repository.AddAsync(userAssignment);
