@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { BaseComponent } from '../../base/base.component';
 import { CourseService } from "../course/course.service";
 
@@ -45,6 +44,7 @@ export class CourseComponent extends BaseComponent implements OnInit {
   }
 
   addAssignment() {
+    this.model.courseId = window.history.state.courseId;
     this._courseService.addAssignment(this.model).then(response => {
       this.getAssignments();
     })
@@ -60,11 +60,10 @@ export class CourseComponent extends BaseComponent implements OnInit {
   uploadFile(id) {
     this.model.assignmentId = id;
     this.model.userId = this.user.id;
-    //console.log(this.model);  // log to show we're getting the userId and assignmentId correctly
     var x = document.getElementById('fileInput');
     x.click();
 
-    document.getElementById("fileInput").onchange= function(e: Event) {
+    document.getElementById("fileInput").onchange = function(e: Event) {
       let file = (<HTMLInputElement>e.target).files[0];
       // this.model.fileHeader = file;
 
@@ -77,16 +76,9 @@ export class CourseComponent extends BaseComponent implements OnInit {
 
       var fileData;
       reader.onload = () => {
-        console.log(file);
-        console.log(reader.result.toString());
         //fileData = reader.result.toString();
       };
       //this.model.fileData = fileData;
     }
   }
-
-  foo() {
-    console.log('hello world');
-  }
-
 }

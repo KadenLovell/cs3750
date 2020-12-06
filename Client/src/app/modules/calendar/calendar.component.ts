@@ -66,9 +66,12 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
     this.document.body.classList.add(this.darkThemeClass);
     this._calendarService.getCourses().then(response => {
       this.courses = response;
-      for (var i = 0; i < this.courses.length; i++) {
-      this.addRecurringEvent(this.courses[i]);
+      if(this.courses) {
+        for (var i = 0; i < this.courses.length; i++) {
+        this.addRecurringEvent(this.courses[i]);
+      }
     }
+    
     this.updateCalendarEvents();
     });
   }
@@ -143,7 +146,7 @@ export class CalendarComponent extends BaseComponent implements OnInit, OnDestro
     if(course.friday) {
       weekdays.push(RRule.FR);
     }
-    console.log(course);
+
     let color = colors[Math.floor(Math.random() * colors.length)];
     this.recurringEvents = [ 
       ...this.recurringEvents, 
