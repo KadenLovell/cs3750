@@ -1,0 +1,43 @@
+<ng-container>
+    <div class="row">
+        <div *ngIf="user.role" class="col-md-6">
+            <div *ngIf="user.role" class="card mt-2 ml-2">
+                <h5 class="card-header">Add Assignment</h5>
+            </div>
+        </div>
+
+        <div class=col-md-6>
+            <div class="card mt-2 mr-2">
+                <h5 class="card-header">Assignment List</h5>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Due Date</th>
+                                <th>Due Time</th>
+                                <th>Max Points</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let x of rows">
+                                <td>{{x.id}}</td>
+                                <td>{{x.title}}</td>
+                                <td>{{x.dueDate}}</td>
+                                <td>{{x.dueTime}}</td>
+                                <td>{{x.maxPoints}}</td>
+                                <td *ngIf="x.submissionType === 0">Text</td>
+                                <td *ngIf="x.submissionType === 1">File</td>
+                                <td>
+                                    <input type="file" name="fileContent" (change)="submitAssignment($event, x)" class="form-control-file" id="fileContent">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
