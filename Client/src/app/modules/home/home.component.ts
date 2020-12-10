@@ -10,12 +10,13 @@ import { BaseComponent } from '../../base/base.component';
 import { User } from "../../shared/user/user";
 import { UserService } from "../../shared/user/user.service";
 import { CourseService } from "../course/course.service";
+import { CourseSearchService } from "../coursesearch/coursesearch.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [HomeService, CourseService]
+  providers: [HomeService, CourseService, CourseSearchService]
 })
 export class HomeComponent extends BaseComponent implements OnInit {
   model: any;
@@ -42,7 +43,11 @@ export class HomeComponent extends BaseComponent implements OnInit {
     private readonly _homeService: HomeService,
     private breakpointObserver: BreakpointObserver,
     private readonly _userService: UserService,
-    private readonly _courseService: CourseService) {
+    private readonly _courseService: CourseService,
+    private readonly _courseSearchService: CourseSearchService
+
+    ) 
+    {
     super();
   }
 
@@ -52,10 +57,12 @@ export class HomeComponent extends BaseComponent implements OnInit {
     if (this.user && this.user.role) {
       this._homeService.getInstructorCourses(this.user.id).then(response => {
         this.rows = response;
+        //console.log(this.rows);
       });
     } else if(this.user && !this.user.role) {
       this._homeService.getStudentCourses().then(response => {
         this.rows = response;
+        console.log(this.rows);
           for (var i = 0; i < response.length; i++) {
             this.userCourseIds.push(response[i].courseId);
           }
@@ -87,5 +94,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
       });
     }
     this.rows2 = assignmentList;
+    //console.log(this.rows2);
   }
 }

@@ -21,10 +21,4 @@ export class CourseService {
 
         return await this._httpService.get(url);
     }
-
-    async addUserAssignment(model: any): Promise<any> {
-        const url = `/api/userAssignment/add`;
-
-        return await this._httpService.post(url, model);
-    }
 }

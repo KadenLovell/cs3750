@@ -13,6 +13,6 @@ namespace Server.Models {
         public DateTime? ModifiedDate { get; set; }
         public Assignment Assignment { get; set; }
         public User User { get; set; }
-        public Course Course { get; set; }
+        public Course? Course { get; set; }
     }
 }

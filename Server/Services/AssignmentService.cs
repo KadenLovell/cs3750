@@ -63,8 +63,7 @@ namespace Server.Services {
                 DueTime = DateTime.Parse((string)model.dueTime).TimeOfDay,
                 MaxPoints = model.maxPoints,
                 AssignmentType = model.submissionType,
-                CourseId = model.courseId,
-                Grade = null,
+                CourseId = model.courseId
             };
 
             await _repository.AddAsync(assignment);
@@ -79,8 +78,7 @@ namespace Server.Services {
                     dueTime = assignment.DueTime,
                     maxPoints = assignment.MaxPoints,
                     submissionType = assignment.AssignmentType,
-                    courseId = assignment.CourseId,
-                    grade = assignment.Grade
+                    courseId = assignment.CourseId
                 }
             };
 

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 import { BaseComponent } from '../../base/base.component';
 import { CourseService } from "../course/course.service";
 
@@ -18,9 +19,6 @@ export class CourseComponent extends BaseComponent implements OnInit {
   rows: any;
   errors: any;
   view: any;
-
-  @ViewChild('fileContent')
-  fileContent: ElementRef;
 
   get user(): User {
     return this._userService.user;
@@ -47,7 +45,6 @@ export class CourseComponent extends BaseComponent implements OnInit {
   }
 
   addAssignment() {
-    this.model.courseId = window.history.state.courseId;
     this._courseService.addAssignment(this.model).then(response => {
       this.getAssignments();
     })
@@ -59,21 +56,37 @@ export class CourseComponent extends BaseComponent implements OnInit {
     });
   }
 
-  submitAssignment(event, object) {
-    this.model.assignmentId = object.id;
+  
+  uploadFile(id) {
+    this.model.assignmentId = id;
     this.model.userId = this.user.id;
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.model.contentType = reader.result.toString().split(',')[0];
-      this.model.content = reader.result.toString().split(',')[1];
-      console.log(this.model);
-      this._courseService.addUserAssignment(this.model).then(x => {
-        this.model.content = null;
-      });
-    };
-    
-    this.getAssignments();
+    //console.log(this.model);  // log to show we're getting the userId and assignmentId correctly
+    var x = document.getElementById('fileInput');
+    x.click();
+
+    document.getElementById("fileInput").onchange= function(e: Event) {
+      let file = (<HTMLInputElement>e.target).files[0];
+      // this.model.fileHeader = file;
+
+      const reader = new FileReader()
+      reader.readAsDataURL(file);
+
+      // dch
+      // var self = this; and using self to access the context didn't work for me
+      // nor did trying to bind the onload function to this context
+
+      var fileData;
+      reader.onload = () => {
+        console.log(file);
+        console.log(reader.result.toString());
+        //fileData = reader.result.toString();
+      };
+      //this.model.fileData = fileData;
+    }
   }
+
+  foo() {
+    console.log('hello world');
+  }
+
 }

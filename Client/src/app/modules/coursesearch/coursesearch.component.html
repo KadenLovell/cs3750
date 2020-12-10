@@ -47,6 +47,7 @@
           </select>
         </div>
 
+        <!--======================================-->
         <div class="form-group col-md-3">
           <label for="startTime">Start Time: </label>
           <select #startTime="ngModel" class="form-control" id="startTime" name="startTime" [(ngModel)]="model.startTime" required>
@@ -132,6 +133,7 @@
           <input class="form-check-input" #friday="ngModel" id="friday" name="friday" type="checkbox" [(ngModel)]="model.friday">
           <label class="form-check-label" for="friday">Friday</label>
         </div>
+        <!--======================================-->
 
       </div>
       <button type="submit" class="btn btn-primary" style="float:right;">Search</button>
@@ -158,7 +160,7 @@
       <td>{{x.departmnet}}</td>
       <td>{{x.instructor}}</td>
       <td>{{x.creditHours}}</td>
-      <td *ngIf="!user.role">
+      <td>
         <button *ngIf="userCourseIds.includes(x.id)" class="btn btn-primary" (click)="unregister(x.id)">Unregister</button>
         <button *ngIf="!userCourseIds.includes(x.id)" class="btn btn-primary" (click)="register(x.id)">Register</button></td>
     </tr>

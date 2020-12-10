@@ -86,7 +86,7 @@
       <form #form="ngForm" novalidate (ngSubmit)="save()">
         <div class="row">
           <div class="form-group col-md-3">
-            <label for="profilePicture">File input</label>
+            <label for="profilePicture">Example file input</label>
             <input #profilePicture="ngModel" type="file" name="profilePicture" (change)="handleUpload($event)" [(ngModel)]="model.profilePicture" class="form-control-file" id="profilePicture">
           </div>
 
