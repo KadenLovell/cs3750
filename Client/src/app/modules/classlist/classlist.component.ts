@@ -25,13 +25,13 @@ export class ClasslistComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.view = 1;
     this.model = {};
+
     // initialize model defaults:
     this.model.monday = false;
     this.model.tuesday = false;
     this.model.wednesday = false;
     this.model.thursday = false;
     this.model.friday = false;
-
   }
 
   save() {

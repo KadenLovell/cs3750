@@ -1,6 +1,6 @@
 <ng-container>
     <div class="row">
-        <div class="col-md-6">
+        <div *ngIf="user.role" class="col-md-6">
             <div *ngIf="user.role" class="card mt-2 ml-2">
                 <h5 class="card-header">Add Assignment</h5>
                 <div class="card-body">
@@ -92,8 +92,7 @@
                                 <td *ngIf="x.submissionType === 0">Text</td>
                                 <td *ngIf="x.submissionType === 1">File</td>
                                 <td>
-                                    <input id="fileInput" type="file" style="display:none;" />
-                                    <input type="button" class="btn btn-secondary" value="Submit" (click)="uploadFile(x.id)" />
+                                    <input type="file" name="fileContent" (change)="submitAssignment($event, x)" class="form-control-file" id="fileContent">
                                 </td>
                             </tr>
                         </tbody>

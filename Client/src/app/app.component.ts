@@ -36,7 +36,6 @@ export class AppComponent {
   toggleSidebar() {
     if (!this.sidebar) {
       this.user = this._userService.user;
-      console.log(this.user);
     }
 
     this.sidebar = !this.sidebar

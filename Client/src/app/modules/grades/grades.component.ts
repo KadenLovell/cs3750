@@ -7,12 +7,13 @@ import { User } from "../../shared/user/user";
 import { UserService } from "../../shared/user/user.service";
 
 @Component({
-  selector: 'app-course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.scss'],
+  selector: 'app-grades',
+  templateUrl: './grades.component.html',
+  styleUrls: ['./grades.component.scss'],
   providers: [CourseService]
+
 })
-export class CourseComponent extends BaseComponent implements OnInit {
+export class GradesComponent extends BaseComponent implements OnInit {
   public state = '';
   model: any;
   rows: any;
@@ -30,7 +31,7 @@ export class CourseComponent extends BaseComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
     // get user if there is a refresh
     this._userService.loadUser();
     // initialize view
