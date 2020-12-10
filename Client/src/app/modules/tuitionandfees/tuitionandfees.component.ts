@@ -34,6 +34,7 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit
 
   ngOnInit(): void {
     this.model = {};
+    this._totalAmount = this.user.fees;
   }
 
   ngAfterViewInit() {
