@@ -89,11 +89,11 @@
                                 <td>{{x.dueDate}}</td>
                                 <td>{{x.dueTime}}</td>
                                 <td>{{x.maxPoints}}</td>
-                                <td *ngIf="x.submissionType === 0">Text</td>
-                                <td *ngIf="x.submissionType === 1">File</td>
+                                <td>submit</td>
                                 <td>
                                     <input id="fileInput" type="file" style="display:none;" />
-                                    <input type="button" class="btn btn-secondary" value="Submit" (click)="uploadFile(x.id)" />
+                                    <input ngIf="x.submissionType === 1" #fileContent="ngModel" class="form-control" id="fileContent" name="fileContent" type="fileContent" required [(ngModel)]="model.fileContent">
+                                    <input ngIf="x.submissionType === 0" type="button" class="btn btn-secondary" value="Submit" (click)="uploadFile(x.id)" />
                                 </td>
                             </tr>
                         </tbody>
@@ -127,8 +127,7 @@
                                 <td *ngIf="x.submissionType === 0">Text</td>
                                 <td *ngIf="x.submissionType === 1">File</td>
                                 <td>
-                                    <input id="fileInput" type="file" style="display:none;" />
-                                    <input type="button" class="btn btn-secondary" value="Submit" (click)="uploadFile(x.id)" />
+                                    <input id="fileInput" type="file" style="display:none;" />                                    
                                 </td>
                             </tr>
                         </tbody>

@@ -105,7 +105,7 @@ export class TuitionAndFeesComponent implements OnDestroy, AfterViewInit, OnInit
   sendPostRequest(token) {
     const body = new HttpParams({
       fromObject: {
-        amount: this.model.amount, // amount is equal to amount user chooses
+        amount: (this.model.amount), // amount is equal to amount user chooses
         currency: 'usd',
         source: `${token.id}`,
         description: 'testAPIcall',
