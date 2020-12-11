@@ -37,6 +37,8 @@ export class CourseComponent extends BaseComponent implements OnInit {
     // get variables passed form home.component (temp fix, will break on refresh!!!!)
     // best path will be to use URL parameters, but it's not secure without having roles in the server!
     this.state = window.history.state.courseId;
+    console.log(this.state);
+    this.model.courseId = this.state;
     // get current course
     this._courseService.getCourse(this.state).then(response => {
       this.model.courseId = response.id;
@@ -45,6 +47,7 @@ export class CourseComponent extends BaseComponent implements OnInit {
   }
 
   addAssignment() {
+    console.log(this.model);
     this._courseService.addAssignment(this.model).then(response => {
       this.getAssignments();
     })
